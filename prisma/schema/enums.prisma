@@ -1,0 +1,19 @@
+enum SubscriptionStatus {
+  none
+  trialing
+  active
+  past_due
+  canceled
+  unpaid
+}
+
+enum PlanType {
+  free
+  premium
+}
+
+enum AssetLinkType {
+  content
+  cover
+  illustration
+}

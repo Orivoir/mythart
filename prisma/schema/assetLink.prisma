@@ -1,0 +1,13 @@
+model AssetLink {
+  id String @id @default(cuid())
+
+  assetId String
+  asset   Asset @relation(fields: [assetId], references: [id])
+
+  snapshotId String?
+  snapshot   Snapshot? @relation(fields: [snapshotId], references: [id])
+
+  type AssetLinkType
+
+  @@index([assetId])
+}

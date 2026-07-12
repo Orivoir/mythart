@@ -1,0 +1,11 @@
+model Chapter {
+  id        String   @id @default(cuid())
+  ebookId   String
+  ebook     Ebook    @relation(fields: [ebookId], references: [id])
+  content   Json
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([ebookId])
+}

@@ -1,0 +1,16 @@
+model Snapshot {
+  id        String   @id @default(cuid())
+  ebookId   String
+  ebook     Ebook    @relation("EbookSnapshots", fields: [ebookId], references: [id])
+
+  version   Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  currentForEbook Ebook? @relation("EbookCurrentSnapshot")
+  assetLinks      AssetLink[]
+
+  @@unique([ebookId, version])
+  @@index([ebookId])
+}
