@@ -12,6 +12,18 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "prisma/generated/**",
+    "prisma/app/generated/**",
+    "prisma/migrations/**",
+    "app/generated/**",
+    "node_modules/**",
+    "public/**",
+    "coverage/**",
+    "dist/**",
+    // Additional ignores:
+    ".eslintrc.js",
+    ".eslintrc.cjs",
+    ".eslintrc.mjs",
   ]),
 ]);
 
