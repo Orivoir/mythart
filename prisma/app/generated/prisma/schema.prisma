@@ -1,0 +1,133 @@
+model Asset {
+  id String @id @default(cuid())
+
+  key    String @unique
+  bucket String
+
+  fileName  String
+  mimeType  String?
+  sizeBytes Int?
+  etag      String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ownerId String?
+  owner   User?   @relation(fields: [ownerId], references: [id])
+
+  assetLinks AssetLink[]
+
+  @@index([ownerId])
+}
+
+model AssetLink {
+  id String @id @default(cuid())
+
+  assetId String
+  asset   Asset  @relation(fields: [assetId], references: [id])
+
+  snapshotId String?
+  snapshot   Snapshot? @relation(fields: [snapshotId], references: [id])
+
+  type AssetLinkType
+
+  @@index([assetId])
+}
+
+model Chapter {
+  id      String @id @default(cuid())
+  ebookId String
+  ebook   Ebook  @relation(fields: [ebookId], references: [id])
+  content Json
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([ebookId])
+}
+
+model Ebook {
+  id String @id @default(cuid())
+
+  title            String
+  subtitle         String?
+  shortDescription String?
+
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id])
+
+  currentSnapshotId String?   @unique
+  currentSnapshot   Snapshot? @relation("EbookCurrentSnapshot", fields: [currentSnapshotId], references: [id])
+
+  snapshots Snapshot[] @relation("EbookSnapshots")
+  chapters  Chapter[]
+
+  @@index([ownerId])
+}
+
+enum SubscriptionStatus {
+  none
+  trialing
+  active
+  past_due
+  canceled
+  unpaid
+}
+
+enum PlanType {
+  free
+  premium
+}
+
+enum AssetLinkType {
+  content
+  cover
+  illustration
+}
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Snapshot {
+  id      String @id @default(cuid())
+  ebookId String
+  ebook   Ebook  @relation("EbookSnapshots", fields: [ebookId], references: [id])
+
+  version Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  currentForEbook Ebook?      @relation("EbookCurrentSnapshot")
+  assetLinks      AssetLink[]
+
+  @@unique([ebookId, version])
+  @@index([ebookId])
+}
+
+model User {
+  id String @id @default(cuid())
+
+  email String  @unique
+  name  String?
+
+  stripeCustomerId String? @unique
+
+  subscriptionStatus SubscriptionStatus @default(none)
+  plan               PlanType           @default(free)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ebooks Ebook[]
+  assets Asset[]
+}
