@@ -14,5 +14,8 @@ model Ebook {
   snapshots         Snapshot[] @relation("EbookSnapshots")
   chapters          Chapter[]
 
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
   @@index([ownerId])
 }

@@ -2,8 +2,13 @@ import type { AuthOptions } from "next-auth";
 import NextAuth from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import { getToken } from "next-auth/jwt";
+import type { NextRequest } from "next/server";
 
 import { prisma } from "@/lib/prisma";
+
+export const authSecret = process.env.AUTH_SECRET;
+export const AUTH_USER_ID_HEADER = "x-auth-user-id";
 
 // create a fake stripe customer id for the user, since we don't have stripe integration yet
 function createStripeCustomerId(): string {
@@ -84,9 +89,21 @@ export const authOptions: AuthOptions = {
     verifyRequest: "/auth/verify-request",
   },
 
-  secret: process.env.AUTH_SECRET,
+  secret: authSecret,
 };
 
 const handler = NextAuth(authOptions);
 
 export default handler;
+
+export async function getAuthenticatedUserId(request: NextRequest): Promise<string | null> {
+  const token = await getToken({ req: request, secret: authSecret });
+
+  return token?.sub ?? null;
+}
+
+export function getAuthenticatedUserIdFromHeaders(headers: Headers): string | null {
+  const userId = headers.get(AUTH_USER_ID_HEADER);
+
+  return userId && userId.length > 0 ? userId : null;
+}
