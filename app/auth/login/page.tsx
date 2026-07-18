@@ -1,24 +1,24 @@
-"use client";
+"use client"
 
-import type { SyntheticEvent } from "react";
-import { signIn, useSession } from "next-auth/react";
-import { useState } from "react";
+import type { SyntheticEvent } from "react"
+import { signIn, useSession } from "next-auth/react"
+import { useState } from "react"
 
 export default function LoginPage() {
-  const { data: session } = useSession();
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { data: session } = useSession()
+  const [email, setEmail] = useState("")
+  const [loading, setLoading] = useState(false)
 
   async function handleSubmit(e: SyntheticEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault()
+    setLoading(true)
 
     await signIn("email", {
       email,
       callbackUrl: "/dashboard",
-    });
+    })
 
-    setLoading(false);
+    setLoading(false)
   }
 
   return (
@@ -58,5 +58,5 @@ export default function LoginPage() {
         )}
       </div>
     </main>
-  );
+  )
 }

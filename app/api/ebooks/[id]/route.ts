@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
-import type { DeleteEbookRequestAPI, DeleteEbookResponseAPI, ResponseErrorAPI, UpdateEbookRequestAPI, UpdateEbookResponseAPI } from "@/app/types/api/ebook";
-import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
-import { normalizeStringValue } from "@/lib/normalize-string-value";
-import { mapEbookToResponse } from "../utils";
+import { NextRequest, NextResponse } from "next/server"
+import type { DeleteEbookRequestAPI, DeleteEbookResponseAPI, ResponseErrorAPI, UpdateEbookRequestAPI, UpdateEbookResponseAPI } from "@/app/types/api/ebook"
+import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
+import { prisma } from "@/lib/prisma"
+import { normalizeStringValue } from "@/lib/normalize-string-value"
+import { mapEbookToResponse } from "../utils"
 
 /**
  * @description Update an existing ebook.
@@ -25,21 +25,21 @@ export async function PUT(
     { params }: { params: Promise<{ id: string }> },
 ): Promise<NextResponse<UpdateEbookResponseAPI | ResponseErrorAPI>> {
 
-    const userId = getAuthenticatedUserIdFromHeaders(request.headers);
+    const userId = getAuthenticatedUserIdFromHeaders(request.headers)
 
     if (!userId) {
-        return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+        return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
 
-    const { id } = await params;
-    const body = await request.json() as Partial<UpdateEbookRequestAPI>;
+    const { id } = await params
+    const body = await request.json() as Partial<UpdateEbookRequestAPI>
 
-    const title = normalizeStringValue(body.title);
-    const subtitle = normalizeStringValue(body.subtitle);
-    const shortDescription = normalizeStringValue(body.shortDescription);
+    const title = normalizeStringValue(body.title)
+    const subtitle = normalizeStringValue(body.subtitle)
+    const shortDescription = normalizeStringValue(body.shortDescription)
 
     if (!title) {
-        return NextResponse.json({ message: "Title is required" }, { status: 400 });
+        return NextResponse.json({ message: "Title is required" }, { status: 400 })
     }
 
     const updateResult = await prisma.ebook.updateMany({
@@ -52,10 +52,10 @@ export async function PUT(
             subtitle,
             shortDescription,
         },
-    });
+    })
 
     if (updateResult.count === 0) {
-        return NextResponse.json({ message: "Ebook not found" }, { status: 404 });
+        return NextResponse.json({ message: "Ebook not found" }, { status: 404 })
     }
 
     const ebook = await prisma.ebook.findFirst({
@@ -63,13 +63,13 @@ export async function PUT(
             id,
             ownerId: userId,
         },
-    });
+    })
 
     if (!ebook) {
-        return NextResponse.json({ message: "Ebook not found" }, { status: 404 });
+        return NextResponse.json({ message: "Ebook not found" }, { status: 404 })
     }
 
-    return NextResponse.json<UpdateEbookResponseAPI>(mapEbookToResponse(ebook));
+    return NextResponse.json<UpdateEbookResponseAPI>(mapEbookToResponse(ebook))
 }
 
 /**
@@ -86,13 +86,13 @@ export async function PUT(
  * @returns {Promise<DeleteEbookResponseAPI>}
  */
 export async function DELETE(request: NextRequest): Promise<NextResponse<DeleteEbookResponseAPI | ResponseErrorAPI>> {
-    const userId = getAuthenticatedUserIdFromHeaders(request.headers);
+    const userId = getAuthenticatedUserIdFromHeaders(request.headers)
 
     if (!userId) {
-        return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+        return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
 
-    const { id } = await request.json() as DeleteEbookRequestAPI;
+    const { id } = await request.json() as DeleteEbookRequestAPI
 
     // Snapshots is not delete here, a "restore" feature will be implemented in the future, so we will keep the snapshots for now.
     // @TODO: Here should delete snapshots without LAST snapshots, or create once if not exists. 
@@ -105,30 +105,30 @@ export async function DELETE(request: NextRequest): Promise<NextResponse<DeleteE
             select: {
                 id: true,
             },
-        });
+        })
 
         if (!ebook) {
-            return null;
+            return null
         }
 
         await transaction.chapter.deleteMany({
             where: {
                 ebookId: id,
             },
-        });
+        })
 
         await transaction.ebook.delete({
             where: {
                 id,
             },
-        });
+        })
 
-        return ebook;
-    });
+        return ebook
+    })
 
     if (!deletedEbook) {
-        return NextResponse.json({ message: "Ebook not found" }, { status: 404 });
+        return NextResponse.json({ message: "Ebook not found" }, { status: 404 })
     }
 
-    return NextResponse.json<DeleteEbookResponseAPI>({ success: true });
+    return NextResponse.json<DeleteEbookResponseAPI>({ success: true })
 }

@@ -1,10 +1,10 @@
-import type { CreateChapterRequestAPI, PaginatedChaptersAPI, CreateChapterResponseAPI } from "@/app/types/api/chapter";
-import type { ResponseErrorAPI } from "@/app/types/api/ebook";
-import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth";
-import { parsePaginationParams, withPagination } from "@/lib/pagination";
-import { mapModelTimestamps } from "@/lib/map-date-fields-to-timestamps";
+import type { CreateChapterRequestAPI, PaginatedChaptersAPI, CreateChapterResponseAPI } from "@/app/types/api/chapter"
+import type { ResponseErrorAPI } from "@/app/types/api/ebook"
+import { NextRequest, NextResponse } from "next/server"
+import { prisma } from "@/lib/prisma"
+import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
+import { parsePaginationParams, withPagination } from "@/lib/pagination"
+import { mapModelTimestamps } from "@/lib/map-date-fields-to-timestamps"
 
 /**
  * @description Get a paginated list of chapters metadata (without content) for a specific ebook.
@@ -20,13 +20,13 @@ import { mapModelTimestamps } from "@/lib/map-date-fields-to-timestamps";
  * @returns {Promise<PaginatedChaptersAPI | ResponseErrorAPI>}
  */
 export async function GET(request: NextRequest, { params }: { params: { id: string } }): Promise<NextResponse<PaginatedChaptersAPI | ResponseErrorAPI>> {
-    const userId = getAuthenticatedUserIdFromHeaders(request.headers);
+    const userId = getAuthenticatedUserIdFromHeaders(request.headers)
 
     if (!userId) {
-        return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+        return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
 
-    const { id } = params;
+    const { id } = params
 
     const ebook = await prisma.ebook.findFirst({
         where: {
@@ -34,13 +34,13 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
             // @TODO: Consider adding collaborator access check here if needed in the future
             ownerId: userId,
         },
-    });
+    })
 
     if (!ebook) {
-        return NextResponse.json({ message: "Ebook not found" }, { status: 404 });
+        return NextResponse.json({ message: "Ebook not found" }, { status: 404 })
     }
 
-    const { page, pageSize } = parsePaginationParams(request.nextUrl.searchParams);
+    const { page, pageSize } = parsePaginationParams(request.nextUrl.searchParams)
 
     const chapters = await prisma.chapter.findMany({
         where: {
@@ -59,37 +59,37 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
             createdAt: true,
             updatedAt: true,
         },
-    });
+    })
 
-    const itemsParsed = chapters.map(mapModelTimestamps);
+    const itemsParsed = chapters.map(mapModelTimestamps)
 
     return NextResponse.json<PaginatedChaptersAPI>(
         withPagination(itemsParsed, page, pageSize, chapters.length),
-    );
+    )
 }
 
 export async function POST(request: NextRequest, { params }: { params: { id: string } }): Promise<NextResponse<CreateChapterResponseAPI | ResponseErrorAPI>> {
 
-    const userId = getAuthenticatedUserIdFromHeaders(request.headers);
+    const userId = getAuthenticatedUserIdFromHeaders(request.headers)
 
     if (!userId) {
-        return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+        return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
 
-    const { id } = params;
+    const { id } = params
 
     const ebook = await prisma.ebook.findFirst({
         where: {
             id,
             ownerId: userId,
         },
-    });
+    })
 
     if (!ebook) {
-        return NextResponse.json({ message: "Ebook not found" }, { status: 404 });
+        return NextResponse.json({ message: "Ebook not found" }, { status: 404 })
     }
 
-    const requestBody = await request.json() as CreateChapterRequestAPI;
+    const requestBody = await request.json() as CreateChapterRequestAPI
 
     const newChapter = await prisma.chapter.create({
         data: {
@@ -97,7 +97,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
             content: requestBody.content || {},
             ebookId: id,
         },
-    });
+    })
 
-    return NextResponse.json<CreateChapterResponseAPI>(mapModelTimestamps(newChapter), { status: 201 });
+    return NextResponse.json<CreateChapterResponseAPI>(mapModelTimestamps(newChapter), { status: 201 })
 }

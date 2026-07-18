@@ -1,18 +1,18 @@
-import type { AuthOptions } from "next-auth";
-import NextAuth from "next-auth";
-import EmailProvider from "next-auth/providers/email";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { getToken } from "next-auth/jwt";
-import type { NextRequest } from "next/server";
+import type { AuthOptions } from "next-auth"
+import NextAuth from "next-auth"
+import EmailProvider from "next-auth/providers/email"
+import { PrismaAdapter } from "@auth/prisma-adapter"
+import { getToken } from "next-auth/jwt"
+import type { NextRequest } from "next/server"
 
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma"
 
-export const authSecret = process.env.AUTH_SECRET;
-export const AUTH_USER_ID_HEADER = "x-auth-user-id";
+export const authSecret = process.env.AUTH_SECRET
+export const AUTH_USER_ID_HEADER = "x-auth-user-id"
 
 // create a fake stripe customer id for the user, since we don't have stripe integration yet
 function createStripeCustomerId(): string {
-  return `cus_${Math.random().toString(36).slice(2, 12)}`;
+  return `cus_${Math.random().toString(36).slice(2, 12)}`
 }
 
 export const authOptions: AuthOptions = {
@@ -39,11 +39,11 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async signIn({ user, profile, email }) {
       if (!user.email) {
-        return false;
+        return false
       }
 
       if (email?.verificationRequest) {
-        return true;
+        return true
       }
 
       const existingUser = await prisma.user.findUnique({
@@ -53,10 +53,10 @@ export const authOptions: AuthOptions = {
           stripeCustomerId: true,
           emailVerified: true,
         },
-      });
+      })
 
       if (existingUser) {
-        const shouldUpdate = !existingUser.emailVerified || !existingUser.stripeCustomerId;
+        const shouldUpdate = !existingUser.emailVerified || !existingUser.stripeCustomerId
 
         if (shouldUpdate) {
           await prisma.user.update({
@@ -65,10 +65,10 @@ export const authOptions: AuthOptions = {
               ...(existingUser.emailVerified ? {} : { emailVerified: new Date() }),
               ...(existingUser.stripeCustomerId ? {} : { stripeCustomerId: createStripeCustomerId() }),
             },
-          });
+          })
         }
 
-        return true;
+        return true
       }
 
       await prisma.user.create({
@@ -78,9 +78,9 @@ export const authOptions: AuthOptions = {
           emailVerified: new Date(),
           stripeCustomerId: createStripeCustomerId(),
         },
-      });
+      })
 
-      return true;
+      return true
     },
   },
 
@@ -90,20 +90,20 @@ export const authOptions: AuthOptions = {
   },
 
   secret: authSecret,
-};
+}
 
-const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions)
 
-export default handler;
+export default handler
 
 export async function getAuthenticatedUserId(request: NextRequest): Promise<string | null> {
-  const token = await getToken({ req: request, secret: authSecret });
+  const token = await getToken({ req: request, secret: authSecret })
 
-  return token?.sub ?? null;
+  return token?.sub ?? null
 }
 
 export function getAuthenticatedUserIdFromHeaders(headers: Headers): string | null {
-  const userId = headers.get(AUTH_USER_ID_HEADER);
+  const userId = headers.get(AUTH_USER_ID_HEADER)
 
-  return userId && userId.length > 0 ? userId : null;
+  return userId && userId.length > 0 ? userId : null
 }

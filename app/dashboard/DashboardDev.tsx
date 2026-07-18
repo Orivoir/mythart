@@ -1,98 +1,98 @@
-"use client";
+"use client"
 
-import { FormEvent, useMemo, useState } from "react";
-import { signOut, useSession } from "next-auth/react";
+import { FormEvent, useMemo, useState } from "react"
+import { signOut, useSession } from "next-auth/react"
 
 export default function DashboardDev() {
-  const { data: session } = useSession();
-  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
-  const [title, setTitle] = useState("");
-  const [subtitle, setSubtitle] = useState("");
-  const [shortDescription, setShortDescription] = useState("");
-  const [createMessage, setCreateMessage] = useState<string | null>(null);
-  const [seedMessage, setSeedMessage] = useState<string | null>(null);
-  const [isSeeding, setIsSeeding] = useState(false);
-  const [isClearing, setIsClearing] = useState(false);
+  const { data: session } = useSession()
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false)
+  const [title, setTitle] = useState("")
+  const [subtitle, setSubtitle] = useState("")
+  const [shortDescription, setShortDescription] = useState("")
+  const [createMessage, setCreateMessage] = useState<string | null>(null)
+  const [seedMessage, setSeedMessage] = useState<string | null>(null)
+  const [isSeeding, setIsSeeding] = useState(false)
+  const [isClearing, setIsClearing] = useState(false)
 
-  const trimmedTitle = useMemo(() => title.trim(), [title]);
-  const canSubmitCreate = trimmedTitle.length > 0;
+  const trimmedTitle = useMemo(() => title.trim(), [title])
+  const canSubmitCreate = trimmedTitle.length > 0
 
   function resetCreateForm() {
-    setTitle("");
-    setSubtitle("");
-    setShortDescription("");
-    setCreateMessage(null);
+    setTitle("")
+    setSubtitle("")
+    setShortDescription("")
+    setCreateMessage(null)
   }
 
   function handleCreateEbookSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+    event.preventDefault()
 
     if (!canSubmitCreate) {
-      setCreateMessage("Title is required.");
-      return;
+      setCreateMessage("Title is required.")
+      return
     }
 
     setCreateMessage(
       "UI ready. API call intentionally not implemented yet. Form payload is valid.",
-    );
+    )
   }
 
   async function handleSeedDatabase() {
-    setSeedMessage(null);
-    setIsSeeding(true);
+    setSeedMessage(null)
+    setIsSeeding(true)
 
     try {
       const response = await fetch("/api/dev/fixtures", {
         method: "POST",
-      });
+      })
 
       const payload = (await response.json()) as {
         message?: string;
         createdCount?: number;
-      };
+      }
 
       if (!response.ok) {
-        setSeedMessage(payload.message ?? "Unable to seed database.");
-        return;
+        setSeedMessage(payload.message ?? "Unable to seed database.")
+        return
       }
 
       setSeedMessage(
         `${payload.message ?? "Fixtures created."} Created: ${payload.createdCount ?? 0}`,
-      );
+      )
     } catch {
-      setSeedMessage("Unable to seed database.");
+      setSeedMessage("Unable to seed database.")
     } finally {
-      setIsSeeding(false);
+      setIsSeeding(false)
     }
   }
 
   async function handleClearDatabase() {
-    setSeedMessage(null);
-    setIsClearing(true);
+    setSeedMessage(null)
+    setIsClearing(true)
 
     try {
       const response = await fetch("/api/dev/fixtures", {
         method: "DELETE",
-      });
+      })
 
       const payload = (await response.json()) as {
         message?: string;
         deletedChapters?: number;
         deletedEbooks?: number;
-      };
+      }
 
       if (!response.ok) {
-        setSeedMessage(payload.message ?? "Unable to clear fixtures.");
-        return;
+        setSeedMessage(payload.message ?? "Unable to clear fixtures.")
+        return
       }
 
       setSeedMessage(
         `${payload.message ?? "Fixtures cleared."} Deleted ebooks: ${payload.deletedEbooks ?? 0}, chapters: ${payload.deletedChapters ?? 0}`,
-      );
+      )
     } catch {
-      setSeedMessage("Unable to clear fixtures.");
+      setSeedMessage("Unable to clear fixtures.")
     } finally {
-      setIsClearing(false);
+      setIsClearing(false)
     }
   }
 
@@ -116,8 +116,8 @@ export default function DashboardDev() {
           <button
             type="button"
             onClick={() => {
-              resetCreateForm();
-              setIsCreateDialogOpen(true);
+              resetCreateForm()
+              setIsCreateDialogOpen(true)
             }}
             className="rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-700"
           >
@@ -251,5 +251,5 @@ export default function DashboardDev() {
         </div>
       ) : null}
     </main>
-  );
+  )
 }

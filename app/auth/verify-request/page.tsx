@@ -11,5 +11,5 @@ export default function VerifyRequestPage() {
         </p>
       </section>
     </main>
-  );
+  )
 }

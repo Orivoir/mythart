@@ -1,9 +1,9 @@
-import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import Image from "next/image"
+import { getTranslations } from "next-intl/server"
 
 
 export default async function Home() {
-  const t = await getTranslations("Brand");
+  const t = await getTranslations("Brand")
 
 
   return (
@@ -49,5 +49,5 @@ export default async function Home() {
         </div>
       </main>
     </div>
-  );
+  )
 }

@@ -1,5 +1,5 @@
-import type { CreateEbookResponseAPI } from "@/app/types/api/ebook";
-import { mapModelTimestamps } from "@/lib/map-date-fields-to-timestamps";
+import type { CreateEbookResponseAPI } from "@/app/types/api/ebook"
+import { mapModelTimestamps } from "@/lib/map-date-fields-to-timestamps"
 
 export interface EbookResponseSource {
     id: string;
@@ -11,7 +11,7 @@ export interface EbookResponseSource {
 }
 
 export function mapEbookToResponse(ebook: EbookResponseSource): CreateEbookResponseAPI {
-    const mappedTimestamps = mapModelTimestamps(ebook);
+    const mappedTimestamps = mapModelTimestamps(ebook)
 
     return {
         id: mappedTimestamps.id,
@@ -20,5 +20,5 @@ export function mapEbookToResponse(ebook: EbookResponseSource): CreateEbookRespo
         shortDescription: mappedTimestamps.shortDescription ?? undefined,
         createdAt: mappedTimestamps.createdAt,
         updatedAt: mappedTimestamps.updatedAt,
-    };
+    }
 }

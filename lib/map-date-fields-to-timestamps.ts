@@ -1,4 +1,4 @@
-const DEFAULT_TIMESTAMP_FIELDS = ["createdAt", "updatedAt"] as const;
+const DEFAULT_TIMESTAMP_FIELDS = ["createdAt", "updatedAt"] as const
 
 type DefaultTimestampField = (typeof DEFAULT_TIMESTAMP_FIELDS)[number];
 
@@ -17,13 +17,13 @@ export function mapDateFieldsToTimestamps<
     source: T & Record<K, Date>,
     fields: readonly K[],
 ): Omit<T, K> & Record<K, number> {
-    const mapped = { ...source } as Record<string, unknown>;
+    const mapped = { ...source } as Record<string, unknown>
 
     for (const field of fields) {
-        mapped[field as string] = source[field].getTime();
+        mapped[field as string] = source[field].getTime()
     }
 
-    return mapped as Omit<T, K> & Record<K, number>;
+    return mapped as Omit<T, K> & Record<K, number>
 }
 
 /**
@@ -35,5 +35,5 @@ export function mapDateFieldsToTimestamps<
 export function mapModelTimestamps<T extends Record<DefaultTimestampField, Date>>(
     source: T,
 ): Omit<T, DefaultTimestampField> & Record<DefaultTimestampField, number> {
-    return mapDateFieldsToTimestamps(source, DEFAULT_TIMESTAMP_FIELDS);
+    return mapDateFieldsToTimestamps(source, DEFAULT_TIMESTAMP_FIELDS)
 }

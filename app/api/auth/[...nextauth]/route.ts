@@ -1,5 +1,5 @@
-import auth from "@/lib/auth";
+import auth from "@/lib/auth"
 
-export const runtime = "nodejs";
+export const runtime = "nodejs"
 
-export { auth as GET, auth as POST };
+export { auth as GET, auth as POST }
