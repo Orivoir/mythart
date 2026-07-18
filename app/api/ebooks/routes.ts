@@ -1,10 +1,10 @@
 import type { PaginatedEbooksAPI, CreateEbookResponseAPI, CreateEbookRequestAPI, ResponseErrorAPI } from "@/app/types/api/ebook"
 import { NextRequest, NextResponse } from "next/server"
-import { prisma } from "@/lib/prisma"
 import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
 import { parsePaginationParams, withPagination } from "@/lib/pagination"
 import { mapEbookToResponse } from "./utils"
 import { normalizeStringValue } from "@/lib/normalize-string-value"
+import { prisma } from "@/lib/prisma"
 
 
 /**
@@ -78,5 +78,5 @@ export async function POST(request: NextRequest): Promise<NextResponse<CreateEbo
         },
     })
 
-    return NextResponse.json<CreateEbookResponseAPI>(mapEbookToResponse(ebook))
+    return NextResponse.json<CreateEbookResponseAPI>(mapEbookToResponse(ebook), { status: 201 })
 }
