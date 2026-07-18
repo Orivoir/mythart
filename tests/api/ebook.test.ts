@@ -1,19 +1,19 @@
-import "dotenv/config";
-import { beforeAll, afterAll, expect, test } from "vitest";
-import { NextRequest } from "next/server";
-import { GET, POST } from "../../app/api/ebooks/routes";
-import type { CreateEbookResponseAPI, PaginatedEbooksAPI, ResponseErrorAPI } from "../../app/types/api/ebook";
-import { createEbooksFixture, createUserFixture } from "../helpers/factories";
-import resetDb from "../helpers/reset-db";
+import "dotenv/config"
+import { beforeAll, afterAll, expect, test } from "vitest"
+import { NextRequest } from "next/server"
+import { GET, POST } from "../../app/api/ebooks/routes"
+import type { CreateEbookResponseAPI, PaginatedEbooksAPI, ResponseErrorAPI } from "../../app/types/api/ebook"
+import { createEbooksFixture, createUserFixture } from "../helpers/factories"
+import resetDb from "../helpers/reset-db"
 
 let userFixture: Awaited<ReturnType<typeof createUserFixture>> | null = null
 
 beforeAll(async () => {
-    userFixture = await createUserFixture();
-});
+    userFixture = await createUserFixture()
+})
 
 afterAll(async () => {
-    await resetDb();
+    await resetDb()
 })
 
 test("GET /api/ebooks should return a empty list paginated result", async () => {
@@ -36,7 +36,7 @@ test("GET /api/ebooks should return a empty list paginated result", async () => 
     expect(body.pageSize).toBe(10)
     expect(body.totalItems).toBe(0)
     expect(body.totalPages).toBe(1)
-});
+})
 
 test("GET /api/ebooks should return many ebooks", async () => {
     if (!userFixture) {
@@ -82,7 +82,7 @@ test("GET /api/ebooks should return many ebooks", async () => {
     expect(body.items.map((item) => item.title)).toEqual(
         expect.arrayContaining(["Ebook One", "Ebook Two", "Ebook Three"]),
     )
-});
+})
 
 test("POST /api/ebooks should create a new ebook and return 201", async () => {
     if (!userFixture) {
