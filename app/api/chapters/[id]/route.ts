@@ -15,14 +15,14 @@ import { prisma } from "@/lib/prisma"
  * 
  * @throws {ResponseErrorAPI} - Throws an error if the user is not authenticated or if the chapter is not found.
  */
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }): Promise<NextResponse<DeleteChapterResponseAPI | ResponseErrorAPI>> {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }): Promise<NextResponse<DeleteChapterResponseAPI | ResponseErrorAPI>> {
     const userId = getAuthenticatedUserIdFromHeaders(request.headers)
 
     if (!userId) {
         return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
 
-    const { id } = params
+    const { id } = await params
 
     const chapter = await prisma.chapter.findFirst({
         where: {
@@ -47,14 +47,24 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     return NextResponse.json({ message: "Chapter deleted successfully" }, { status: 200 })
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }): Promise<NextResponse<UpdateChapterResponseAPI | ResponseErrorAPI>> {
+/**
+ * @description Updates a chapter by its ID for the authenticated user.
+ * @usage PUT /api/chapters/:id
+ * 
+ * @param {string} id - The ID of the chapter to be updated.
+ * @param {UpdateChapterRequestAPI} requestBody - The request body containing the updated chapter data.
+ * @returns {Promise<NextResponse<UpdateChapterResponseAPI | ResponseErrorAPI>>} - A promise that resolves to a NextResponse containing either the updated chapter data or an error message.
+ * 
+ * @throws {ResponseErrorAPI} - Throws an error if the user is not authenticated or if the chapter is not found.
+ */
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }): Promise<NextResponse<UpdateChapterResponseAPI | ResponseErrorAPI>> {
     const userId = getAuthenticatedUserIdFromHeaders(request.headers)
     
     if (!userId) {
         return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
 
-    const { id } = params
+    const { id } = await params
 
     const chapter = await prisma.chapter.findFirst({
         where: {
