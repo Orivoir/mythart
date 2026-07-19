@@ -9,8 +9,7 @@ model Snapshot {
   updatedAt DateTime @updatedAt
 
   currentForEbook Ebook? @relation("EbookCurrentSnapshot")
-  assetLinks      AssetLink[]
-
+  
   @@unique([ebookId, version])
   @@index([ebookId])
 }

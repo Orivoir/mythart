@@ -12,8 +12,9 @@ enum PlanType {
   premium
 }
 
-enum AssetLinkType {
-  content
-  cover
-  illustration
+enum AssetReferenceType {
+  COVER
+  CONTENT_IMAGE
+  SNAPSHOT
+  EXPORT
 }

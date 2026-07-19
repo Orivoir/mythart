@@ -11,6 +11,9 @@ model Ebook {
   currentSnapshotId String? @unique
   currentSnapshot   Snapshot? @relation("EbookCurrentSnapshot", fields: [currentSnapshotId], references: [id])
 
+  coverAssetId      String?
+  coverAsset        Asset? @relation(fields: [coverAssetId], references: [id])
+
   snapshots         Snapshot[] @relation("EbookSnapshots")
   chapters          Chapter[]
 

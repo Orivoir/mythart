@@ -12,10 +12,11 @@ model Asset {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  ownerId   String?
-  owner     User?    @relation(fields: [ownerId], references: [id])
+  ownerId   String
+  owner     User     @relation(fields: [ownerId], references: [id])
 
-  assetLinks AssetLink[]
+  chapterReferences  ChapterAssetReference[]
+  ebookCoverImages Ebook[]
 
   @@index([ownerId])
 }
