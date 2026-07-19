@@ -2,6 +2,8 @@ import { NextResponse, type NextRequest } from "next/server"
 
 import { AUTH_USER_ID_HEADER, getAuthenticatedUserId } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import { HTTP_ERRORS } from "./lib/constants/http-code"
+import { ApiException, apiErrorResponse } from "./lib/errors"
 
 const METHODS_WITH_JSON_BODY = new Set(["PUT", "PATCH", "DELETE", "POST"])
 
@@ -37,7 +39,7 @@ export async function proxy(request: NextRequest): Promise<NextResponse> {
     const userId = await getAuthenticatedUserId(request)
 
     if (!userId) {
-        return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
+        return apiErrorResponse(new ApiException(HTTP_ERRORS.UNAUTHORIZED))
     }
 
     const ebookIdFromRoute = getEbookIdFromRoute(request.nextUrl.pathname)
@@ -47,7 +49,7 @@ export async function proxy(request: NextRequest): Promise<NextResponse> {
 
         if (ebookIdFromBody) {
             if (ebookIdFromBody !== ebookIdFromRoute) {
-                return NextResponse.json({ message: "Invalid ebook id" }, { status: 400 })
+                return apiErrorResponse(new ApiException(HTTP_ERRORS.BAD_REQUEST))
             }
 
             const ebook = await prisma.ebook.findFirst({
@@ -61,7 +63,7 @@ export async function proxy(request: NextRequest): Promise<NextResponse> {
             })
 
             if (!ebook) {
-                return NextResponse.json({ message: "Ebook not found" }, { status: 404 })
+                return apiErrorResponse(new ApiException(HTTP_ERRORS.NOT_FOUND))
             }
         }
     }

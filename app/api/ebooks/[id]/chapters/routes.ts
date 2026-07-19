@@ -5,6 +5,9 @@ import { prisma } from "@/lib/prisma"
 import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
 import { parsePaginationParams, withPagination } from "@/lib/pagination"
 import { mapModelTimestamps } from "@/lib/map-date-fields-to-timestamps"
+import { ApiException, apiErrorResponse, apiValidationException, parseApiJsonObject } from "@/lib/errors"
+import { ChapterSchema } from "@/lib/schemas/chapter.schema"
+import { HTTP_ERRORS } from "@/lib/constants/http-code"
 
 /**
  * @description Get a paginated list of chapters metadata (without content) for a specific ebook.
@@ -19,30 +22,31 @@ import { mapModelTimestamps } from "@/lib/map-date-fields-to-timestamps"
  * @param {NextResponse} res - The outgoing response object.
  * @returns {Promise<PaginatedChaptersAPI | ResponseErrorAPI>}
  */
-export async function GET(request: NextRequest, { params }: { params: { id: string } }): Promise<NextResponse<PaginatedChaptersAPI | ResponseErrorAPI>> {
-    const userId = getAuthenticatedUserIdFromHeaders(request.headers)
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }): Promise<NextResponse<PaginatedChaptersAPI | ResponseErrorAPI>> {
+    try {
+        const userId = getAuthenticatedUserIdFromHeaders(request.headers)
 
-    if (!userId) {
-        return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
-    }
+        if (!userId) {
+            throw new ApiException(HTTP_ERRORS.UNAUTHORIZED)
+        }
 
-    const { id } = params
+        const { id } = await params
 
-    const ebook = await prisma.ebook.findFirst({
+        const ebook = await prisma.ebook.findFirst({
         where: {
             id,
             // @TODO: Consider adding collaborator access check here if needed in the future
             ownerId: userId,
         },
-    })
+        })
 
-    if (!ebook) {
-        return NextResponse.json({ message: "Ebook not found" }, { status: 404 })
-    }
+        if (!ebook) {
+            throw new ApiException(HTTP_ERRORS.NOT_FOUND)
+        }
 
-    const { page, pageSize } = parsePaginationParams(request.nextUrl.searchParams)
+        const { page, pageSize } = parsePaginationParams(request.nextUrl.searchParams)
 
-    const chapters = await prisma.chapter.findMany({
+        const chapters = await prisma.chapter.findMany({
         where: {
             ebookId: id,
         },
@@ -59,45 +63,64 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
             createdAt: true,
             updatedAt: true,
         },
-    })
+        })
 
-    const itemsParsed = chapters.map(mapModelTimestamps)
+        const totalItems = await prisma.chapter.count({
+            where: {
+                ebookId: id,
+            },
+        })
 
-    return NextResponse.json<PaginatedChaptersAPI>(
-        withPagination(itemsParsed, page, pageSize, chapters.length),
-    )
+        const itemsParsed = chapters.map(mapModelTimestamps)
+
+        return NextResponse.json<PaginatedChaptersAPI>(
+            withPagination(itemsParsed, page, pageSize, totalItems),
+        )
+    } catch (error) {
+        return apiErrorResponse(error)
+    }
 }
 
-export async function POST(request: NextRequest, { params }: { params: { id: string } }): Promise<NextResponse<CreateChapterResponseAPI | ResponseErrorAPI>> {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }): Promise<NextResponse<CreateChapterResponseAPI | ResponseErrorAPI>> {
+    try {
+        const userId = getAuthenticatedUserIdFromHeaders(request.headers)
 
-    const userId = getAuthenticatedUserIdFromHeaders(request.headers)
+        if (!userId) {
+            throw new ApiException(HTTP_ERRORS.UNAUTHORIZED)
+        }
 
-    if (!userId) {
-        return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
+        const { id } = await params
+
+        const ebook = await prisma.ebook.findFirst({
+            where: {
+                id,
+                ownerId: userId,
+            },
+        })
+
+        if (!ebook) {
+            throw new ApiException(HTTP_ERRORS.NOT_FOUND)
+        }
+
+        const requestBody = await parseApiJsonObject(request)
+        const parsed = ChapterSchema.safeParse({
+            title: typeof requestBody.title === "string" ? requestBody.title.trim() : requestBody.title,
+        })
+
+        if (!parsed.success) {
+            throw apiValidationException(parsed.error)
+        }
+
+        const newChapter = await prisma.chapter.create({
+            data: {
+                title: parsed.data.title,
+                content: requestBody.content as CreateChapterRequestAPI["content"] || {},
+                ebookId: id,
+            },
+        })
+
+        return NextResponse.json<CreateChapterResponseAPI>(mapModelTimestamps(newChapter), { status: 201 })
+    } catch (error) {
+        return apiErrorResponse(error)
     }
-
-    const { id } = params
-
-    const ebook = await prisma.ebook.findFirst({
-        where: {
-            id,
-            ownerId: userId,
-        },
-    })
-
-    if (!ebook) {
-        return NextResponse.json({ message: "Ebook not found" }, { status: 404 })
-    }
-
-    const requestBody = await request.json() as CreateChapterRequestAPI
-
-    const newChapter = await prisma.chapter.create({
-        data: {
-            title: requestBody.title,
-            content: requestBody.content || {},
-            ebookId: id,
-        },
-    })
-
-    return NextResponse.json<CreateChapterResponseAPI>(mapModelTimestamps(newChapter), { status: 201 })
 }

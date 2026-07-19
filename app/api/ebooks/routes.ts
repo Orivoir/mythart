@@ -5,6 +5,9 @@ import { parsePaginationParams, withPagination } from "@/lib/pagination"
 import { mapEbookToResponse } from "./utils"
 import { normalizeStringValue } from "@/lib/normalize-string-value"
 import { prisma } from "@/lib/prisma"
+import { ApiException, apiErrorResponse, apiValidationException, parseApiJsonObject } from "@/lib/errors"
+import { EbookSchema } from "@/lib/schemas/ebook.schema"
+import { HTTP_ERRORS } from "@/lib/constants/http-code"
 
 
 /**
@@ -14,37 +17,41 @@ import { prisma } from "@/lib/prisma"
  * @returns {Promise<PaginatedEbooksAPI>}
  */
 export async function GET(request: NextRequest): Promise<NextResponse<PaginatedEbooksAPI | ResponseErrorAPI>> {
-    const userId = getAuthenticatedUserIdFromHeaders(request.headers)
+    try {
+        const userId = getAuthenticatedUserIdFromHeaders(request.headers)
 
-    if (!userId) {
-        return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
+        if (!userId) {
+            throw new ApiException(HTTP_ERRORS.UNAUTHORIZED)
+        }
+
+        const { page, pageSize } = parsePaginationParams(request.nextUrl.searchParams)
+
+        const where = {
+            ownerId: userId,
+        }
+
+        const items = await prisma.ebook.findMany({
+            where,
+            skip: (page - 1) * pageSize,
+            take: pageSize,
+            orderBy: {
+                createdAt: "desc",
+            },
+        })
+
+        const totalItems = await prisma.ebook.count({ where })
+
+        return NextResponse.json<PaginatedEbooksAPI>(
+            withPagination(
+                items.map(mapEbookToResponse),
+                page,
+                pageSize,
+                totalItems,
+            ),
+        )
+    } catch (error) {
+        return apiErrorResponse(error)
     }
-
-    const { page, pageSize } = parsePaginationParams(request.nextUrl.searchParams)
-
-    const where = {
-        ownerId: userId,
-    }
-
-    const items = await prisma.ebook.findMany({
-        where,
-        skip: (page - 1) * pageSize,
-        take: pageSize,
-        orderBy: {
-            createdAt: "desc",
-        },
-    })
-
-    const totalItems = await prisma.ebook.count({ where })
-
-    return NextResponse.json<PaginatedEbooksAPI>(
-        withPagination(
-            items.map(mapEbookToResponse),
-            page,
-            pageSize,
-            totalItems
-        ),
-    )
 }
 
 /**
@@ -54,29 +61,33 @@ export async function GET(request: NextRequest): Promise<NextResponse<PaginatedE
  * @returns {Promise<CreateEbookResponseAPI>}
  */
 export async function POST(request: NextRequest): Promise<NextResponse<CreateEbookResponseAPI | ResponseErrorAPI>> {
-    const userId = getAuthenticatedUserIdFromHeaders(request.headers)
+    try {
+        const userId = getAuthenticatedUserIdFromHeaders(request.headers)
 
-    if (!userId) {
-        return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
+        if (!userId) {
+            throw new ApiException(HTTP_ERRORS.UNAUTHORIZED)
+        }
+
+        const body = await parseApiJsonObject(request) as Partial<CreateEbookRequestAPI>
+        const parsed = EbookSchema.safeParse({
+            title: normalizeStringValue(body.title) ?? undefined,
+            subtitle: body.subtitle === undefined ? undefined : normalizeStringValue(body.subtitle) ?? "",
+            shortDescription: body.shortDescription === undefined ? undefined : normalizeStringValue(body.shortDescription) ?? "",
+        })
+
+        if (!parsed.success) {
+            throw apiValidationException(parsed.error)
+        }
+
+        const ebook = await prisma.ebook.create({
+            data: {
+                ...parsed.data,
+                ownerId: userId,
+            },
+        })
+
+        return NextResponse.json<CreateEbookResponseAPI>(mapEbookToResponse(ebook), { status: 201 })
+    } catch (error) {
+        return apiErrorResponse(error)
     }
-
-    const body = await request.json() as Partial<CreateEbookRequestAPI>
-    const title = normalizeStringValue(body.title)
-    const subtitle = normalizeStringValue(body.subtitle)
-    const shortDescription = normalizeStringValue(body.shortDescription)
-
-    if (!title) {
-        return NextResponse.json({ message: "Title is required" }, { status: 400 })
-    }
-
-    const ebook = await prisma.ebook.create({
-        data: {
-            title,
-            subtitle,
-            shortDescription,
-            ownerId: userId,
-        },
-    })
-
-    return NextResponse.json<CreateEbookResponseAPI>(mapEbookToResponse(ebook), { status: 201 })
 }

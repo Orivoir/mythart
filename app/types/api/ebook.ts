@@ -1,3 +1,5 @@
+import type { ApiErrorResponse } from "@/lib/errors"
+
 export interface EbookResponseAPI {
     id: string;
     title: string;
@@ -40,6 +42,4 @@ export interface DeleteEbookResponseAPI {
     success: boolean;
 }
 
-export interface ResponseErrorAPI {
-    message: string;
-}
+export type ResponseErrorAPI = ApiErrorResponse

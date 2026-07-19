@@ -5,6 +5,7 @@ import { GET, POST } from "../../app/api/ebooks/routes"
 import type { CreateEbookResponseAPI, PaginatedEbooksAPI, ResponseErrorAPI } from "../../app/types/api/ebook"
 import { createEbooksFixture, createUserFixture } from "../helpers/factories"
 import resetDb from "../helpers/reset-db"
+import { MAX_LENGTH } from "@/lib/constants/limits"
 
 let userFixture: Awaited<ReturnType<typeof createUserFixture>> | null = null
 
@@ -114,7 +115,67 @@ test("POST /api/ebooks should create a new ebook and return 201", async () => {
     expect(typeof body.updatedAt).toBe("number")
 })
 
-test("POST /api/ebooks should return 400 when title is missing", async () => {
+test.each([
+    [
+        "title is missing",
+        {
+            subtitle: "Subtitle",
+            shortDescription: "A valid description",
+        },
+        "title",
+        "TITLE_REQUIRED",
+    ],
+    [
+        "title is too long",
+        {
+            title: "a".repeat(MAX_LENGTH.TITLE_EBOOK + 1),
+            subtitle: "Subtitle",
+            shortDescription: "A valid description",
+        },
+        "title",
+        "TITLE_TOO_LONG",
+    ],
+    [
+        "subtitle is too short",
+        {
+            title: "Valid title",
+            subtitle: "",
+            shortDescription: "A valid description",
+        },
+        "subtitle",
+        "SUBTITLE_TOO_SHORT",
+    ],
+    [
+        "subtitle is too long",
+        {
+            title: "Valid title",
+            subtitle: "a".repeat(MAX_LENGTH.SUBTITLE_EBOOK + 1),
+            shortDescription: "A valid description",
+        },
+        "subtitle",
+        "SUBTITLE_TOO_LONG",
+    ],
+    [
+        "short description is too short",
+        {
+            title: "Valid title",
+            subtitle: "Subtitle",
+            shortDescription: "Short",
+        },
+        "shortDescription",
+        "SHORT_DESCRIPTION_TOO_SHORT",
+    ],
+    [
+        "short description is too long",
+        {
+            title: "Valid title",
+            subtitle: "Subtitle",
+            shortDescription: "a".repeat(MAX_LENGTH.SHORT_DESCRIPTION_EBOOK + 1),
+        },
+        "shortDescription",
+        "SHORT_DESCRIPTION_TOO_LONG",
+    ],
+])("POST /api/ebooks returns a validation error when %s", async (_description, requestBody, field, errorCode) => {
     if (!userFixture) {
         throw new Error("User fixture was not initialized")
     }
@@ -125,15 +186,36 @@ test("POST /api/ebooks should return 400 when title is missing", async () => {
             "content-type": "application/json",
             "x-auth-user-id": userFixture.id,
         },
-        body: JSON.stringify({
-            subtitle: "Missing title",
-            shortDescription: "This should fail",
-        }),
+        body: JSON.stringify(requestBody),
     })
 
     const response = await POST(request)
     const body = await response.json() as ResponseErrorAPI
 
     expect(response.status).toBe(400)
-    expect(body.message).toBe("Title is required")
+    expect(body.code).toBe("VALIDATION_ERROR")
+    expect(body.message).toBe("Request validation failed")
+    expect(body.fields?.[field]).toContain(errorCode)
+})
+
+test("POST /api/ebooks returns INVALID_JSON for malformed JSON", async () => {
+    if (!userFixture) {
+        throw new Error("User fixture was not initialized")
+    }
+
+    const request = new NextRequest("http://localhost:3000/api/ebooks", {
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+            "x-auth-user-id": userFixture.id,
+        },
+        body: "{invalid-json",
+    })
+
+    const response = await POST(request)
+    const body = await response.json() as ResponseErrorAPI
+
+    expect(response.status).toBe(400)
+    expect(body.code).toBe("INVALID_JSON")
+    expect(body.message).toBe("Request body must be valid JSON")
 })
