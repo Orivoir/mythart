@@ -12,6 +12,7 @@ export interface ChapterResponseAPI {
     id: string;
     ebookId: string;
     title: string;
+    position: number;
     createdAt:number;
     updatedAt: number;
 }
@@ -30,6 +31,7 @@ export interface CreateChapterResponseAPI {
     ebookId: string;
     title: string;
     content: JsonValue;
+    position: number;
     createdAt: number;
     updatedAt: number;
 }

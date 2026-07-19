@@ -63,6 +63,7 @@ beforeEach(async () => {
             title: "Original chapter",
             content: { blocks: ["original"] },
             ebookId: ebook.id,
+            position: 0,
         },
     })
     const otherChapter = await prisma.chapter.create({
@@ -70,6 +71,7 @@ beforeEach(async () => {
             title: "Other chapter",
             content: {},
             ebookId: otherEbook.id,
+            position: 0,
         },
     })
 
@@ -92,6 +94,7 @@ test("PUT /api/chapters/:id updates an owned chapter title and content", async (
 
     expect(response.status).toBe(200)
     expect(body.id).toBe(chapterId)
+    expect(body.position).toBe(0)
     expect(body.title).toBe("Updated chapter")
     expect(body.content).toEqual({ blocks: ["updated"] })
     expect(typeof body.createdAt).toBe("number")
@@ -107,6 +110,7 @@ test("PUT /api/chapters/:id updates content without changing the title", async (
     const body = await response.json() as UpdateChapterResponseAPI
 
     expect(response.status).toBe(200)
+    expect(body.position).toBe(0)
     expect(body.title).toBe("Original chapter")
     expect(body.content).toEqual({ blocks: ["content only"] })
 })

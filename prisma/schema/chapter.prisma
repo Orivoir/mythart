@@ -4,8 +4,10 @@ model Chapter {
   ebook     Ebook    @relation(fields: [ebookId], references: [id])
   content   Json
   title  String
+  position Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([ebookId])
+  @@unique([ebookId, position])
 }

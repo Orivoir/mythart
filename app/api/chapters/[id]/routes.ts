@@ -28,27 +28,45 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
 
         const { id } = await params
 
-        const chapter = await prisma.chapter.findFirst({
-            where: {
-                id,
-                ebook: {
-                    ownerId: userId,
+        await prisma.$transaction(async (tx) => {
+            const chapter = await tx.chapter.findFirst({
+                where: {
+                    id,
+                    ebook: {
+                        ownerId: userId,
+                    },
                 },
-            },
-        })
+            })
 
-        if (!chapter) {
-            throw new ApiException(HTTP_ERRORS.NOT_FOUND)
-        }
+            if (!chapter) {
+                throw new ApiException(HTTP_ERRORS.NOT_FOUND)
+            }
 
-        // Snapshot should stock all content of version and chapter, without "soft" deleted for chapter is apply.
-        await prisma.chapter.delete({
-            where: {
-                id,
-            },
+            // Snapshot should stock all content of version and chapter, without "soft" deleted for chapter is apply.
+            await tx.chapter.delete({
+                where: {
+                    id,
+                },
+            })
+
+            // offset the position of all chapters that come after the deleted chapter
+            await tx.chapter.updateMany({
+                where: {
+                    ebookId: chapter.ebookId,
+                    position: {
+                        gt: chapter.position,
+                    },
+                },
+                data: {
+                    position: {
+                        decrement: 1,
+                    },
+                },
+            })
         })
 
         return NextResponse.json<DeleteChapterResponseAPI>({ success: true }, { status: 200 })
+
     } catch (error) {
         return apiErrorResponse(error)
     }

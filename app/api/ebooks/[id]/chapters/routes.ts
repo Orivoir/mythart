@@ -53,12 +53,13 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
         skip: (page - 1) * pageSize,
         take: pageSize,
         orderBy: {
-            createdAt: "desc",
+            position: "asc"
         },
         select: {
             id: true,
             ebookId: true,
             title: true,
+            position: true,
             content: false,
             createdAt: true,
             updatedAt: true,
@@ -110,14 +111,22 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
         if (!parsed.success) {
             throw apiValidationException(parsed.error)
         }
+        const newChapter = await prisma.$transaction(async (tx) => {
+            const count = await tx.chapter.count({
+                where: {
+                    ebookId: id,
+                },
+            });
 
-        const newChapter = await prisma.chapter.create({
-            data: {
-                title: parsed.data.title,
-                content: requestBody.content as CreateChapterRequestAPI["content"] || {},
-                ebookId: id,
-            },
-        })
+            return tx.chapter.create({
+                data: {
+                    title: parsed.data.title,
+                    content: requestBody.content as CreateChapterRequestAPI["content"] || {},
+                    ebookId: id,
+                    position: count,
+                },
+            });
+        });
 
         return NextResponse.json<CreateChapterResponseAPI>(mapModelTimestamps(newChapter), { status: 201 })
     } catch (error) {
