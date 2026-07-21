@@ -6,33 +6,77 @@ import { HTTP_ERRORS } from "./lib/constants/http-code"
 import { ApiException, apiErrorResponse } from "./lib/errors"
 
 const METHODS_WITH_JSON_BODY = new Set(["PUT", "PATCH", "DELETE", "POST"])
+const PSQL_INT_MAX = 2147483647
 
-function getEbookIdFromRoute(pathname: string): string | null {
-    const match = pathname.match(/^\/api\/ebooks\/([^/]+)$/)
-
-    if (!match) {
-        return null
-    }
-
-    return match[1] ?? null
+type ResourceId = {
+    resource: "ebooks" | "chapters"
+    id: string
 }
 
-async function getJsonBodyId(request: NextRequest): Promise<string | null> {
-    const contentType = request.headers.get("content-type")?.toLowerCase() ?? ""
+function getResourceIdFromRoute(pathname: string): ResourceId | null {
+    const ebookMatch = pathname.match(/^\/api\/ebooks\/([^/]+)(?:\/.*)?$/)
 
-    if (!contentType.includes("application/json")) {
-        return null
+    if (ebookMatch?.[1]) {
+        return {
+            resource: "ebooks",
+            id: ebookMatch[1],
+        }
     }
 
-    try {
-        const body = await request.clone().json() as { id?: unknown }
+    const chapterMatch = pathname.match(/^\/api\/chapters\/([^/]+)(?:\/.*)?$/)
 
-        return typeof body.id === "string" && body.id.length > 0
-            ? body.id
-            : null
-    } catch {
-        return null
+    if (chapterMatch?.[1]) {
+        return {
+            resource: "chapters",
+            id: chapterMatch[1],
+        }
     }
+
+    return null
+}
+
+function isValidPsqlIntId(id: string): boolean {
+    if (!/^\d+$/.test(id)) {
+        return false
+    }
+
+    const numericId = Number(id)
+
+    if (!Number.isSafeInteger(numericId)) {
+        return false
+    }
+
+    return numericId > 0 && numericId <= PSQL_INT_MAX
+}
+
+async function ensureOwnedResource(resourceId: ResourceId, userId: string): Promise<boolean> {
+    if (resourceId.resource === "ebooks") {
+        const ebook = await prisma.ebook.findFirst({
+            where: {
+                id: resourceId.id,
+                ownerId: userId,
+            },
+            select: {
+                id: true,
+            },
+        })
+
+        return Boolean(ebook)
+    }
+
+    const chapter = await prisma.chapter.findFirst({
+        where: {
+            id: resourceId.id,
+            ebook: {
+                ownerId: userId,
+            },
+        },
+        select: {
+            id: true,
+        },
+    })
+
+    return Boolean(chapter)
 }
 
 export async function proxy(request: NextRequest): Promise<NextResponse> {
@@ -42,29 +86,17 @@ export async function proxy(request: NextRequest): Promise<NextResponse> {
         return apiErrorResponse(new ApiException(HTTP_ERRORS.UNAUTHORIZED))
     }
 
-    const ebookIdFromRoute = getEbookIdFromRoute(request.nextUrl.pathname)
+    const resourceId = getResourceIdFromRoute(request.nextUrl.pathname)
 
-    if (ebookIdFromRoute && METHODS_WITH_JSON_BODY.has(request.method)) {
-        const ebookIdFromBody = await getJsonBodyId(request)
+    if (resourceId && METHODS_WITH_JSON_BODY.has(request.method)) {
+        if (resourceId.id.trim().length === 0 || !isValidPsqlIntId(resourceId.id)) {
+            return apiErrorResponse(new ApiException(HTTP_ERRORS.BAD_REQUEST))
+        }
 
-        if (ebookIdFromBody) {
-            if (ebookIdFromBody !== ebookIdFromRoute) {
-                return apiErrorResponse(new ApiException(HTTP_ERRORS.BAD_REQUEST))
-            }
+        const hasAccessToResource = await ensureOwnedResource(resourceId, userId)
 
-            const ebook = await prisma.ebook.findFirst({
-                where: {
-                    id: ebookIdFromBody,
-                    ownerId: userId,
-                },
-                select: {
-                    id: true,
-                },
-            })
-
-            if (!ebook) {
-                return apiErrorResponse(new ApiException(HTTP_ERRORS.NOT_FOUND))
-            }
+        if (!hasAccessToResource) {
+            return apiErrorResponse(new ApiException(HTTP_ERRORS.NOT_FOUND))
         }
     }
 

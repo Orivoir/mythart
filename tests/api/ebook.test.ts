@@ -1,15 +1,18 @@
 import "dotenv/config"
-import { beforeAll, afterAll, expect, test } from "vitest"
+import { afterAll, beforeEach, expect, test } from "vitest"
 import { NextRequest } from "next/server"
 import { GET, POST } from "../../app/api/ebooks/routes"
+import { DELETE, PUT } from "../../app/api/ebooks/[id]/routes"
 import type { CreateEbookResponseAPI, PaginatedEbooksAPI, ResponseErrorAPI } from "../../app/types/api/ebook"
 import { createEbooksFixture, createUserFixture } from "../helpers/factories"
+import prisma from "../helpers/prisma"
 import resetDb from "../helpers/reset-db"
 import { MAX_LENGTH } from "@/lib/constants/limits"
 
 let userFixture: Awaited<ReturnType<typeof createUserFixture>> | null = null
 
-beforeAll(async () => {
+beforeEach(async () => {
+    await resetDb()
     userFixture = await createUserFixture()
 })
 
@@ -218,4 +221,100 @@ test("POST /api/ebooks returns INVALID_JSON for malformed JSON", async () => {
     expect(response.status).toBe(400)
     expect(body.code).toBe("INVALID_JSON")
     expect(body.message).toBe("Request body must be valid JSON")
+})
+
+test("PUT /api/ebooks/:id updates an owned ebook without requiring body.id", async () => {
+    if (!userFixture) {
+        throw new Error("User fixture was not initialized")
+    }
+
+    const created = await prisma.ebook.create({
+        data: {
+            title: "Original title",
+            subtitle: "Original subtitle",
+            shortDescription: "Original description",
+            ownerId: userFixture.id,
+        },
+    })
+
+    const request = new NextRequest(`http://localhost:3000/api/ebooks/${created.id}`, {
+        method: "PUT",
+        headers: {
+            "content-type": "application/json",
+            "x-auth-user-id": userFixture.id,
+        },
+        body: JSON.stringify({
+            id: "999999",
+            title: "Updated title",
+            subtitle: "Updated subtitle",
+            shortDescription: "Updated description",
+        }),
+    })
+
+    const response = await PUT(request, { params: Promise.resolve({ id: created.id }) })
+    const body = await response.json() as CreateEbookResponseAPI
+
+    expect(response.status).toBe(200)
+    expect(body.id).toBe(created.id)
+    expect(body.title).toBe("Updated title")
+    expect(body.subtitle).toBe("Updated subtitle")
+    expect(body.shortDescription).toBe("Updated description")
+})
+
+test("DELETE /api/ebooks/:id deletes an owned ebook without requiring body.id", async () => {
+    if (!userFixture) {
+        throw new Error("User fixture was not initialized")
+    }
+
+    const created = await prisma.ebook.create({
+        data: {
+            title: "Ebook to delete",
+            ownerId: userFixture.id,
+        },
+    })
+
+    const request = new NextRequest(`http://localhost:3000/api/ebooks/${created.id}`, {
+        method: "DELETE",
+        headers: {
+            "x-auth-user-id": userFixture.id,
+        },
+    })
+
+    const response = await DELETE(request, { params: Promise.resolve({ id: created.id }) })
+    const body = await response.json() as { success: boolean }
+
+    expect(response.status).toBe(200)
+    expect(body).toEqual({ success: true })
+    expect(await prisma.ebook.findUnique({ where: { id: created.id } })).toBeNull()
+})
+
+test("PUT /api/ebooks/:id returns NOT_FOUND when the ebook belongs to another user", async () => {
+    if (!userFixture) {
+        throw new Error("User fixture was not initialized")
+    }
+
+    const otherOwner = await createUserFixture()
+    const created = await prisma.ebook.create({
+        data: {
+            title: "Other owner's ebook",
+            ownerId: otherOwner.id,
+        },
+    })
+
+    const request = new NextRequest(`http://localhost:3000/api/ebooks/${created.id}`, {
+        method: "PUT",
+        headers: {
+            "content-type": "application/json",
+            "x-auth-user-id": userFixture.id,
+        },
+        body: JSON.stringify({
+            title: "Should fail",
+        }),
+    })
+
+    const response = await PUT(request, { params: Promise.resolve({ id: created.id }) })
+    const body = await response.json() as ResponseErrorAPI
+
+    expect(response.status).toBe(404)
+    expect(body.code).toBe("NOT_FOUND")
 })

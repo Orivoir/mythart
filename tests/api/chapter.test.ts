@@ -115,6 +115,20 @@ test("PUT /api/chapters/:id updates content without changing the title", async (
     expect(body.content).toEqual({ blocks: ["content only"] })
 })
 
+test("PUT /api/chapters/:id ignores body.id and uses the route param id", async () => {
+    const request = chapterRequest("PUT", JSON.stringify({
+        id: "123456",
+        title: "Updated from route id",
+    }))
+
+    const response = await PUT(request, routeContext(chapterId))
+    const body = await response.json() as UpdateChapterResponseAPI
+
+    expect(response.status).toBe(200)
+    expect(body.id).toBe(chapterId)
+    expect(body.title).toBe("Updated from route id")
+})
+
 test.each([
     ["too short", "", "CHAPTER_TITLE_TOO_SHORT"],
     ["too long", "a".repeat(MAX_LENGTH.TITLE_CHAPTER + 1), "CHAPTER_TITLE_TOO_LONG"],

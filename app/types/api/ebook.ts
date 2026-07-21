@@ -28,15 +28,11 @@ export interface CreateEbookResponseAPI extends EbookResponseAPI {
     updatedAt: number;
 }
 
-export interface UpdateEbookRequestAPI extends CreateEbookRequestAPI {
-    id: string;
-}
+export type UpdateEbookRequestAPI = CreateEbookRequestAPI
 
 export interface UpdateEbookResponseAPI extends EbookResponseAPI {}
 
-export interface DeleteEbookRequestAPI {
-    id: string;
-}
+export type DeleteEbookRequestAPI = Record<string, never>
 
 export interface DeleteEbookResponseAPI {
     success: boolean;
