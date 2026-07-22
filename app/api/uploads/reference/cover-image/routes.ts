@@ -1,32 +1,32 @@
-import { isValidPermanentObject } from "@/lib/s3";
-import { NextResponse } from "next/server";
-import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth";
-import { ApiException } from "@/lib/errors/api-exception";
-import { HTTP_ERRORS } from "@/lib/constants/http-code";
-import { apiUploadException } from "@/lib/errors/api-upload-exception";
-import { prisma } from "@/lib/prisma";
+import { isValidPermanentObject } from "@/lib/s3"
+import { NextResponse } from "next/server"
+import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
+import { ApiException } from "@/lib/errors/api-exception"
+import { HTTP_ERRORS } from "@/lib/constants/http-code"
+import { apiUploadException } from "@/lib/errors/api-upload-exception"
+import { prisma } from "@/lib/prisma"
 
 export async function PUT(
   request: Request,
   { params }: { params: { id: string } },
 ) {
-  const userId = getAuthenticatedUserIdFromHeaders(request.headers);
+  const userId = getAuthenticatedUserIdFromHeaders(request.headers)
 
   if (!userId) {
-    throw new ApiException(HTTP_ERRORS.UNAUTHORIZED);
+    throw new ApiException(HTTP_ERRORS.UNAUTHORIZED)
   }
 
   const { key, fileName } = (await request.json()) as {
     key: string;
     fileName: string;
-  };
+  }
 
-  const { isValid, mimeType, sizeBytes } = await isValidPermanentObject({ key });
+  const { isValid, mimeType, sizeBytes } = await isValidPermanentObject({ key })
 
   if (!isValid || !mimeType || !sizeBytes) {
     throw apiUploadException(
       "The provided key does not correspond to a valid permanent object.",
-    );
+    )
   }
 
   const addReferenceUpload = await prisma.$transaction(async (tx) => {
@@ -39,15 +39,15 @@ export async function PUT(
         fileName,
         ownerId: userId,
       },
-    });
+    })
 
     const ebookUpdated = await tx.ebook.update({
       where: { id: params.id, ownerId: userId },
       data: { coverAssetId: assetCoverImage.id },
-    });
+    })
 
-    return { assetCoverImage, ebookUpdated };
-  });
+    return { assetCoverImage, ebookUpdated }
+  })
 
   if (!addReferenceUpload) {
     // @TODO here should choice strategy fallback:
@@ -65,10 +65,10 @@ export async function PUT(
     //   - hardy implementation:
     //      - should have "global state" for count retry request, add times expires retry
     //        and fallback delete file from S3 if retry request not success after X times
-    throw apiUploadException("Failed to add reference upload.");
+    throw apiUploadException("Failed to add reference upload.")
   }
 
-  const { assetCoverImage } = addReferenceUpload;
+  const { assetCoverImage } = addReferenceUpload
 
   return NextResponse.json({
     success: true,
@@ -82,5 +82,5 @@ export async function PUT(
       createdAt: assetCoverImage.createdAt.toISOString(),
       updatedAt: assetCoverImage.updatedAt.toISOString(),
     },
-  });
+  })
 }

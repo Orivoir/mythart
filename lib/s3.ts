@@ -1,11 +1,11 @@
 // lib/s3.ts
 
-import { S3Client } from "@aws-sdk/client-s3";
-import { PutObjectCommand, HeadObjectCommand, CopyObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { S3Client } from "@aws-sdk/client-s3"
+import { PutObjectCommand, HeadObjectCommand, CopyObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3"
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 import path from "path"
 import { randomUUID } from "crypto"
-import { AssetReferenceType } from "@/app/generated/prisma";
+import { AssetReferenceType } from "@/app/generated/prisma"
 
 export const s3 = new S3Client({
   endpoint: process.env.S3_ENDPOINT,
@@ -18,7 +18,7 @@ export const s3 = new S3Client({
   // in all environments, including tests.
   // forcePathStyle: Boolean(process.env.S3_ENDPOINT) || process.env.NODE_ENV === "development",
   forcePathStyle: true
-});
+})
 
 
 export interface S3PresignedUrlOptions {
@@ -50,7 +50,7 @@ export interface S3ValidateObjectUploadResponse {
 
 export async function generatePresignedUrl({ context, fileName, mimeType, expiresIn = 3600 }: S3PresignedUrlOptions): Promise<S3PresignedUrlResponse> {
 
-  const extension = path.extname(fileName);
+  const extension = path.extname(fileName)
 
   const key = `${process.env.S3_TEMP_UPLOAD_PREFIX!}/${context}/${randomUUID()}${extension}`
 
@@ -58,9 +58,9 @@ export async function generatePresignedUrl({ context, fileName, mimeType, expire
       Bucket: process.env.S3_BUCKET,
       Key: key,
       ContentType: mimeType,
-  });
+  })
 
-  const presignedUrl = await getSignedUrl(s3, command, { expiresIn });
+  const presignedUrl = await getSignedUrl(s3, command, { expiresIn })
 
   return {
     presignedUrl,
@@ -77,7 +77,7 @@ export async function validateObjectUpload({ key, mimeType, size }: S3ValidateOb
   const tempFileMetadata = await s3.send(new HeadObjectCommand({
     Bucket: process.env.S3_BUCKET,
     Key: key
-  }));
+  }))
 
   /**
    * Should verify the following:
@@ -99,7 +99,7 @@ export async function validateObjectUpload({ key, mimeType, size }: S3ValidateOb
     return {
       success: false,
       error: "MIME type does not match" // or file not exists
-    };
+    }
   }
 
   // ContentLength and browser file size exposed value as brute octets
@@ -117,12 +117,12 @@ export async function validateObjectUpload({ key, mimeType, size }: S3ValidateOb
 
   return {
     success: true
-  };
+  }
 }
 
 export async function moveObjectToPermanentLocation({ key, context, fileName, userId }: { key: string, context: AssetReferenceType, fileName: string, userId: string }) {
 
-  const extension = path.extname(fileName);
+  const extension = path.extname(fileName)
 
   const keyPermanent = `users/${userId}/${context}/${randomUUID()}${extension}`
 
@@ -130,14 +130,14 @@ export async function moveObjectToPermanentLocation({ key, context, fileName, us
     Bucket: process.env.S3_BUCKET!,
     CopySource: `${process.env.S3_BUCKET}/${key}`,
     Key: keyPermanent
-  }));
+  }))
 
   await s3.send(new DeleteObjectCommand({
     Bucket: process.env.S3_BUCKET,
     Key: key
-  }));
+  }))
 
-  return keyPermanent;
+  return keyPermanent
 }
 
 export async function isValidPermanentObject({ key }: { key: string}): Promise<{isValid:boolean, mimeType?: string, sizeBytes?: number}> {
@@ -145,7 +145,7 @@ export async function isValidPermanentObject({ key }: { key: string}): Promise<{
   const tempFileMetadata = await s3.send(new HeadObjectCommand({
     Bucket: process.env.S3_BUCKET,
     Key: key
-  }));
+  }))
 
   if (key.startsWith(process.env.S3_TEMP_UPLOAD_PREFIX!)) {
     return {isValid: false}

@@ -1,17 +1,17 @@
-import { generatePresignedUrl } from "@/lib/s3";
-import { NextResponse } from "next/server";
-import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth";
-import { ApiException } from "@/lib/errors/api-exception";
-import { HTTP_ERRORS } from "@/lib/constants/http-code";
+import { generatePresignedUrl } from "@/lib/s3"
+import { NextResponse } from "next/server"
+import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
+import { ApiException } from "@/lib/errors/api-exception"
+import { HTTP_ERRORS } from "@/lib/constants/http-code"
 
 export async function POST(request: Request) {
-  const userId = getAuthenticatedUserIdFromHeaders(request.headers);
+  const userId = getAuthenticatedUserIdFromHeaders(request.headers)
 
   if (!userId) {
-    throw new ApiException(HTTP_ERRORS.UNAUTHORIZED);
+    throw new ApiException(HTTP_ERRORS.UNAUTHORIZED)
   }
 
-  const { fileName, mimeType, context, size } = await request.json();
+  const { fileName, mimeType, context, size } = await request.json()
 
   // @TODO: here should check the user plan (free plan or premium plan)
   // and check the file size limit for the plan of this user
@@ -26,13 +26,13 @@ export async function POST(request: Request) {
   */
 
   // Keep payload contract unchanged for now while endpoint migration is in progress.
-  void size;
+  void size
 
   const results = await generatePresignedUrl({
     fileName,
     mimeType,
     context,
-  });
+  })
 
-  return NextResponse.json(results);
+  return NextResponse.json(results)
 }
