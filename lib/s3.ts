@@ -25,6 +25,7 @@ export interface S3PresignedUrlOptions {
   fileName: string;
   mimeType: string;
   context: AssetReferenceType;
+  size: number;
   expiresIn?: number;
 }
 

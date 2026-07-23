@@ -11,10 +11,17 @@ import {
 import { POST as createPresignedUploadUrl } from "@/app/api/uploads/presigned-url/routes"
 import { POST as completeUpload } from "@/app/api/uploads/complete/routes"
 import { PUT as createCoverImageReference } from "@/app/api/uploads/reference/cover-image/routes"
-import { createUserFixture } from "../helpers/factories"
+import {
+    createProUserFixture,
+    createPremiumUserFixture,
+    createUserFixture,
+} from "../helpers/factories"
 import resetDb from "../helpers/reset-db"
 import prisma from "../helpers/prisma"
 import { s3 } from "@/lib/s3"
+import { PLANS } from "@/lib/constants/plan"
+import { ApiException } from "@/lib/errors/api-exception"
+import { HTTP_ERRORS } from "@/lib/constants/http-code"
 
 interface PresignedUploadResponse {
     presignedUrl: string
@@ -118,6 +125,65 @@ runIfS3Configured("POST /api/uploads/presigned-url", () => {
 
     afterAll(async () => {
         await resetDb()
+    })
+
+    test.each([
+        ["FREE", PLANS.FREE.limits.maxUploadSizeBytes, async () => createUserFixture()],
+        ["PREMIUM", PLANS.PREMIUM.limits.maxUploadSizeBytes, createPremiumUserFixture],
+        ["PRO", PLANS.PRO.limits.maxUploadSizeBytes, createProUserFixture],
+    ])("returns 200 for %s plan when file size is within max upload limit", async (_plan, allowedSize, createPlanUser) => {
+        const planUser = await createPlanUser()
+
+        const request = new NextRequest("http://localhost:3000/api/uploads/presigned-url", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                "x-auth-user-id": planUser.id,
+            },
+            body: JSON.stringify({
+                fileName: "cover.png",
+                mimeType: "image/png",
+                context: "COVER",
+                size: allowedSize,
+            }),
+        })
+
+        const response = await createPresignedUploadUrl(request)
+        const body = await response.json() as PresignedUploadResponse
+
+        expect(response.status).toBe(200)
+        expect(body.presignedUrl).toMatch(/^https?:\/\//)
+        expect(body.mimeType).toBe("image/png")
+    })
+
+    test.each([
+        ["FREE", PLANS.FREE.limits.maxUploadSizeBytes + 1, async () => createUserFixture()],
+        ["PREMIUM", PLANS.PREMIUM.limits.maxUploadSizeBytes + 1, createPremiumUserFixture],
+        ["PRO", PLANS.PRO.limits.maxUploadSizeBytes + 1, createProUserFixture],
+    ])("returns payment-required for %s plan when file size exceeds max upload limit", async (_plan, exceededSize, createPlanUser) => {
+        const planUser = await createPlanUser()
+
+        const request = new NextRequest("http://localhost:3000/api/uploads/presigned-url", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                "x-auth-user-id": planUser.id,
+            },
+            body: JSON.stringify({
+                fileName: "cover.png",
+                mimeType: "image/png",
+                context: "COVER",
+                size: exceededSize,
+            }),
+        })
+
+        const uploadRequest = createPresignedUploadUrl(request)
+
+        await expect(uploadRequest).rejects.toBeInstanceOf(ApiException)
+        await expect(uploadRequest).rejects.toMatchObject({
+            status: HTTP_ERRORS.PAYMENT_REQUIRED.status,
+            code: HTTP_ERRORS.PAYMENT_REQUIRED.code,
+        })
     })
 
     test("generates URL, completes upload move, and creates cover image reference", async () => {
@@ -252,11 +318,125 @@ runIfS3Configured("POST /api/uploads/presigned-url", () => {
         // TODO: enable when bucket policy enforces single-use signed URLs.
     })
 
-    test.skip("security: should reject upload with a MIME type different than requested", async () => {
-        // TODO: enable when bucket policy enforces strict content-type validation.
+    test("security: should reject upload with a MIME type different than requested", async () => {
+        const request = new NextRequest("http://localhost:3000/api/uploads/presigned-url", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                "x-auth-user-id": userId,
+            },
+            body: JSON.stringify({
+                fileName: "cover.png",
+                mimeType: "image/png",
+                context: "COVER",
+                size: 1024,
+            }),
+        })
+
+        const response = await createPresignedUploadUrl(request)
+        const body = await response.json() as PresignedUploadResponse
+
+        expect(response.status).toBe(200)
+
+        const uploadPayload = new TextEncoder().encode("not-a-png")
+        const uploadResponse = await fetch(body.presignedUrl, {
+            method: "PUT",
+            headers: {
+                "content-type": "text/plain",
+            },
+            body: uploadPayload,
+        })
+
+        uploadedKeys.push(body.key)
+
+        expect(uploadResponse.status).toBeGreaterThanOrEqual(200)
+        expect(uploadResponse.status).toBeLessThan(300)
+
+        const completeRequest = new NextRequest("http://localhost:3000/api/uploads/complete", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                "x-auth-user-id": userId,
+            },
+            body: JSON.stringify({
+                fileName: "cover.png",
+                mimeType: "image/png",
+                size: uploadPayload.length,
+                key: body.key,
+                context: "COVER",
+            }),
+        })
+
+        const completePromise = completeUpload(completeRequest)
+
+        await expect(completePromise).rejects.toBeInstanceOf(ApiException)
+        await expect(completePromise).rejects.toMatchObject({
+            status: HTTP_ERRORS.VALIDATION_ERROR.status,
+            code: HTTP_ERRORS.VALIDATION_ERROR.code,
+            fields: {
+                error: ["MIME type does not match"],
+            },
+        })
     })
 
-    test.skip("security: should reject oversized file uploads", async () => {
-        // TODO: enable when size limits are implemented at app or bucket policy level.
+    test("security: should reject oversized file uploads", async () => {
+        const request = new NextRequest("http://localhost:3000/api/uploads/presigned-url", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                "x-auth-user-id": userId,
+            },
+            body: JSON.stringify({
+                fileName: "cover.png",
+                mimeType: "image/png",
+                context: "COVER",
+                size: 8,
+            }),
+        })
+
+        const response = await createPresignedUploadUrl(request)
+        const body = await response.json() as PresignedUploadResponse
+
+        expect(response.status).toBe(200)
+
+        const uploadPayload = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10, 0, 1, 2, 3])
+        const uploadResponse = await fetch(body.presignedUrl, {
+            method: "PUT",
+            headers: {
+                "content-type": "image/png",
+            },
+            body: uploadPayload,
+        })
+
+        uploadedKeys.push(body.key)
+
+        expect(uploadResponse.status).toBeGreaterThanOrEqual(200)
+        expect(uploadResponse.status).toBeLessThan(300)
+
+        const completeRequest = new NextRequest("http://localhost:3000/api/uploads/complete", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                "x-auth-user-id": userId,
+            },
+            body: JSON.stringify({
+                fileName: "cover.png",
+                mimeType: "image/png",
+                size: 8,
+                key: body.key,
+                context: "COVER",
+            }),
+        })
+
+        const completePromise = completeUpload(completeRequest)
+
+        await expect(completePromise).rejects.toBeInstanceOf(ApiException)
+        await expect(completePromise).rejects.toMatchObject({
+            status: HTTP_ERRORS.VALIDATION_ERROR.status,
+            code: HTTP_ERRORS.VALIDATION_ERROR.code,
+            fields: {
+                error: ["File size does not match"],
+            },
+        })
     })
 })

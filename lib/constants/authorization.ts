@@ -1,0 +1,96 @@
+import type {S3PresignedUrlOptions} from "@/lib/s3"
+import { PLANS, type PlanLimits } from "@/lib/constants/plan"
+import {prisma} from "@/lib/prisma"
+import {PlanType} from "@/app/generated/prisma/client"
+
+export interface CanUploadFileOptions extends Omit<S3PresignedUrlOptions, "expiresIn"> {
+  userId: string;
+  plan?: PlanType
+}
+
+export type CanUploadFileBaseOnPlanOptions = {
+  storageBytes: number,
+  maxUploadSizeBytes: number,
+  fileSizeBytes: number,
+  currentUsageBytes: number
+}
+
+export async function canUploadFile({
+  size,
+  userId,
+  plan
+}: CanUploadFileOptions): Promise<boolean> {
+  /**
+   * Implement logic to determine if the user can upload a file based on their permissions, the context, and other factors (like size file).
+   * 1 - Get PlanType of userId
+   * 2 - Get  limits storageBytes and maxUploadSizeBytes of the plan
+   * 3 - Get the current storage used by the userId (based on reference in the database)
+   * 4 - Check if the file size is less than maxUploadSizeBytes
+   * 5 - Check if the current storage used + file size is less than storageBytes
+   * 6 - Return true if both checks pass, otherwise return false
+   */
+
+  const {maxUploadSizeBytes, storageBytes} = 
+  typeof plan === "string" ?
+    // DONT REQUEST DATABASE IF PLAN IS PROVIDED BY ENDPOINT
+    PLANS[plan.toUpperCase() as keyof typeof PLANS].limits:
+    (await getPlanLimits(userId))
+
+  const currentUsageBytes = await getUsageStorageBytes(userId)
+  return canUploadFileBasedOnPlan({
+    storageBytes,
+    maxUploadSizeBytes,
+    fileSizeBytes: size,
+    currentUsageBytes
+  })
+}
+
+export async function getUsageStorageBytes(userId: string): Promise<number> {
+  const result = await prisma.asset.aggregate({
+    _sum: {
+      sizeBytes: true,
+    },
+    where: {
+      ownerId: userId,
+    },
+  })
+
+  return result._sum.sizeBytes ?? 0
+}
+
+export async function getPlanLimits(userId: string): Promise<PlanLimits> {
+  
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      plan: true,
+    },
+  })
+
+  if (!user) {
+    throw new Error("User not found")
+  }
+
+  const plan = user.plan.toLocaleUpperCase() as keyof typeof PLANS
+
+  return PLANS[plan].limits
+}
+
+export function canUploadFileBasedOnPlan({
+  storageBytes,
+  maxUploadSizeBytes,
+  fileSizeBytes,
+  currentUsageBytes}: CanUploadFileBaseOnPlanOptions): boolean {
+  
+  if(fileSizeBytes > maxUploadSizeBytes) {
+    return false
+  }
+
+  if(currentUsageBytes + fileSizeBytes > storageBytes) {
+    return false
+  }
+
+  return true
+}

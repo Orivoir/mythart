@@ -5,8 +5,8 @@ model Asset {
   bucket    String
 
   fileName  String
-  mimeType  String?
-  sizeBytes Int?
+  mimeType  String
+  sizeBytes Int
   // etag      String?
 
   createdAt DateTime @default(now())

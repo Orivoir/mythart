@@ -10,6 +10,7 @@ enum SubscriptionStatus {
 enum PlanType {
   free
   premium
+  pro
 }
 
 enum AssetReferenceType {

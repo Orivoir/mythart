@@ -35,6 +35,11 @@ export const HTTP_ERRORS = {
         code: "INTERNAL_ERROR",
         message: "An unexpected error occurred",
     },
+    PAYMENT_REQUIRED: {
+        status: 402,
+        code: "PAYMENT_REQUIRED",
+        message: "Payment required",
+    },
 } as const
 
 export const HTTP_ERROR_BAD_REQUEST = HTTP_ERRORS.VALIDATION_ERROR.code

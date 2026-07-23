@@ -1,7 +1,12 @@
 import prisma from "./prisma"
 import type { CreateEbookRequestAPI } from "../../app/types/api/ebook"
+import { PlanType } from "../../app/generated/prisma/client"
 
-export async function createUserFixture() {
+interface CreateUserFixtureOptions {
+  plan?: PlanType
+}
+
+export async function createUserFixture({ plan = PlanType.free }: CreateUserFixtureOptions = {}) {
   const idSuffix = Date.now()
 
   return prisma.user.create({
@@ -10,8 +15,17 @@ export async function createUserFixture() {
       name: "Fixture User",
       emailVerified: new Date(),
       stripeCustomerId: `cus_fixture_${idSuffix}`,
+      plan,
     },
   })
+}
+
+export async function createPremiumUserFixture() {
+  return createUserFixture({ plan: PlanType.premium })
+}
+
+export async function createProUserFixture() {
+  return createUserFixture({ plan: PlanType.pro })
 }
 
 export async function createEbooksFixture(
