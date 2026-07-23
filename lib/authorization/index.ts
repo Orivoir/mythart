@@ -1,5 +1,5 @@
 import { prisma } from "../prisma"
-import { type PlanLimits, type PlanType, PlanFeatures, PlanFeaturesName, PLANS, PlanCollaborationFeatures } from "../constants/plan"
+import { type PlanLimits, type PlanType, PlanFeatures, PlanFeaturesName, PLANS } from "../constants/plan"
 
 
 // Generic helper authorzation function to check if a user can execute a action based on their plan limits and features.

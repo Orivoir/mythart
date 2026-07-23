@@ -8,7 +8,8 @@ const eslintConfig = defineConfig([
   {
     rules: {
       "semi": ["error", "never"],
-      "quotes": ["error", "double"]
+      "quotes": ["error", "double"],
+      "@typescript-eslint/no-empty-object-type": "off",
     },
   },
   // Override default ignores of eslint-config-next.
