@@ -161,4 +161,10 @@ export const PLANS = {
   },
 } as const
 
+export type PlanType = keyof typeof PLANS
+
+export type PlanFeaturesName = keyof typeof PLANS[keyof typeof PLANS]["features"]
+
 export type PlanLimits = typeof PLANS[keyof typeof PLANS]["limits"]
+export type PlanFeatures = typeof PLANS[keyof typeof PLANS]["features"]
+export type PlanCollaborationFeatures = typeof PLANS[keyof typeof PLANS]["features"]["collaboration"]

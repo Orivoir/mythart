@@ -1,8 +1,10 @@
 import type { ResponseErrorAPI } from "@/app/types/api/ebook"
 import { NextRequest, NextResponse } from "next/server"
 
+import { CollaborationPermission } from "@/app/generated/prisma/client"
 import { DeleteChapterResponseAPI } from "@/app/types/api/chapter"
 import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
+import { canManageChapterByPermission } from "@/lib/authorization"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { ApiException, withApiHandler } from "@/lib/errors"
 import { prisma } from "@/lib/prisma"
@@ -19,20 +21,17 @@ export const DELETE = withApiHandler(async (
 
     const { id } = await params
 
+    const chapter = await canManageChapterByPermission({
+        chapterId: id,
+        userId,
+        permission: CollaborationPermission.CHAPTER_DELETE,
+    })
+
+    if (!chapter) {
+        throw new ApiException(HTTP_ERRORS.NOT_FOUND)
+    }
+
     await prisma.$transaction(async (tx) => {
-        const chapter = await tx.chapter.findFirst({
-            where: {
-                id,
-                ebook: {
-                    ownerId: userId,
-                },
-            },
-        })
-
-        if (!chapter) {
-            throw new ApiException(HTTP_ERRORS.NOT_FOUND)
-        }
-
         // Snapshot should stock all content of version and chapter, without "soft" deleted for chapter is apply.
         await tx.chapter.delete({
             where: {

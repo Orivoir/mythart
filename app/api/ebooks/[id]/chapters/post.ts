@@ -6,6 +6,7 @@ import type { ResponseErrorAPI } from "@/app/types/api/ebook"
 import { NextRequest, NextResponse } from "next/server"
 
 import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
+import { canCreateChapterForEbook } from "@/lib/authorization"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { ApiException, parseApiJsonObject, withApiHandler } from "@/lib/errors"
 import { mapModelTimestamps } from "@/lib/map-date-fields-to-timestamps"
@@ -24,14 +25,16 @@ export const POST = withApiHandler(async (
 
     const { id } = await params
 
-    const ebook = await prisma.ebook.findFirst({
-        where: {
-            id,
-            ownerId: userId,
-        },
+    const authorization = await canCreateChapterForEbook({
+        ebookId: id,
+        userId,
     })
 
-    if (!ebook) {
+    if (authorization.limitReached) {
+        throw new ApiException(HTTP_ERRORS.PAYMENT_REQUIRED)
+    }
+
+    if (!authorization.canCreate) {
         throw new ApiException(HTTP_ERRORS.NOT_FOUND)
     }
 

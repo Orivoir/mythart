@@ -1,18 +1,12 @@
 import type {S3PresignedUrlOptions} from "@/lib/s3"
-import { PLANS, type PlanLimits } from "@/lib/constants/plan"
+import { PLANS } from "@/lib/constants/plan"
 import {prisma} from "@/lib/prisma"
 import {PlanType} from "@/app/generated/prisma/client"
+import {getPlanLimits, getPlan} from "@/lib/authorization"
 
 export interface CanUploadFileOptions extends Omit<S3PresignedUrlOptions, "expiresIn"> {
   userId: string;
   plan?: PlanType
-}
-
-export type CanUploadFileBaseOnPlanOptions = {
-  storageBytes: number,
-  maxUploadSizeBytes: number,
-  fileSizeBytes: number,
-  currentUsageBytes: number
 }
 
 export async function canUploadFile({
@@ -30,11 +24,12 @@ export async function canUploadFile({
    * 6 - Return true if both checks pass, otherwise return false
    */
 
+  const planUser = await getPlan(userId)
   const {maxUploadSizeBytes, storageBytes} = 
   typeof plan === "string" ?
     // DONT REQUEST DATABASE IF PLAN IS PROVIDED BY ENDPOINT
     PLANS[plan.toUpperCase() as keyof typeof PLANS].limits:
-    (await getPlanLimits(userId))
+    (await getPlanLimits(planUser))
 
   const currentUsageBytes = await getUsageStorageBytes(userId)
   return canUploadFileBasedOnPlan({
@@ -58,24 +53,12 @@ export async function getUsageStorageBytes(userId: string): Promise<number> {
   return result._sum.sizeBytes ?? 0
 }
 
-export async function getPlanLimits(userId: string): Promise<PlanLimits> {
-  
-  const user = await prisma.user.findUnique({
-    where: {
-      id: userId,
-    },
-    select: {
-      plan: true,
-    },
-  })
 
-  if (!user) {
-    throw new Error("User not found")
-  }
-
-  const plan = user.plan.toLocaleUpperCase() as keyof typeof PLANS
-
-  return PLANS[plan].limits
+export type CanUploadFileBaseOnPlanOptions = {
+  storageBytes: number,
+  maxUploadSizeBytes: number,
+  fileSizeBytes: number,
+  currentUsageBytes: number
 }
 
 export function canUploadFileBasedOnPlan({

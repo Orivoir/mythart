@@ -1,6 +1,6 @@
 import "dotenv/config"
 import { describe, expect, test } from "vitest"
-import { canUploadFileBasedOnPlan } from "./../../lib/constants/authorization"
+import { canUploadFileBasedOnPlan } from "./../../lib/authorization"
 import { PLANS } from "./../../lib/constants/plan"
 
 const PLAN_CASES = [

@@ -3,6 +3,7 @@ import type { ResponseErrorAPI } from "@/app/types/api/ebook"
 import { NextRequest, NextResponse } from "next/server"
 
 import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
+import { getEbookCollaboratorForUser } from "@/lib/authorization"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { ApiException, withApiHandler } from "@/lib/errors"
 import { mapModelTimestamps } from "@/lib/map-date-fields-to-timestamps"
@@ -24,13 +25,22 @@ export const GET = withApiHandler(async (
     const ebook = await prisma.ebook.findFirst({
         where: {
             id,
-            // @TODO: Consider adding collaborator access check here if needed in the future
             ownerId: userId,
         },
     })
 
+    let allowedChapterIds: string[] | null = null
+
     if (!ebook) {
-        throw new ApiException(HTTP_ERRORS.NOT_FOUND)
+        const collaborator = await getEbookCollaboratorForUser(id, userId)
+
+        if (!collaborator) {
+            throw new ApiException(HTTP_ERRORS.NOT_FOUND)
+        }
+
+        if (!collaborator.allChaptersAccess) {
+            allowedChapterIds = collaborator.chapterAccess.map((entry) => entry.chapterId)
+        }
     }
 
     const { page, pageSize } = parsePaginationParams(request.nextUrl.searchParams)
@@ -38,6 +48,13 @@ export const GET = withApiHandler(async (
     const chapters = await prisma.chapter.findMany({
         where: {
             ebookId: id,
+            ...(allowedChapterIds
+                ? {
+                    id: {
+                        in: allowedChapterIds,
+                    },
+                }
+                : {}),
         },
         skip: (page - 1) * pageSize,
         take: pageSize,
@@ -58,6 +75,13 @@ export const GET = withApiHandler(async (
     const totalItems = await prisma.chapter.count({
         where: {
             ebookId: id,
+            ...(allowedChapterIds
+                ? {
+                    id: {
+                        in: allowedChapterIds,
+                    },
+                }
+                : {}),
         },
     })
 

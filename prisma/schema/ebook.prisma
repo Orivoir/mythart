@@ -16,6 +16,8 @@ model Ebook {
 
   snapshots         Snapshot[] @relation("EbookSnapshots")
   chapters          Chapter[]
+  collaborators     EbookCollaborator[]
+  customRoles       EbookCustomRole[]
 
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt

@@ -3,7 +3,7 @@ import { NextResponse } from "next/server"
 import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
 import { ApiException } from "@/lib/errors/api-exception"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
-import { canUploadFile } from "@/lib/constants/authorization"
+import { canUploadFile } from "@/lib/authorization"
 
 export async function POST(request: Request) {
   const userId = getAuthenticatedUserIdFromHeaders(request.headers)
@@ -13,9 +13,6 @@ export async function POST(request: Request) {
   }
 
   const { fileName, mimeType, context, size } = await request.json() as S3PresignedUrlOptions
-
-  // @TODO: here should check the user plan (free plan or premium plan)
-  // and check the file size limit for the plan of this user
 
   const canUpload = await canUploadFile({
     size,

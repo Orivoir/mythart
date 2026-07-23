@@ -10,6 +10,7 @@ model Chapter {
   ebook     Ebook    @relation(fields: [ebookId], references: [id])
 
   assetReferences ChapterAssetReference[]
+  collaboratorAccess EbookCollaboratorChapterAccess[]
 
   @@index([ebookId])
   @@unique([ebookId, position])

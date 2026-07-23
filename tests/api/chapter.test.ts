@@ -2,6 +2,7 @@ import "dotenv/config"
 import { afterAll, beforeEach, expect, test } from "vitest"
 import { NextRequest } from "next/server"
 
+import { CollaborationRole } from "@/app/generated/prisma/client"
 import { DELETE, PUT } from "@/app/api/chapters/[id]/routes"
 import type { DeleteChapterResponseAPI, UpdateChapterResponseAPI } from "@/app/types/api/chapter"
 import type { ResponseErrorAPI } from "@/app/types/api/ebook"
@@ -12,19 +13,22 @@ import resetDb from "../helpers/reset-db"
 
 let ownerId = ""
 let otherOwnerId = ""
+let authorCollaboratorId = ""
+let proofreaderCollaboratorId = ""
 let chapterId = ""
+let secondChapterId = ""
 let otherChapterId = ""
 
 function routeContext(id: string) {
     return { params: Promise.resolve({ id }) }
 }
 
-function chapterRequest(method: "PUT" | "DELETE", body?: string, authenticated = true): NextRequest {
+function chapterRequest(method: "PUT" | "DELETE", body?: string, authenticated = true, authUserId?: string): NextRequest {
     return new NextRequest(`http://localhost:3000/api/chapters/${chapterId}`, {
         method,
         headers: {
             ...(body ? { "content-type": "application/json" } : {}),
-            ...(authenticated ? { "x-auth-user-id": ownerId } : {}),
+            ...(authenticated ? { "x-auth-user-id": authUserId ?? ownerId } : {}),
         },
         ...(body ? { body } : {}),
     })
@@ -44,6 +48,26 @@ beforeEach(async () => {
         },
     })
     otherOwnerId = otherOwner.id
+
+    const authorCollaborator = await prisma.user.create({
+        data: {
+            email: `author-${ownerId}@example.com`,
+            name: "Author Collaborator",
+            emailVerified: new Date(),
+            stripeCustomerId: `cus_author_${ownerId}`,
+        },
+    })
+    authorCollaboratorId = authorCollaborator.id
+
+    const proofreaderCollaborator = await prisma.user.create({
+        data: {
+            email: `proofreader-${ownerId}@example.com`,
+            name: "Proofreader Collaborator",
+            emailVerified: new Date(),
+            stripeCustomerId: `cus_proofreader_${ownerId}`,
+        },
+    })
+    proofreaderCollaboratorId = proofreaderCollaborator.id
 
     const ebook = await prisma.ebook.create({
         data: {
@@ -66,6 +90,14 @@ beforeEach(async () => {
             position: 0,
         },
     })
+    const secondChapter = await prisma.chapter.create({
+        data: {
+            title: "Second chapter",
+            content: { blocks: ["second"] },
+            ebookId: ebook.id,
+            position: 1,
+        },
+    })
     const otherChapter = await prisma.chapter.create({
         data: {
             title: "Other chapter",
@@ -75,7 +107,31 @@ beforeEach(async () => {
         },
     })
 
+    await prisma.ebookCollaborator.create({
+        data: {
+            ebookId: ebook.id,
+            userId: authorCollaboratorId,
+            role: CollaborationRole.AUTHOR,
+            allChaptersAccess: false,
+            chapterAccess: {
+                create: {
+                    chapterId: chapter.id,
+                },
+            },
+        },
+    })
+
+    await prisma.ebookCollaborator.create({
+        data: {
+            ebookId: ebook.id,
+            userId: proofreaderCollaboratorId,
+            role: CollaborationRole.PROOFREADER,
+            allChaptersAccess: true,
+        },
+    })
+
     chapterId = chapter.id
+    secondChapterId = secondChapter.id
     otherChapterId = otherChapter.id
 })
 
@@ -113,6 +169,42 @@ test("PUT /api/chapters/:id updates content without changing the title", async (
     expect(body.position).toBe(0)
     expect(body.title).toBe("Original chapter")
     expect(body.content).toEqual({ blocks: ["content only"] })
+})
+
+test("PUT /api/chapters/:id allows an author collaborator with scoped chapter access", async () => {
+    const request = chapterRequest("PUT", JSON.stringify({
+        title: "Collaborator update",
+    }), true, authorCollaboratorId)
+
+    const response = await PUT(request, routeContext(chapterId))
+    const body = await response.json() as UpdateChapterResponseAPI
+
+    expect(response.status).toBe(200)
+    expect(body.title).toBe("Collaborator update")
+})
+
+test("PUT /api/chapters/:id denies a proofreader collaborator without update permission", async () => {
+    const request = chapterRequest("PUT", JSON.stringify({
+        title: "Should fail",
+    }), true, proofreaderCollaboratorId)
+
+    const response = await PUT(request, routeContext(chapterId))
+    const body = await response.json() as ResponseErrorAPI
+
+    expect(response.status).toBe(404)
+    expect(body.code).toBe("NOT_FOUND")
+})
+
+test("PUT /api/chapters/:id denies collaborator outside scoped chapter access", async () => {
+    const request = chapterRequest("PUT", JSON.stringify({
+        title: "Should fail for scope",
+    }), true, authorCollaboratorId)
+
+    const response = await PUT(request, routeContext(secondChapterId))
+    const body = await response.json() as ResponseErrorAPI
+
+    expect(response.status).toBe(404)
+    expect(body.code).toBe("NOT_FOUND")
 })
 
 test("PUT /api/chapters/:id ignores body.id and uses the route param id", async () => {
@@ -181,6 +273,23 @@ test("DELETE /api/chapters/:id deletes an owned chapter", async () => {
     expect(response.status).toBe(200)
     expect(body).toEqual({ success: true })
     expect(await prisma.chapter.findUnique({ where: { id: chapterId } })).toBeNull()
+})
+
+test("DELETE /api/chapters/:id allows author collaborator to delete permitted chapter", async () => {
+    const response = await DELETE(chapterRequest("DELETE", undefined, true, authorCollaboratorId), routeContext(chapterId))
+    const body = await response.json() as DeleteChapterResponseAPI
+
+    expect(response.status).toBe(200)
+    expect(body.success).toBe(true)
+    expect(await prisma.chapter.findUnique({ where: { id: chapterId } })).toBeNull()
+})
+
+test("DELETE /api/chapters/:id denies proofreader collaborator without delete permission", async () => {
+    const response = await DELETE(chapterRequest("DELETE", undefined, true, proofreaderCollaboratorId), routeContext(chapterId))
+    const body = await response.json() as ResponseErrorAPI
+
+    expect(response.status).toBe(404)
+    expect(body.code).toBe("NOT_FOUND")
 })
 
 test.each([
