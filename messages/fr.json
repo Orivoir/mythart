@@ -2,5 +2,24 @@
     "Brand": {
         "Name": "MythRart",
         "Slogan": "Moteur de documents numérique qui pense avec l'art de la mythologie"
+    },
+    "CTA": {
+        "TitleHome": {
+            "BeforeAccent": "Le moteur de documents pensé",
+            "Accent": "pour les auteurs",
+            "AfterAccent": "et leurs histoires."
+        },
+        "SubtitleHome": "Ecrivez plus librement. Structurez vos idées. Collaborez en temps réel. Traduisez sans réécrire. Et ne perdez pas une ligne.",
+        "NoInstallChip": "Pas d'installation, 100% web. Synchronisé partout.",
+        "MarketingList": {
+            "FreePlanTitle": "Plan gratuit a vie",
+            "FreePlanDescription": "Commencez à écrire et à organiser vos idées sans limite de temps.",
+
+            "NoInstallTitle": "Aucune installation",
+            "NoInstallDescription": "Accédez à vos documents depuis n'importe quel appareil.",
+
+            "TrialPeriodTitle": "Essai Premium 14 jours",
+            "TrialPeriodDescription": "Profitez de toutes les fonctionnalités premium pendant 14 jours. Sans engagement."
+        }
     }
 }

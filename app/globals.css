@@ -161,6 +161,7 @@
 
 * {
   border-color: var(--border);
+  box-sizing: border-box;
 }
 
 html {

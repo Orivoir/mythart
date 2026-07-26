@@ -9,6 +9,8 @@ type ButtonVariant =
   | "ghost"
   | "accent"
   | "accent-outline"
+  |  "primary"
+  |  "primary-outline"
 
 type ButtonSize =
   | "default"
@@ -40,6 +42,20 @@ const variantStyles: Record<ButtonVariant, string> = {
       "hover:bg-primary/5",
     ].join(" "),
 
+    primary:
+    [
+      "bg-primary text-surface",
+      "hover:bg-primary/90",
+    ].join(" "),
+
+    "primary-outline":
+    [
+      "border border-primary-variant/20",
+      "text-primary-variant",
+      "bg-transparent",
+      "hover:bg-primary-variant/5",
+    ].join(" "),
+
   accent:
     [
       "bg-accent text-accent-foreground",
@@ -64,16 +80,16 @@ const variantStyles: Record<ButtonVariant, string> = {
 
 const sizeStyles: Record<ButtonSize, string> = {
   default:
-    "h-10 px-4 py-2",
+    "h-10 px-4 py-2 rounded-sm",
 
   sm:
-    "h-9 rounded-md px-3 text-sm",
+    "h-9 rounded-sm px-3 text-sm",
 
   lg:
-    "h-12 rounded-lg px-8 text-base",
+    "h-12 rounded-sm px-8 text-base",
 
   full:
-    "h-12 w-full rounded-lg px-8 text-base",
+    "h-12 w-full rounded-sm px-8 text-base",
 }
 
 
