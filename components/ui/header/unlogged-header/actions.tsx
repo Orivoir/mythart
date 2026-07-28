@@ -12,11 +12,11 @@ export function Actions() {
       items-center
       gap-3
     ">
-      <Link href="/login">
+      <Link href="/login" className="hidden md:inline-flex">
         Se connecter
       </Link>
 
-      <Button variant="accent-outline">
+      <Button variant="accent-outline" className="hidden md:inline-flex">
         Essayer gratuitement
       </Button>
 
