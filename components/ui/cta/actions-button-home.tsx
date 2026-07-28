@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button"
 import { ButtonWithIcon } from "@/components/ui/button-with-icon"
 import { CirclePlay } from "lucide-react"
+import { getTranslations } from "next-intl/server"
 
-export function ActionButtonHome() {
+export async function ActionButtonHome() {
+
+  const t = await getTranslations("CTA.ActionButton")
 
   return (
     <div className="
@@ -11,7 +14,7 @@ export function ActionButtonHome() {
       gap-4
     ">
       <Button variant="primary" size="lg">
-        Commencer gratuitement
+        {t("StartWriting")}
       </Button>
 
       <ButtonWithIcon
@@ -20,7 +23,7 @@ export function ActionButtonHome() {
         iconPosition="right"
         size="lg"
       >
-        Voir la démo
+        {t("StartTrial")}
       </ButtonWithIcon>
   </div>
   )

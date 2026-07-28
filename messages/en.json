@@ -20,6 +20,10 @@
 
             "TrialPeriodTitle": "14 days Premium Trial",
             "TrialPeriodDescription": "Enjoy all premium features for 14 days. No commitment."
+        },
+        "ActionButton": {
+            "StartWriting": "Start writing",
+            "StartTrial": "Start free trial"
         }
     }
 }

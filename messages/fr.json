@@ -20,6 +20,10 @@
 
             "TrialPeriodTitle": "Essai Premium 14 jours",
             "TrialPeriodDescription": "Profitez de toutes les fonctionnalités premium pendant 14 jours. Sans engagement."
+        },
+        "ActionButton": {
+            "StartWriting": "Commencez gratuitement",
+            "StartTrial": "Commencez l'essai gratuit"
         }
     }
 }
