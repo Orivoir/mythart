@@ -23,7 +23,26 @@
         },
         "ActionButton": {
             "StartWriting": "Commencez gratuitement",
-            "StartTrial": "Commencez l'essai gratuit"
+            "ViewDemo": "Voir la démo"
+        },
+        "FeaturesList": {
+            "EditorTitle": "Ecriture enrichie",
+            "EditorDescribe": "Texte, entités et relations. Tout est lié, tout fait sens.",
+
+            "CollaborationTitle": "Collaboration native",
+            "CollaborationDescribe": "Travaillez a plusieurs",
+
+            "VersionningTitle": "Versionning intelligent",
+            "VersionningDescribe": "Sauvegarde automatique, historique complet et restauration facile. Revenez en arrière a tout moment.",
+
+            "OfflineTitle": "Hors ligne & PWA",
+            "OfflineDescribe": "Avion, train, métro, bus, bateau. Ecrivez partout, même sans connexion internet. Mythrart synchronise automatiquement quand vous serez de nouveau en ligne.",
+
+            "TranslationTitle": "Traduction facilitées",
+            "TranslationDescribe": "Traduisez sans réécrire gardez l'original intact, collaborer avec des traducteurs.",
+
+            "SilentAITitle": "IA Silencieuse",
+            "SilentAIDescribe": "L'IA est là pour vous aider, pas pour vous remplacer. Elle ne prend pas de décisions à votre place."
         }
     }
 }

@@ -7,7 +7,7 @@
         "TitleHome": {
             "BeforeAccent": "The Document Engine designed",
             "Accent": "for authors",
-            "AfterAccent": "and theirs stories."
+            "AfterAccent": "and their stories."
         },
         "SubtitleHome": "Write more freely. Structure your ideas. Collaborate in real time. Translate without rewriting. And don't lose a line.",
         "NoInstallChip": "No-install, 100% web. Synchronized everywhere.",
@@ -23,7 +23,26 @@
         },
         "ActionButton": {
             "StartWriting": "Start writing",
-            "StartTrial": "Start free trial"
+            "ViewDemo": "View demo"
+        },
+        "FeaturesList": {
+            "EditorTitle": "Enriched writing",
+            "EditorDescribe": "Text, entities and relations. Everything is linked, everything makes sense",
+
+            "CollaborationTitle": "Native collaboration",
+            "CollaborationDescribe": "Work together in real time or at your own pace. Fine-grained permissions included.",
+
+            "VersionningTitle": "Smart versioning",
+            "VersionningDescribe": "Automatic saving, full history and easy restoration. Go back at any time.",
+
+            "OfflineTitle": "Offline & PWA",
+            "OfflineDescribe": "Plane, train, subway, bus, boat. Write everywhere, even without internet connection. Mythrart automatically synchronizes when you are back online.",
+
+            "TranslationTitle": "Easy translation",
+            "TranslationDescribe": "Translate without rewriting, keep the original intact, collaborate with translators.",
+
+            "SilentAITitle": "Silent AI",
+            "SilentAIDescribe": "The AI is here to help you, not to replace you. It does not make decisions for you."
         }
     }
 }

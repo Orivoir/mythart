@@ -23,8 +23,8 @@ export async function ActionButtonHome() {
         iconPosition="right"
         size="lg"
       >
-        {t("StartTrial")}
+        {t("ViewDemo")}
       </ButtonWithIcon>
-  </div>
+    </div>
   )
 }

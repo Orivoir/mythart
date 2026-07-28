@@ -6,13 +6,13 @@ export function SubtitleHome() {
   const t = useTranslations("CTA")
 
   return (
-    <Text variant="muted" className="
+    <Text variant="default" className="
       text-xl
       sm:text-md
       md:text-lg
       lg:text-xl
       ">
         {t("SubtitleHome")}
-      </Text>
+    </Text>
   )
 }
