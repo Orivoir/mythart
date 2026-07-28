@@ -30,6 +30,7 @@ export function Feature({
       flex
       items-start
       gap-4
+      bg-surface
     ">
 
       <IconSurface>

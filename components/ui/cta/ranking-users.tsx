@@ -13,9 +13,9 @@ export async function RankingUsers() {
     <div className="
       flex
       flex-col
-      gap-2
+      gap-6
     ">
-      <div className="">
+      <div>
         <Text variant="default" className="whitespace-nowrap">
           {t("Describe")}
         </Text>
