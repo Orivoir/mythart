@@ -27,24 +27,30 @@ export async function ListMarketing() {
       <ul className="
         flex
         flex-row
-        gap-8
+        gap-4
       ">
         {items.map(item => (
-          <li key={item.title}>
+          <li key={item.title} className="
+            flex
+            flex-row
+            gap-4
+            flex-1
+          ">
+            <div>
+              <CircleCheck className="text-accent" />
+            </div>
             <div className="
               flex
-              flex-row
+              flex-col
               gap-2
-              items-center
             ">
-              <CircleCheck className="text-accent" />
               <Title variant="accent" className="line-clamp-1 text-md">
                 {item.title}
               </Title>
+              <Text variant="muted" className="line-clamp-2 text-sm">
+                {item.description}
+              </Text>
             </div>
-            <Text variant="muted" className="line-clamp-2 text-sm">
-              {item.description}
-            </Text>
           </li>
         ))}
 

@@ -8,6 +8,7 @@ import {
   GlobeOffIcon,
   WandSparklesIcon
 } from "lucide-react"
+import { IconSurface } from "./icon-surface"
 
 export type FeatureType =  "pencil" | "users" | "history" | "globe" | "globe-off" | "wand-sparkles"
 
@@ -27,27 +28,18 @@ export function Feature({
       bg-card
       p-4
       flex
-      items-center
+      items-start
       gap-4
     ">
 
-      <div className="
-        flex
-        h-10
-        w-10
-        shrink-0
-        items-center
-        justify-center
-        rounded-md
-        bg-muted/5
-      ">
-        {type === "pencil" && <PencilSparklesIcon className="h-5 w-5 text-accent" />}
-        {type === "users" && <UsersIcon className="h-5 w-5 text-accent" />}
-        {type === "history" && <HistoryIcon className="h-5 w-5 text-accent" />}
-        {type === "globe" && <GlobeIcon className="h-5 w-5 text-accent" />}
-        {type === "globe-off" && <GlobeOffIcon className="h-5 w-5 text-accent" />}
-        {type === "wand-sparkles" && <WandSparklesIcon className="h-5 w-5 text-accent" />}
-      </div>
+      <IconSurface>
+        {type === "pencil" && <PencilSparklesIcon size={32} className="text-accent" />}
+        {type === "users" && <UsersIcon size={32} className="text-accent" />}
+        {type === "history" && <HistoryIcon size={32} className="text-accent" />}
+        {type === "globe" && <GlobeIcon size={32} className="text-accent" />}
+        {type === "globe-off" && <GlobeOffIcon size={32} className="text-accent" />}
+        {type === "wand-sparkles" && <WandSparklesIcon size={32} className="text-accent" />}
+      </IconSurface>
 
       <div className="min-w-0">
         <Title variant="default" className="line-clamp-1">

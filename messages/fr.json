@@ -13,13 +13,13 @@
         "NoInstallChip": "Pas d'installation, 100% web. Synchronisé partout.",
         "MarketingList": {
             "FreePlanTitle": "Plan gratuit a vie",
-            "FreePlanDescription": "Commencez à écrire et à organiser vos idées sans limite de temps.",
+            "FreePlanDescription": "Commencez gratuitement sans limite de temps.",
 
             "NoInstallTitle": "Aucune installation",
-            "NoInstallDescription": "Accédez à vos documents depuis n'importe quel appareil.",
+            "NoInstallDescription": "Accéssible depuis n'importe quel appareil.",
 
             "TrialPeriodTitle": "Essai Premium 14 jours",
-            "TrialPeriodDescription": "Profitez de toutes les fonctionnalités premium pendant 14 jours. Sans engagement."
+            "TrialPeriodDescription": "Sans limites, sans engagement."
         },
         "ActionButton": {
             "StartWriting": "Commencez gratuitement",
@@ -43,6 +43,25 @@
 
             "SilentAITitle": "IA Silencieuse",
             "SilentAIDescribe": "L'IA est là pour vous aider, pas pour vous remplacer. Elle ne prend pas de décisions à votre place."
+        },
+        "RankingUsers": {
+            "Describe": "Déjà adopté par des auteurs du monde entier.",
+            "Label": "{rank}/5 sur {count}+ avis"
+
+        },
+        "ReassuringsList": {
+            "OwnDataTitle": "Vos histoires vous appartiennent",
+            "OwnDataDescribe": "Pilotez vos données de manières sécurisée et privée, les données sont transférées de manières chiffrées",
+
+            "EasyExportTitle": "Exportez en un click",
+            "EasyExportDescribe": "Exportez vos documents en EPUB, PDF, DOCX, Markdown, et plus.",
+
+            "LongTimeStabilityTitle": "Conçu pour durer",
+            "LongTimeStabilityDescribe": "Evolue avec votre projet, du premier mot à la publication. "
+        },
+        "FooterText": {
+            "Title": "Écrivez. Structurez. Collaborez. Publiez. Partout.",
+            "Subtitle": "Une seule plateforme pour tout votre processus créatif."
         }
     }
 }

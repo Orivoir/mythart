@@ -13,13 +13,13 @@
         "NoInstallChip": "No-install, 100% web. Synchronized everywhere.",
         "MarketingList": {
             "FreePlanTitle": "Free plan for life",
-            "FreePlanDescription": "Start writing and organizing your ideas without time limit.",
+            "FreePlanDescription": "Start for free with no time limit.",
 
             "NoInstallTitle": "No installation",
-            "NoInstallDescription": "Access your documents from any device.",
+            "NoInstallDescription": "Access from any device.",
 
             "TrialPeriodTitle": "14 days Premium Trial",
-            "TrialPeriodDescription": "Enjoy all premium features for 14 days. No commitment."
+            "TrialPeriodDescription": "No limits, no commitment."
         },
         "ActionButton": {
             "StartWriting": "Start writing",
@@ -43,6 +43,24 @@
 
             "SilentAITitle": "Silent AI",
             "SilentAIDescribe": "The AI is here to help you, not to replace you. It does not make decisions for you."
+        },
+        "RankingUsers": {
+            "Describe": "Already adopted by authors worldwide.",
+            "Label": "{rank}/5 based on {count}+ reviews"
+        },
+        "ReassuringsList": {
+            "OwnDataTitle": "Your stories belong to you",
+            "OwnDataDescribe": "Manage your data in a secure and private way, data is transferred in an encrypted manner",
+
+            "EasyExportTitle": "Export with one click",
+            "EasyExportDescribe": "Export your documents in EPUB, PDF, DOCX, Markdown, and more.",
+
+            "LongTimeStabilityTitle": "Built to last",
+            "LongTimeStabilityDescribe": "Evolves with your project, from the first word to publication."
+        },
+        "FooterText": {
+            "Title": "Write. Structure. Collaborate. Publish. Everywhere.",
+            "Subtitle": "A single platform for your entire creative process."
         }
     }
 }
