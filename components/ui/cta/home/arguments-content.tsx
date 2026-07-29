@@ -12,21 +12,16 @@ export function ArgumentsContent() {
       <div className="
         flex
         flex-1
-        flex-row
-        md:flex-col
-        2xl:flex-row
+        flex-col
+        md:flex-row
         gap-12
-        xl:gap-16
         my-24
       ">
         <div className="
           flex
           flex-1
-          xl:flex-row
-          lg:flex-col
+          flex-col
           md:flex-row
-          flex-row
-          xl:gap-16
           gap-12
         ">
           <CTARankingUsers />

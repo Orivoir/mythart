@@ -6,8 +6,14 @@ export async function ChipNoInstall() {
   const t = await getTranslations("CTA")
 
   return (
-    <Chip>
+    <>
+    <Chip className="md:block hidden">
       {t("NoInstallChip")}
     </Chip>
+    <Chip className="block md:hidden">
+      {t("NoInstallChipShort")}
+    </Chip>
+    
+    </>
   )
 }

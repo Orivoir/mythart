@@ -10,7 +10,8 @@ export async function ActionButtonHome() {
   return (
     <div className="
       flex
-      flex-row
+      flex-col
+      md:flex-col
       gap-4
     ">
       <Button variant="primary" size="lg">

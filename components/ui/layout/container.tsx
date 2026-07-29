@@ -15,7 +15,7 @@ export function Container({
         "w-full",
         "max-w-10xl",
         "mx-auto",
-        "px-24 sm:px-10 lg:px-20",
+        "px-8 sm:px-10 lg:px-20",
         "mt-16",
         className
       )}

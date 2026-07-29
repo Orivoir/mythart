@@ -6,9 +6,10 @@ export function HeroContent() {
   return (
     <section className="
       flex
-      flex-col-reverse
+      flex-col
       xl:flex-row
-      gap-48
+      md:gap-48
+      gap-24
       items-center
       justify-between
       w-full

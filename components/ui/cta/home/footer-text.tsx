@@ -18,8 +18,7 @@ export async function FooterText() {
     >
       <Title className={cn(
         "text-lg",
-        "sm:text-xl",
-        "md:text-2xl",
+        "md: text-sm",
         "lg:text-3xl",
         "font-extrabold",
         "font-brand"
@@ -29,9 +28,9 @@ export async function FooterText() {
 
       <Title className={cn(
         "text-accent",
-        "text-sm",
-        "sm:text-md",
-        "md:text-lg",
+        "text-xs",
+        "md:text-xs",
+        "lg:text-md",
         "font-brand"
       )}>
         {t("Subtitle")}

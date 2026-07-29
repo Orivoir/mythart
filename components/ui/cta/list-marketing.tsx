@@ -26,7 +26,8 @@ export async function ListMarketing() {
     <div className="">
       <ul className="
         flex
-        flex-row
+        flex-col
+        md:flex-row
         gap-4
       ">
         {items.map(item => (

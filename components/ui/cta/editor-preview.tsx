@@ -1,13 +1,18 @@
 import Image from "next/image"
 
-export function EditorPreview() {
+export function EditorPreview({
+  small = false
+}: {
+  small?: boolean
+}) {
 
   return (
     <div
       className="
         relative
         w-full
-        aspect-4/3
+        md:aspect-4/3
+        aspect-3/4
       "
     >
       {/* Main editor preview */}
@@ -22,6 +27,7 @@ export function EditorPreview() {
           shadow-sm
         "
       >
+        {!small ? (
         <Image
           src="https://placehold.co/1280x960/234f7d/ffffff.png"
           alt="Rich text editor preview"
@@ -29,12 +35,23 @@ export function EditorPreview() {
           className="object-cover"
           priority
         />
+        ): (
+          <Image
+            src="https://placehold.co/960x1280/234f7d/ffffff.png"
+            alt="Rich text editor preview"
+            fill
+            className="object-cover"
+            priority
+          />
+        )}
       </div>
 
 
       {/* Collaboration preview */}
       <div
         className="
+          hidden
+          md:flex
           absolute
           bottom-[-15]
           left-[-120]
@@ -60,6 +77,8 @@ export function EditorPreview() {
       {/* Versioning preview */}
       <div
         className="
+          hidden
+          md:flex
           absolute
           bottom-4
           left-1/2
@@ -87,6 +106,8 @@ export function EditorPreview() {
       <div
         className="
           absolute
+          hidden
+          md:flex
           bottom-[-60]
           right-[-30]
           h-75

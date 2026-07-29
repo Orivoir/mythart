@@ -7,8 +7,7 @@ export function SubtitleHome() {
 
   return (
     <Text variant="default" className="
-      text-xl
-      sm:text-md
+      text-md
       md:text-lg
       lg:text-xl
       ">
