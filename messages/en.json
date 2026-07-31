@@ -63,5 +63,47 @@
             "Title": "Write. Structure. Collaborate. Publish. Everywhere.",
             "Subtitle": "A single platform for your entire creative process."
         }
+    },
+    "Auth": {
+        "Login": {
+            "Title": {
+                "BeforeAccent": "Start writing.",
+                "Accent": "Without friction."
+            },
+            "Subtitle": "Create your account in seconds and access to your writing space.",
+            "LeftSideCTA": {
+                "CreditCardTitle": "No credit card required",
+                "CreditCardDescription": "Free plan is available forever, no time limit.",
+                
+                "AccessAnywhereTitle": "Accessible anywhere",
+                "AccessAnywhereDescription": "100% web, synchronized across all your devices.",
+
+                "CrownTitle": "Your data belongs to you",
+                "CrownDescription": "Confidential, encrypted, and exportable at any time.",
+
+                "CreateInSecondsTitle": "Start in seconds",
+                "CreateInSecondsDescription": "No installation, no complexity. Start writing immediately."
+            },
+            "Form": {
+                "Title": "Choose your favorite authentication method",
+                "EmailPlaceholder": "Enter your email address",
+                "EmailSubmitButton": "Send link",
+                "EmailHelperText": "We will send you a link to access your account. No password required.",
+                "SeparatorText": "OR",
+                "EmailLabelTitle": "Receive authentication link",
+                "EmailSubLabel": "We will send you a secure link to your email.",
+                "EmailLabelChip": "Recommended",
+
+                "PhoneLabelTitle": "Use my phone",
+                "PhoneSubLabel": "We will send you a code to access your account.",
+                "PhoneSubmitButton": "Send SMS code",
+
+                "PreTextLegalPolicies": "By continuing, you agree to our",
+                "UsageTerms": "Terms of Use",
+                "SubTextLegalPolicies": "and our",
+                "PrivacyPolicy": "Privacy Policy"
+
+            }
+        }
     }
 }

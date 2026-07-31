@@ -6,7 +6,7 @@ export function IconSurface(
 ) {
   return (
     <div className={cn(
-      "flex h-10 w-10 shrink-0 items-center justify-center  rounded-md bg-muted/5",
+      "flex h-10 w-10 shrink-0 items-center justify-center  rounded-full bg-muted/5",
       className
     )}>
       {children}

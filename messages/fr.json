@@ -64,5 +64,47 @@
             "Title": "Écrivez. Structurez. Collaborez. Publiez. Partout.",
             "Subtitle": "Une seule plateforme pour tout votre processus créatif."
         }
+    },
+    "Auth": {
+        "Login": {
+            "Title": {
+                "BeforeAccent": "Commencez à écrire.",
+                "Accent": "Sans friction."
+            },
+            "Subtitle": "Créez votre compte gratuitement en quelques secondes et accedez à votre espace d'écriture.",
+            "LeftSideCTA": {
+                "CreditCardTitle": "Pas de carte bancaire requise",
+                "CreditCardDescription": "Le plan gratuit est disponible pour toujours, sans limite de temps.",
+
+                "AccessAnywhereTitle": "Accessible partout",
+                "AccessAnywhereDescription": "100% web synchronisé sur tous vos appareils.",
+
+                "CrownTitle": "Vos données vous appartiennent",
+                "CrownDescription": "Confidentielles, chiffrées et exportables à tout moment.",
+
+                "CreateInSecondsTitle": "Commencez en quelques secondes",
+                "CreateInSecondsDescription": "Pas d'installation, pas de complexité. Commencez à écrire immédiatement."
+            },
+            "Form": {
+                "Title": "Choisissez la méthode qui vous convient",
+                "SeparatorText": "OU",
+                
+                "EmailPlaceholder": "Entrez votre email",
+                "EmailSubmitButton": "Envoyez le lien",
+                "EmailHelperText": "Lien valide 15 minutes. Sécurisé et unique.",
+                "EmailLabelTitle": "Recevoir un lien magique",
+                "EmailSubLabel": "Nous vous enverrons un lien sécurisé par email.",
+                "EmailLabelChip": "Recommandé",
+
+                "PhoneLabelTitle": "Utiliser mon téléphone",
+                "PhoneSubLabel": "Nous envoyons un code par SMS.",
+                "PhoneSubmitButton": "Envoyez le code SMS",
+
+                "PreTextLegalPolicies": "En continuant, vous acceptez nos",
+                "UsageTerms": "Conditions d'utilisation",
+                "SubTextLegalPolicies": "et notre",
+                "PrivacyPolicy": "Politique de confidentialité"
+            }
+        }
     }
 }

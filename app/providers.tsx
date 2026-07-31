@@ -2,6 +2,7 @@
 
 import { SessionProvider } from "next-auth/react"
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { Theme } from "@radix-ui/themes"; 
 
 export function ThemeProvider({
   children,
@@ -24,7 +25,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     <>
     <SessionProvider>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        {children}
+        <Theme>
+          {children}
+        </Theme>
       </ThemeProvider>
     </SessionProvider>
     </> 

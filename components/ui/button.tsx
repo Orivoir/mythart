@@ -77,7 +77,6 @@ const variantStyles: Record<ButtonVariant, string> = {
     ].join(" "),
 }
 
-
 const sizeStyles: Record<ButtonSize, string> = {
   default:
     "h-10 px-4 py-2 rounded-sm",
