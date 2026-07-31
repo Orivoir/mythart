@@ -1,14 +1,14 @@
 "use client"
 
-import PhoneInput from 'react-phone-number-input'
-import type { Country, Value } from 'react-phone-number-input'
-import { isSupportedCountry } from 'react-phone-number-input'
+import PhoneInput from "react-phone-number-input"
+import type { Country, Value } from "react-phone-number-input"
+import { isSupportedCountry } from "react-phone-number-input"
 import { useState } from "react"
 import "react-phone-number-input/style.css"
 import {useLocale} from "next-intl"
-import FormPhoneCustomInput from '../custom-components-phone/form-phone-custom-input';
-import { CountrySelect } from '../custom-components-phone/country-select';
-import { PhoneFlag } from '../custom-components-phone/phone-flag-select';
+import FormPhoneCustomInput from "../custom-components-phone/form-phone-custom-input"
+import { CountrySelect } from "../custom-components-phone/country-select"
+import { PhoneFlag } from "../custom-components-phone/phone-flag-select"
 
 export function FormPhoneInput() {
 

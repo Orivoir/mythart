@@ -1,17 +1,16 @@
 import { NextRequest } from "next/server"
 import { CreateBucketCommand, DeleteObjectCommand, HeadBucketCommand } from "@aws-sdk/client-s3"
+import { expect } from "vitest"
 
 import { createUserFixture } from "../../helpers/factories"
 import prisma from "../../helpers/prisma"
 import resetDb from "../../helpers/reset-db"
 import { s3 } from "@/lib/s3"
+import { UploadHandshakeStatus } from "@/app/generated/prisma"
 
 export interface PresignedUploadResponse {
-    presignedUrl: string
-    key: string
-    extension: string
-    fileName: string
-    mimeType: string
+    uploadHandshakeId: string
+    uploadUrl: string
     expiresIn: number
 }
 
@@ -117,11 +116,7 @@ export function createPresignedUrlRequest(userId: string, body: {
 }
 
 export function createCompleteUploadRequest(userId: string, body: {
-    fileName: string
-    mimeType: string
-    size: number
-    key: string
-    context: "COVER"
+    uploadHandshakeId: string
 }) {
     return new NextRequest("http://localhost:3000/api/uploads/complete", {
         method: "POST",
@@ -131,6 +126,18 @@ export function createCompleteUploadRequest(userId: string, body: {
         },
         body: JSON.stringify(body),
     })
+}
+
+export async function getUploadHandshake(uploadHandshakeId: string) {
+    return prisma.uploadHandshake.findUniqueOrThrow({
+        where: { id: uploadHandshakeId },
+    })
+}
+
+export async function expectUploadHandshakeStatus(uploadHandshakeId: string, status: UploadHandshakeStatus) {
+    const handshake = await getUploadHandshake(uploadHandshakeId)
+    expect(handshake.status).toBe(status)
+    return handshake
 }
 
 export function createCoverReferenceRequest(userId: string, key: string, fileName: string) {

@@ -1,5 +1,5 @@
-import { Avatar } from "radix-ui";
-import { Text } from "../Typography/text";
+import { Avatar } from "radix-ui"
+import { Text } from "../Typography/text"
 
 export function AvatarsUsedUsers() {
 

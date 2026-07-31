@@ -1,6 +1,7 @@
 import "dotenv/config"
 import { afterAll, afterEach, beforeEach, describe, expect, test } from "vitest"
 import { HeadObjectCommand } from "@aws-sdk/client-s3"
+import { UploadHandshakeStatus } from "@/app/generated/prisma"
 
 import { POST as createPresignedUploadUrl } from "@/app/api/uploads/presigned-url/routes"
 import { POST as completeUpload } from "@/app/api/uploads/complete/routes"
@@ -13,6 +14,8 @@ import {
     createCompleteUploadRequest,
     createCoverReferenceRequest,
     createPresignedUrlRequest,
+    expectUploadHandshakeStatus,
+    getUploadHandshake,
     runIfS3Configured,
     setupUploadFixture,
     teardownUploadFixture,
@@ -45,25 +48,29 @@ runDescribe("cover image upload flow", () => {
     })
 
     test("generates URL, completes upload move, and creates cover image reference", async () => {
+        const uploadPayload = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10])
+
         const response = await createPresignedUploadUrl(createPresignedUrlRequest(userId, {
             fileName: "cover.png",
             mimeType: "image/png",
             context: "COVER",
-            size: 1024,
+            size: uploadPayload.length,
         }))
         const body = await response.json() as PresignedUploadResponse
 
         expect(response.status).toBe(200)
-        expect(body.presignedUrl).toMatch(/^https?:\/\//)
-        expect(body.key).toContain(process.env.S3_TEMP_UPLOAD_PREFIX ?? "temp-upload")
-        expect(body.extension).toBe(".png")
-        expect(body.mimeType).toBe("image/png")
-        expect(body.fileName).toBe("cover.png")
+        expect(body.uploadUrl).toMatch(/^https?:\/\//)
+        expect(body.uploadHandshakeId).toBeTruthy()
         expect(body.expiresIn).toBeGreaterThan(0)
 
-        const uploadPayload = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10])
+        const handshake = await getUploadHandshake(body.uploadHandshakeId)
 
-        const uploadResponse = await fetch(body.presignedUrl, {
+        expect(handshake.key).toContain(process.env.S3_TEMP_UPLOAD_PREFIX ?? "temp-upload")
+        expect(handshake.expectedMimeType).toBe("image/png")
+        expect(handshake.expectedSizeBytes).toBe(uploadPayload.length)
+        expect(handshake.status).toBe(UploadHandshakeStatus.PENDING)
+
+        const uploadResponse = await fetch(body.uploadUrl, {
             method: "PUT",
             headers: {
                 "content-type": "image/png",
@@ -78,32 +85,29 @@ runDescribe("cover image upload flow", () => {
 
         const headObject = await s3.send(new HeadObjectCommand({
             Bucket: bucket,
-            Key: body.key,
+            Key: handshake.key,
         }))
 
-        uploadedKeys.push(body.key)
+        uploadedKeys.push(handshake.key)
 
         expect(headObject.ContentLength).toBe(uploadPayload.length)
         expect(headObject.ContentType).toBe("image/png")
 
         const completeResponse = await completeUpload(createCompleteUploadRequest(userId, {
-            fileName: "cover.png",
-            mimeType: "image/png",
-            size: uploadPayload.length,
-            key: body.key,
-            context: "COVER",
+            uploadHandshakeId: body.uploadHandshakeId,
         }))
         const completeBody = await completeResponse.json() as CompleteUploadResponse
 
         expect(completeResponse.status).toBe(200)
         expect(completeBody.success).toBe(true)
         expect(completeBody.permanentKey).toContain(`users/${userId}/COVER/`)
+        await expectUploadHandshakeStatus(body.uploadHandshakeId, UploadHandshakeStatus.COMPLETED)
 
         uploadedKeys.push(completeBody.permanentKey)
 
         await expect(s3.send(new HeadObjectCommand({
             Bucket: bucket,
-            Key: body.key,
+            Key: handshake.key,
         }))).rejects.toBeDefined()
 
         const headPermanentObject = await s3.send(new HeadObjectCommand({

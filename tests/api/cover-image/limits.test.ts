@@ -50,11 +50,9 @@ runDescribe("POST /api/uploads/presigned-url limits", () => {
         }))
         const body = await response.json() as PresignedUploadResponse
 
-        uploadedKeys.push(body.key)
-
         expect(response.status).toBe(200)
-        expect(body.presignedUrl).toMatch(/^https?:\/\//)
-        expect(body.mimeType).toBe("image/png")
+        expect(body.uploadUrl).toMatch(/^https?:\/\//)
+        expect(body.uploadHandshakeId).toBeTruthy()
     })
 
     test.each([

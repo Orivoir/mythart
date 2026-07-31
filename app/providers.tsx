@@ -1,8 +1,8 @@
 "use client"
 
 import { SessionProvider } from "next-auth/react"
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { Theme } from "@radix-ui/themes"; 
+import { ThemeProvider as NextThemesProvider } from "next-themes"
+import { Theme } from "@radix-ui/themes" 
 
 export function ThemeProvider({
   children,
@@ -17,7 +17,7 @@ export function ThemeProvider({
     >
       {children}
     </NextThemesProvider>
-  );
+  )
 }
 
 export default function Providers({ children }: { children: React.ReactNode }) {

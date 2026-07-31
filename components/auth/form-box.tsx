@@ -1,7 +1,7 @@
-import { FormHeader } from "./form-header/form-header";
-import { FormEmailBox } from "./form-email/form-email-box";
-import { FormPhoneBox } from "./form-phone/form-phone-box";
-import {cn} from "@/lib/utils";
+import { FormHeader } from "./form-header/form-header"
+import { FormEmailBox } from "./form-email/form-email-box"
+import { FormPhoneBox } from "./form-phone/form-phone-box"
+import {cn} from "@/lib/utils"
 
 export function FormBox({
   type = "email"

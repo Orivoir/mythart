@@ -1,8 +1,8 @@
 "use client"
 
-import { Button } from "../../ui/button";
-import { useTranslations } from "next-intl";
-import { useFormStatus } from "react-dom";
+import { Button } from "../../ui/button"
+import { useTranslations } from "next-intl"
+import { useFormStatus } from "react-dom"
 
 export function FormPhoneSubmit() {
 

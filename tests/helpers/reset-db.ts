@@ -18,6 +18,7 @@ async function safeDelete(model: {
 
 export default async function resetDb(): Promise<void> {
   await safeDelete(prisma.chapterAssetReference)
+  await safeDelete(prisma.uploadHandshake)
   await safeDelete(prisma.snapshot)
   await safeDelete(prisma.chapter)
   await safeDelete(prisma.asset)

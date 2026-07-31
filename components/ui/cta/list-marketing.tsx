@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server"
 import { Title } from "@/components/ui/Typography/title"
 import { Text } from "@/components/ui/Typography/text"
 import { CircleCheck } from "lucide-react"

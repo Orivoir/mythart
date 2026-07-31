@@ -1,7 +1,8 @@
 # Upload strategy
 
-Files are uploaded directly from the client to S3. The API coordinates validation,
-move, and reference creation, but does not stream file bytes.
+Files are uploaded directly from the client to S3. The API coordinates
+handshake creation, validation, move, and reference creation, but does not
+stream file bytes.
 
 ## Routes layout
 
@@ -28,15 +29,26 @@ Request body:
 }
 ```
 
-The endpoint validates auth and business rules (quota/plan checks are TODO), then
-generates a presigned URL.
+The endpoint validates auth and business rules (quota/plan checks are TODO),
+creates an `UploadHandshake`, and then generates a presigned URL bound to the
+temporary S3 key stored in that handshake.
+
+Response body:
+
+```json
+{
+  "uploadHandshakeId": "<string>",
+  "uploadUrl": "<presigned url>",
+  "expiresIn": 3600
+}
+```
 
 ## Step 2: upload to S3
 
-The client uploads bytes directly to `presignedUrl`:
+The client uploads bytes directly to `uploadUrl`:
 
 ```ts
-const uploadResponse = await fetch(body.presignedUrl, {
+const uploadResponse = await fetch(body.uploadUrl, {
   method: "PUT",
   headers: {
     "content-type": "image/png",
@@ -51,8 +63,18 @@ Objects are uploaded to temporary keys using `S3_TEMP_UPLOAD_PREFIX`.
 
 `POST /api/uploads/complete`
 
-This endpoint verifies object metadata (`key`, `mimeType`, `size`) and moves the
-object from temporary path to permanent path.
+Request body:
+
+```json
+{
+  "uploadHandshakeId": "<string>"
+}
+```
+
+This endpoint loads the `UploadHandshake`, reads the object metadata from S3
+with `HeadObject`, verifies the temporary key, MIME type, and size against the
+server-stored expectations, and then moves the object from the temporary path to
+its permanent path.
 
 ## Step 4: create resource reference
 

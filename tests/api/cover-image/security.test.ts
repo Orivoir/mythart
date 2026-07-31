@@ -5,11 +5,14 @@ import { POST as createPresignedUploadUrl } from "@/app/api/uploads/presigned-ur
 import { POST as completeUpload } from "@/app/api/uploads/complete/routes"
 import { ApiException } from "@/lib/errors/api-exception"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
+import { UploadHandshakeStatus } from "@/app/generated/prisma"
 
 import {
     cleanupUploadedKeys,
     createCompleteUploadRequest,
     createPresignedUrlRequest,
+    expectUploadHandshakeStatus,
+    getUploadHandshake,
     runIfS3Configured,
     setupUploadFixture,
     teardownUploadFixture,
@@ -48,8 +51,10 @@ runDescribe("cover image upload security", () => {
 
         expect(response.status).toBe(200)
 
+        const handshake = await getUploadHandshake(body.uploadHandshakeId)
+
         const uploadPayload = new TextEncoder().encode("not-a-png")
-        const uploadResponse = await fetch(body.presignedUrl, {
+        const uploadResponse = await fetch(body.uploadUrl, {
             method: "PUT",
             headers: {
                 "content-type": "text/plain",
@@ -57,17 +62,13 @@ runDescribe("cover image upload security", () => {
             body: uploadPayload,
         })
 
-        uploadedKeys.push(body.key)
+        uploadedKeys.push(handshake.key)
 
         expect(uploadResponse.status).toBeGreaterThanOrEqual(200)
         expect(uploadResponse.status).toBeLessThan(300)
 
         const completePromise = completeUpload(createCompleteUploadRequest(userId, {
-            fileName: "cover.png",
-            mimeType: "image/png",
-            size: uploadPayload.length,
-            key: body.key,
-            context: "COVER",
+            uploadHandshakeId: body.uploadHandshakeId,
         }))
 
         await expect(completePromise).rejects.toBeInstanceOf(ApiException)
@@ -78,6 +79,8 @@ runDescribe("cover image upload security", () => {
                 error: ["MIME type does not match"],
             },
         })
+
+        await expectUploadHandshakeStatus(body.uploadHandshakeId, UploadHandshakeStatus.FAILED)
     })
 
     test("should reject oversized file uploads", async () => {
@@ -91,8 +94,10 @@ runDescribe("cover image upload security", () => {
 
         expect(response.status).toBe(200)
 
+        const handshake = await getUploadHandshake(body.uploadHandshakeId)
+
         const uploadPayload = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10, 0, 1, 2, 3])
-        const uploadResponse = await fetch(body.presignedUrl, {
+        const uploadResponse = await fetch(body.uploadUrl, {
             method: "PUT",
             headers: {
                 "content-type": "image/png",
@@ -100,17 +105,13 @@ runDescribe("cover image upload security", () => {
             body: uploadPayload,
         })
 
-        uploadedKeys.push(body.key)
+        uploadedKeys.push(handshake.key)
 
         expect(uploadResponse.status).toBeGreaterThanOrEqual(200)
         expect(uploadResponse.status).toBeLessThan(300)
 
         const completePromise = completeUpload(createCompleteUploadRequest(userId, {
-            fileName: "cover.png",
-            mimeType: "image/png",
-            size: 8,
-            key: body.key,
-            context: "COVER",
+            uploadHandshakeId: body.uploadHandshakeId,
         }))
 
         await expect(completePromise).rejects.toBeInstanceOf(ApiException)
@@ -121,5 +122,7 @@ runDescribe("cover image upload security", () => {
                 error: ["File size does not match"],
             },
         })
+
+        await expectUploadHandshakeStatus(body.uploadHandshakeId, UploadHandshakeStatus.FAILED)
     })
 })

@@ -1,9 +1,10 @@
-import { generatePresignedUrl, S3PresignedUrlOptions } from "@/lib/s3"
 import { NextResponse } from "next/server"
 import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
 import { ApiException } from "@/lib/errors/api-exception"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { canUploadFile } from "@/lib/authorization"
+import { CreateUploadRequest } from "@/app/types/api/upload"
+import { createUploadHandshake } from "@/lib/upload-handshake"
 
 export async function POST(request: Request) {
   const userId = getAuthenticatedUserIdFromHeaders(request.headers)
@@ -12,7 +13,7 @@ export async function POST(request: Request) {
     throw new ApiException(HTTP_ERRORS.UNAUTHORIZED)
   }
 
-  const { fileName, mimeType, context, size } = await request.json() as S3PresignedUrlOptions
+  const { fileName, mimeType, context, size } = await request.json() as CreateUploadRequest
 
   const canUpload = await canUploadFile({
     size,
@@ -25,7 +26,8 @@ export async function POST(request: Request) {
   if(!canUpload) {
     throw new ApiException(HTTP_ERRORS.PAYMENT_REQUIRED)
   } else {
-    const results = await generatePresignedUrl({
+    const results = await createUploadHandshake({
+      userId,
       fileName,
       mimeType,
       context,

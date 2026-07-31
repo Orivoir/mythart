@@ -9,12 +9,12 @@ import { UnloggedHeader } from "@/components/ui/header/unlogged-header/unlogged-
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-});
+})
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
-});
+})
 
 
 export const metadata: Metadata = {

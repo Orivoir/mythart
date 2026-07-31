@@ -1,8 +1,8 @@
-import { Title } from "../ui/Typography/title";
+import { Title } from "../ui/Typography/title"
 import {getTranslations} from "next-intl/server"
-import { FormBox } from "./form-box";
-import { AuthSeparator } from "./separator";
-import { LegalsPolicies } from "./legals-policies";
+import { FormBox } from "./form-box"
+import { AuthSeparator } from "./separator"
+import { LegalsPolicies } from "./legals-policies"
 
 export async function AuthForm() {
 

@@ -1,3 +1,18 @@
-import { S3ValidateObjectUploadOptions } from "@/lib/s3"
+import { AssetReferenceType } from "@/app/generated/prisma"
 
-export interface S3ValidateObjectUploadRequest extends S3ValidateObjectUploadOptions {}
+export interface CreateUploadRequest {
+	fileName: string
+	mimeType: string
+	context: AssetReferenceType
+	size: number
+}
+
+export interface CreateUploadResponse {
+	uploadHandshakeId: string
+	uploadUrl: string
+	expiresIn: number
+}
+
+export interface CompleteUploadRequest {
+	uploadHandshakeId: string
+}

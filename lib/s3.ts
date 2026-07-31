@@ -30,18 +30,14 @@ export interface S3PresignedUrlOptions {
 }
 
 export interface S3PresignedUrlResponse {
-  presignedUrl: string;
-  key: string;
-  extension: string;
-  fileName: string;
-  mimeType: string;
+  uploadUrl: string;
   expiresIn: number;
 }
 
 export interface S3ValidateObjectUploadOptions {
   key: string;
-  mimeType: string;
-  size: number;
+  expectedMimeType: string;
+  expectedSizeBytes: number;
 }
 
 export interface S3ValidateObjectUploadResponse {
@@ -49,11 +45,13 @@ export interface S3ValidateObjectUploadResponse {
   error?: string
 }
 
-export async function generatePresignedUrl({ context, fileName, mimeType, expiresIn = 3600 }: S3PresignedUrlOptions): Promise<S3PresignedUrlResponse> {
-
+export function generateTempUploadKey({ context, fileName }: Pick<S3PresignedUrlOptions, "context" | "fileName">): string {
   const extension = path.extname(fileName)
 
-  const key = `${process.env.S3_TEMP_UPLOAD_PREFIX!}/${context}/${randomUUID()}${extension}`
+  return `${process.env.S3_TEMP_UPLOAD_PREFIX!}/${context}/${randomUUID()}${extension}`
+}
+
+export async function generatePresignedUrl({ key, mimeType, expiresIn = 3600 }: { key: string, mimeType: string, expiresIn?: number }): Promise<S3PresignedUrlResponse> {
 
   const command = new PutObjectCommand({
       Bucket: process.env.S3_BUCKET,
@@ -61,34 +59,16 @@ export async function generatePresignedUrl({ context, fileName, mimeType, expire
       ContentType: mimeType,
   })
 
-  const presignedUrl = await getSignedUrl(s3, command, { expiresIn })
+  const uploadUrl = await getSignedUrl(s3, command, { expiresIn })
 
   return {
-    presignedUrl,
-    key,
-    extension,
-    fileName,
-    mimeType,
+    uploadUrl,
     expiresIn
   }
 }
 
-export async function validateObjectUpload({ key, mimeType, size }: S3ValidateObjectUploadOptions) {
+export async function validateObjectUpload({ key, expectedMimeType, expectedSizeBytes }: S3ValidateObjectUploadOptions): Promise<S3ValidateObjectUploadResponse> {
 
-  const tempFileMetadata = await s3.send(new HeadObjectCommand({
-    Bucket: process.env.S3_BUCKET,
-    Key: key
-  }))
-
-  /**
-   * Should verify the following:
-   * 1. The object exists in S3 (HeadObjectCommand will throw an error if it doesn't).
-   * 2. The MIME type matches the expected MIME type.
-   * 3. The size matches the expected size.
-   * 
-   * If any of these checks fail, throw an ApiException with the appropriate HTTP error code.
-   */
-  
   if (!key.startsWith(process.env.S3_TEMP_UPLOAD_PREFIX!)) {
     return {
       success: false,
@@ -96,7 +76,21 @@ export async function validateObjectUpload({ key, mimeType, size }: S3ValidateOb
     }
   }
 
-  if(tempFileMetadata.ContentType !== mimeType) {
+  let tempFileMetadata
+
+  try {
+    tempFileMetadata = await s3.send(new HeadObjectCommand({
+      Bucket: process.env.S3_BUCKET,
+      Key: key
+    }))
+  } catch {
+    return {
+      success: false,
+      error: "Uploaded object does not exist"
+    }
+  }
+
+  if(tempFileMetadata.ContentType !== expectedMimeType) {
     return {
       success: false,
       error: "MIME type does not match" // or file not exists
@@ -107,7 +101,7 @@ export async function validateObjectUpload({ key, mimeType, size }: S3ValidateOb
   // but if browser a zipped the file before upload or Worker process the file (like compact image, resize, etc...)
   // the size will be different, in the future this endpoint should be deleted instead of
   // S3 Event notification system (webhooks listeners), which will be more reliable and secure.
-  if(tempFileMetadata.ContentLength !== size) {
+  if(tempFileMetadata.ContentLength !== expectedSizeBytes) {
     return {
       success: false,
       error: "File size does not match"
@@ -123,7 +117,7 @@ export async function validateObjectUpload({ key, mimeType, size }: S3ValidateOb
 
 export async function moveObjectToPermanentLocation({ key, context, fileName, userId }: { key: string, context: AssetReferenceType, fileName: string, userId: string }) {
 
-  const extension = path.extname(fileName)
+  const extension = path.extname(fileName || key)
 
   const keyPermanent = `users/${userId}/${context}/${randomUUID()}${extension}`
 

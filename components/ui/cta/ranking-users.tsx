@@ -1,6 +1,6 @@
-import { getTranslations } from "next-intl/server";
-import { Text } from "../Typography/text";
-import { Star, StarHalf } from "lucide-react";
+import { getTranslations } from "next-intl/server"
+import { Text } from "../Typography/text"
+import { Star, StarHalf } from "lucide-react"
 
 export async function RankingUsers() {
 
@@ -33,9 +33,9 @@ export async function RankingUsers() {
 
           <div className="flex gap-1" style={{ position: "absolute", top: 0 }}>
             {[...Array(5)].map((_, index) => {
-              const starValue = index + 1;
-              const isFullStar = starValue <= Math.floor(factoryRank);
-              const isHalfStar = starValue === Math.ceil(factoryRank) && !isFullStar;
+              const starValue = index + 1
+              const isFullStar = starValue <= Math.floor(factoryRank)
+              const isHalfStar = starValue === Math.ceil(factoryRank) && !isFullStar
 
               return (
                 <span key={index} className="inline-block">
@@ -47,7 +47,7 @@ export async function RankingUsers() {
                     <Star fill="currentColor" className="w-5 h-5 text-muted" />
                   )}
                 </span>
-              );
+              )
             })}
           </div>
 

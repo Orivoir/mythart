@@ -1,5 +1,5 @@
-import { Separator } from "../ui/Separator";
-import { Text } from "../ui/Typography/text";
+import { Separator } from "../ui/Separator"
+import { Text } from "../ui/Typography/text"
 import {getTranslations} from "next-intl/server"
 
 export async function AuthSeparator() {

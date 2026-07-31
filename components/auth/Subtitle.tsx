@@ -1,5 +1,5 @@
-import { Text } from "../ui/Typography/text";
-import { getTranslations } from "next-intl/server";
+import { Text } from "../ui/Typography/text"
+import { getTranslations } from "next-intl/server"
 
 export async function Subtitle() {
 

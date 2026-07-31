@@ -46,3 +46,16 @@ enum CollaborationPermission {
   COLLABORATOR_REMOVE
   ROLE_ASSIGN
 }
+
+enum SnapshotStatus {
+  PENDING
+  READY
+  FAILED
+}
+
+enum UploadHandshakeStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  EXPIRED
+}

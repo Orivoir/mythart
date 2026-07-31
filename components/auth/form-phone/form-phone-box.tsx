@@ -2,8 +2,8 @@
 
 import type { SyntheticEvent } from "react"
 import "react-phone-number-input/style.css"
-import { FormPhoneSubmit } from './form-phone-submit';
-import { FormPhoneInput } from './form-phone-input';
+import { FormPhoneSubmit } from "./form-phone-submit"
+import { FormPhoneInput } from "./form-phone-input"
 
 export function FormPhoneBox() {
 

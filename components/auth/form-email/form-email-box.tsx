@@ -2,10 +2,10 @@
 
 import type { SyntheticEvent } from "react"
 import { useTranslations } from "next-intl"
-import { Text } from "../../ui/Typography/text";
+import { Text } from "../../ui/Typography/text"
 import {ShieldCheck} from "lucide-react"
-import { FormEmailInput } from "./form-email-input";
-import { FormEmailSubmit } from "@/components/auth/form-email/form-email-submit";
+import { FormEmailInput } from "./form-email-input"
+import { FormEmailSubmit } from "@/components/auth/form-email/form-email-submit"
 import { signIn } from "next-auth/react"
 
 export function FormEmailBox() {

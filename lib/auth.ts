@@ -11,7 +11,8 @@ export const authSecret = process.env.AUTH_SECRET
 export const AUTH_USER_ID_HEADER = "x-auth-user-id"
 
 // create a fake stripe customer id for the user, since we don't have stripe integration yet
-function createStripeCustomerId(): string {
+// should be call at the time of user pay a subscription, and then store it in the user table
+export async function createStripeCustomerId(): Promise<string> {
   return `cus_${Math.random().toString(36).slice(2, 12)}`
 }
 
@@ -56,14 +57,13 @@ export const authOptions: AuthOptions = {
       })
 
       if (existingUser) {
-        const shouldUpdate = !existingUser.emailVerified || !existingUser.stripeCustomerId
+        const shouldUpdate = !existingUser.emailVerified
 
         if (shouldUpdate) {
           await prisma.user.update({
             where: { id: existingUser.id },
             data: {
-              ...(existingUser.emailVerified ? {} : { emailVerified: new Date() }),
-              ...(existingUser.stripeCustomerId ? {} : { stripeCustomerId: createStripeCustomerId() }),
+              ...(existingUser.emailVerified ? {} : { emailVerified: new Date() })
             },
           })
         }
@@ -75,8 +75,7 @@ export const authOptions: AuthOptions = {
         data: {
           email: user.email,
           name: user.name ?? profile?.name ?? null,
-          emailVerified: new Date(),
-          stripeCustomerId: createStripeCustomerId(),
+          emailVerified: new Date()
         },
       })
 
