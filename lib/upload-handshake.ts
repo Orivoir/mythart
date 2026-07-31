@@ -27,6 +27,7 @@ export interface CompleteUploadHandshakeOptions {
 }
 
 export interface CompleteUploadHandshakeResponse {
+  assetId: string
   permanentKey: string
 }
 
@@ -46,6 +47,7 @@ export async function createUploadHandshake({
       ownerId: userId,
       context,
       key,
+      fileName,
       expectedMimeType: mimeType,
       expectedSizeBytes: size,
       status: UploadHandshakeStatus.PENDING,
@@ -110,16 +112,34 @@ export async function completeUploadHandshake({
     const permanentKey = await moveObjectToPermanentLocation({
       key: handshake.key,
       context: handshake.context,
-      fileName: handshake.key,
+      fileName: handshake.fileName,
       userId,
     })
 
-    await prisma.uploadHandshake.update({
-      where: { id: handshake.id },
-      data: { status: UploadHandshakeStatus.COMPLETED },
+    const asset = await prisma.$transaction(async (tx) => {
+      const createdAsset = await tx.asset.create({
+        data: {
+          key: permanentKey,
+          bucket: process.env.S3_BUCKET!,
+          fileName: handshake.fileName,
+          mimeType: handshake.expectedMimeType,
+          sizeBytes: handshake.expectedSizeBytes,
+          ownerId: userId,
+        },
+      })
+
+      await tx.uploadHandshake.update({
+        where: { id: handshake.id },
+        data: { status: UploadHandshakeStatus.COMPLETED },
+      })
+
+      return createdAsset
     })
 
-    return { permanentKey }
+    return {
+      assetId: asset.id,
+      permanentKey,
+    }
   } catch (error) {
     await prisma.uploadHandshake.update({
       where: { id: handshake.id },

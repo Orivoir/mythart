@@ -15,12 +15,12 @@ export async function POST(request: Request) {
   const { uploadHandshakeId } = await request.json() as CompleteUploadRequest
 
   try {
-    const { permanentKey } = await completeUploadHandshake({
+    const { assetId, permanentKey } = await completeUploadHandshake({
       uploadHandshakeId,
       userId,
     })
 
-    return NextResponse.json({ success: true, permanentKey })
+    return NextResponse.json({ success: true, assetId, permanentKey })
   } catch (error) {
     if (error instanceof ApiException) {
       throw error

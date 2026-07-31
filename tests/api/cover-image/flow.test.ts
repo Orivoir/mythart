@@ -66,6 +66,7 @@ runDescribe("cover image upload flow", () => {
         const handshake = await getUploadHandshake(body.uploadHandshakeId)
 
         expect(handshake.key).toContain(process.env.S3_TEMP_UPLOAD_PREFIX ?? "temp-upload")
+        expect(handshake.fileName).toBe("cover.png")
         expect(handshake.expectedMimeType).toBe("image/png")
         expect(handshake.expectedSizeBytes).toBe(uploadPayload.length)
         expect(handshake.status).toBe(UploadHandshakeStatus.PENDING)
@@ -100,8 +101,20 @@ runDescribe("cover image upload flow", () => {
 
         expect(completeResponse.status).toBe(200)
         expect(completeBody.success).toBe(true)
+        expect(completeBody.assetId).toBeTruthy()
         expect(completeBody.permanentKey).toContain(`users/${userId}/COVER/`)
         await expectUploadHandshakeStatus(body.uploadHandshakeId, UploadHandshakeStatus.COMPLETED)
+
+        const uploadedAsset = await prisma.asset.findUnique({
+            where: { id: completeBody.assetId },
+        })
+
+        expect(uploadedAsset).not.toBeNull()
+        expect(uploadedAsset?.key).toBe(completeBody.permanentKey)
+        expect(uploadedAsset?.fileName).toBe("cover.png")
+        expect(uploadedAsset?.mimeType).toBe("image/png")
+        expect(uploadedAsset?.sizeBytes).toBe(uploadPayload.length)
+        expect(uploadedAsset?.ownerId).toBe(userId)
 
         uploadedKeys.push(completeBody.permanentKey)
 
@@ -120,8 +133,7 @@ runDescribe("cover image upload flow", () => {
 
         const referenceResponse = await createCoverImageReference(createCoverReferenceRequest(
             userId,
-            completeBody.permanentKey,
-            "cover.png",
+            completeBody.assetId,
         ), {
             params: { id: ebookId },
         })

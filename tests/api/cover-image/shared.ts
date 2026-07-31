@@ -16,6 +16,7 @@ export interface PresignedUploadResponse {
 
 export interface CompleteUploadResponse {
     success: boolean
+    assetId: string
     permanentKey: string
 }
 
@@ -140,7 +141,7 @@ export async function expectUploadHandshakeStatus(uploadHandshakeId: string, sta
     return handshake
 }
 
-export function createCoverReferenceRequest(userId: string, key: string, fileName: string) {
+export function createCoverReferenceRequest(userId: string, assetId: string) {
     return new NextRequest("http://localhost:3000/api/uploads/reference/cover-image", {
         method: "PUT",
         headers: {
@@ -148,8 +149,7 @@ export function createCoverReferenceRequest(userId: string, key: string, fileNam
             "x-auth-user-id": userId,
         },
         body: JSON.stringify({
-            key,
-            fileName,
+            assetId,
         }),
     })
 }

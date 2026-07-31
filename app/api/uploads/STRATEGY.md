@@ -73,8 +73,8 @@ Request body:
 
 This endpoint loads the `UploadHandshake`, reads the object metadata from S3
 with `HeadObject`, verifies the temporary key, MIME type, and size against the
-server-stored expectations, and then moves the object from the temporary path to
-its permanent path.
+server-stored expectations, moves the object from the temporary path to its
+permanent path, and creates the uploaded `Asset` record.
 
 ## Step 4: create resource reference
 
@@ -82,8 +82,7 @@ For cover images:
 
 - `PUT /api/uploads/reference/cover-image/:id`
 
-This endpoint verifies the permanent object and creates the SQL reference (asset +
-link to ebook).
+This endpoint attaches the already-created uploaded asset to the ebook.
 
 ## Security notes
 

@@ -4,6 +4,7 @@ model UploadHandshake {
   owner             User                  @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   context           AssetReferenceType
   key               String                @unique
+  fileName          String
   expectedMimeType  String
   expectedSizeBytes Int
   status            UploadHandshakeStatus @default(PENDING)
