@@ -3,7 +3,7 @@
  * Client
 **/
 
-import * as runtime from './runtime/client.js';
+import * as runtime from "./runtime/client.js"
 import $Types = runtime.Types // general types
 import $Public = runtime.Types.Public
 import $Utils = runtime.Types.Utils
@@ -84,84 +84,84 @@ export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTok
  */
 export namespace $Enums {
   export const SubscriptionStatus: {
-  none: 'none',
-  trialing: 'trialing',
-  active: 'active',
-  past_due: 'past_due',
-  canceled: 'canceled',
-  unpaid: 'unpaid'
-};
+  none: "none",
+  trialing: "trialing",
+  active: "active",
+  past_due: "past_due",
+  canceled: "canceled",
+  unpaid: "unpaid"
+}
 
 export type SubscriptionStatus = (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus]
 
 
 export const PlanType: {
-  free: 'free',
-  premium: 'premium',
-  pro: 'pro'
-};
+  free: "free",
+  premium: "premium",
+  pro: "pro"
+}
 
 export type PlanType = (typeof PlanType)[keyof typeof PlanType]
 
 
 export const AssetReferenceType: {
-  COVER: 'COVER',
-  CONTENT_IMAGE: 'CONTENT_IMAGE',
-  SNAPSHOT: 'SNAPSHOT',
-  EXPORT: 'EXPORT'
-};
+  COVER: "COVER",
+  CONTENT_IMAGE: "CONTENT_IMAGE",
+  SNAPSHOT: "SNAPSHOT",
+  EXPORT: "EXPORT"
+}
 
 export type AssetReferenceType = (typeof AssetReferenceType)[keyof typeof AssetReferenceType]
 
 
 export const CollaborationRole: {
-  OWNER: 'OWNER',
-  AUTHOR: 'AUTHOR',
-  TRANSLATOR: 'TRANSLATOR',
-  PROOFREADER: 'PROOFREADER',
-  EDITOR: 'EDITOR'
-};
+  OWNER: "OWNER",
+  AUTHOR: "AUTHOR",
+  TRANSLATOR: "TRANSLATOR",
+  PROOFREADER: "PROOFREADER",
+  EDITOR: "EDITOR"
+}
 
 export type CollaborationRole = (typeof CollaborationRole)[keyof typeof CollaborationRole]
 
 
 export const CollaborationPermission: {
-  EBOOK_READ: 'EBOOK_READ',
-  EBOOK_UPDATE_METADATA: 'EBOOK_UPDATE_METADATA',
-  EBOOK_DELETE: 'EBOOK_DELETE',
-  CHAPTER_READ: 'CHAPTER_READ',
-  CHAPTER_CREATE: 'CHAPTER_CREATE',
-  CHAPTER_UPDATE: 'CHAPTER_UPDATE',
-  CHAPTER_DELETE: 'CHAPTER_DELETE',
-  SNAPSHOT_READ: 'SNAPSHOT_READ',
-  SNAPSHOT_CREATE: 'SNAPSHOT_CREATE',
-  SNAPSHOT_RESTORE: 'SNAPSHOT_RESTORE',
-  ASSET_UPLOAD: 'ASSET_UPLOAD',
-  ASSET_DELETE: 'ASSET_DELETE',
-  COVER_UPDATE: 'COVER_UPDATE',
-  COLLABORATOR_INVITE: 'COLLABORATOR_INVITE',
-  COLLABORATOR_REMOVE: 'COLLABORATOR_REMOVE',
-  ROLE_ASSIGN: 'ROLE_ASSIGN'
-};
+  EBOOK_READ: "EBOOK_READ",
+  EBOOK_UPDATE_METADATA: "EBOOK_UPDATE_METADATA",
+  EBOOK_DELETE: "EBOOK_DELETE",
+  CHAPTER_READ: "CHAPTER_READ",
+  CHAPTER_CREATE: "CHAPTER_CREATE",
+  CHAPTER_UPDATE: "CHAPTER_UPDATE",
+  CHAPTER_DELETE: "CHAPTER_DELETE",
+  SNAPSHOT_READ: "SNAPSHOT_READ",
+  SNAPSHOT_CREATE: "SNAPSHOT_CREATE",
+  SNAPSHOT_RESTORE: "SNAPSHOT_RESTORE",
+  ASSET_UPLOAD: "ASSET_UPLOAD",
+  ASSET_DELETE: "ASSET_DELETE",
+  COVER_UPDATE: "COVER_UPDATE",
+  COLLABORATOR_INVITE: "COLLABORATOR_INVITE",
+  COLLABORATOR_REMOVE: "COLLABORATOR_REMOVE",
+  ROLE_ASSIGN: "ROLE_ASSIGN"
+}
 
 export type CollaborationPermission = (typeof CollaborationPermission)[keyof typeof CollaborationPermission]
 
 
 export const SnapshotStatus: {
-  PENDING: 'PENDING',
-  READY: 'READY',
-  FAILED: 'FAILED'
-};
+  PENDING: "PENDING",
+  READY: "READY",
+  FAILED: "FAILED"
+}
 
 export type SnapshotStatus = (typeof SnapshotStatus)[keyof typeof SnapshotStatus]
 
 
 export const UploadHandshakeStatus: {
-  PENDING: 'PENDING',
-  COMPLETED: 'COMPLETED',
-  FAILED: 'FAILED',
-  EXPIRED: 'EXPIRED'
-};
+  PENDING: "PENDING",
+  COMPLETED: "COMPLETED",
+  FAILED: "FAILED",
+  EXPIRED: "EXPIRED"
+}
 
 export type UploadHandshakeStatus = (typeof UploadHandshakeStatus)[keyof typeof UploadHandshakeStatus]
 
@@ -213,10 +213,10 @@ export const UploadHandshakeStatus: typeof $Enums.UploadHandshakeStatus
  */
 export class PrismaClient<
   ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
-  const U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
+  const U = "log" extends keyof ClientOptions ? ClientOptions["log"] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions["log"]> : never : never,
   ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
 > {
-  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["other"] }
 
     /**
    * ##  Prisma Client ʲˢ
@@ -236,7 +236,7 @@ export class PrismaClient<
    */
 
   constructor(optionsArg ?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>);
-  $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): PrismaClient;
+  $on<V extends U>(eventType: V, callback: (event: V extends "query" ? Prisma.QueryEvent : Prisma.LogEvent) => void): PrismaClient;
 
   /**
    * Connect with the database
@@ -639,9 +639,9 @@ export namespace Prisma {
     [key in keyof T]: key extends keyof U ? T[key] : never
   } &
     (T extends SelectAndInclude
-      ? 'Please either choose `select` or `include`.'
+      ? "Please either choose `select` or `include`."
       : T extends SelectAndOmit
-        ? 'Please either choose `select` or `omit`.'
+        ? "Please either choose `select` or `omit`."
         : {})
 
   /**
@@ -675,7 +675,7 @@ export namespace Prisma {
   ? False
   : T extends Uint8Array
   ? False
-  : T extends BigInt
+  : T extends bigint
   ? False
   : T extends object
   ? True
@@ -820,7 +820,7 @@ export namespace Prisma {
 
   type Cast<A, B> = A extends B ? A : B;
 
-  export const type: unique symbol;
+  export const type: unique symbol
 
 
 
@@ -836,13 +836,13 @@ export namespace Prisma {
 
   type FieldPaths<
     T,
-    U = Omit<T, '_avg' | '_sum' | '_count' | '_min' | '_max'>
+    U = Omit<T, "_avg" | "_sum" | "_count" | "_min" | "_max">
   > = IsObject<T> extends True ? U : T
 
   type GetHavingFields<T> = {
     [K in keyof T]: Or<
-      Or<Extends<'OR', K>, Extends<'AND', K>>,
-      Extends<'NOT', K>
+      Or<Extends<"OR", K>, Extends<"AND", K>>,
+      Extends<"NOT", K>
     > extends True
       ? // infer is only needed to not hit TS limit
         // based on the brilliant idea of Pierre-Antoine Mills
@@ -879,27 +879,27 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Asset: 'Asset',
-    ChapterAssetReference: 'ChapterAssetReference',
-    Chapter: 'Chapter',
-    EbookCollaborator: 'EbookCollaborator',
-    EbookCollaboratorChapterAccess: 'EbookCollaboratorChapterAccess',
-    EbookCustomRole: 'EbookCustomRole',
-    Ebook: 'Ebook',
-    Snapshot: 'Snapshot',
-    SnapshotFile: 'SnapshotFile',
-    UploadHandshake: 'UploadHandshake',
-    User: 'User',
-    Account: 'Account',
-    VerificationToken: 'VerificationToken'
-  };
+    Asset: "Asset",
+    ChapterAssetReference: "ChapterAssetReference",
+    Chapter: "Chapter",
+    EbookCollaborator: "EbookCollaborator",
+    EbookCollaboratorChapterAccess: "EbookCollaboratorChapterAccess",
+    EbookCustomRole: "EbookCustomRole",
+    Ebook: "Ebook",
+    Snapshot: "Snapshot",
+    SnapshotFile: "SnapshotFile",
+    UploadHandshake: "UploadHandshake",
+    User: "User",
+    Account: "Account",
+    VerificationToken: "VerificationToken"
+  }
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
 
 
 
   interface TypeMapCb<ClientOptions = {}> extends $Utils.Fn<{extArgs: $Extensions.InternalArgs }, $Utils.Record<string, any>> {
-    returns: Prisma.TypeMap<this['params']['extArgs'], ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}>
+    returns: Prisma.TypeMap<this["params"]["extArgs"], ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}>
   }
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> = {
@@ -1899,7 +1899,7 @@ export namespace Prisma {
   }
   export const defineExtension: $Extensions.ExtendsHook<"define", Prisma.TypeMapCb, $Extensions.DefaultArgs>
   export type DefaultPrismaClient = PrismaClient
-  export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
+  export type ErrorFormat = "pretty" | "colorless" | "minimal"
   export interface PrismaClientOptions {
     /**
      * @default "colorless"
@@ -1997,16 +1997,16 @@ export namespace Prisma {
   }
 
   /* Types for Logging */
-  export type LogLevel = 'info' | 'query' | 'warn' | 'error'
+  export type LogLevel = "info" | "query" | "warn" | "error"
   export type LogDefinition = {
     level: LogLevel
-    emit: 'stdout' | 'event'
+    emit: "stdout" | "event"
   }
 
   export type CheckIsLogLevel<T> = T extends LogLevel ? T : never;
 
   export type GetLogType<T> = CheckIsLogLevel<
-    T extends LogDefinition ? T['level'] : T
+    T extends LogDefinition ? T["level"] : T
   >;
 
   export type GetEvents<T extends any[]> = T extends Array<LogLevel | LogDefinition>
@@ -2030,27 +2030,27 @@ export namespace Prisma {
 
 
   export type PrismaAction =
-    | 'findUnique'
-    | 'findUniqueOrThrow'
-    | 'findMany'
-    | 'findFirst'
-    | 'findFirstOrThrow'
-    | 'create'
-    | 'createMany'
-    | 'createManyAndReturn'
-    | 'update'
-    | 'updateMany'
-    | 'updateManyAndReturn'
-    | 'upsert'
-    | 'delete'
-    | 'deleteMany'
-    | 'executeRaw'
-    | 'queryRaw'
-    | 'aggregate'
-    | 'count'
-    | 'runCommandRaw'
-    | 'findRaw'
-    | 'groupBy'
+    | "findUnique"
+    | "findUniqueOrThrow"
+    | "findMany"
+    | "findFirst"
+    | "findFirstOrThrow"
+    | "create"
+    | "createMany"
+    | "createManyAndReturn"
+    | "update"
+    | "updateMany"
+    | "updateManyAndReturn"
+    | "upsert"
+    | "delete"
+    | "deleteMany"
+    | "executeRaw"
+    | "queryRaw"
+    | "aggregate"
+    | "count"
+    | "runCommandRaw"
+    | "findRaw"
+    | "groupBy"
 
   // tested in getLogLevel.test.ts
   export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
@@ -2514,7 +2514,7 @@ export namespace Prisma {
   }
 
   export type GetAssetAggregateType<T extends AssetAggregateArgs> = {
-        [P in keyof T & keyof AggregateAsset]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateAsset]: P extends "_count" | "count"
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateAsset[P]>
@@ -2557,9 +2557,9 @@ export namespace Prisma {
 
   type GetAssetGroupByPayload<T extends AssetGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<AssetGroupByOutputType, T['by']> &
+      PickEnumerable<AssetGroupByOutputType, T["by"]> &
         {
-          [P in ((keyof T) & (keyof AssetGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof AssetGroupByOutputType))]: P extends "_count"
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], AssetGroupByOutputType[P]>
@@ -2661,12 +2661,12 @@ export namespace Prisma {
   type AssetGetPayload<S extends boolean | null | undefined | AssetDefaultArgs> = $Result.GetResult<Prisma.$AssetPayload, S>
 
   type AssetCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<AssetFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    Omit<AssetFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
       select?: AssetCountAggregateInputType | true
     }
 
   export interface AssetDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Asset'], meta: { name: 'Asset' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Asset"], meta: { name: "Asset" } }
     /**
      * Find zero or one Asset that matches the filter.
      * @param {AssetFindUniqueArgs} args - Arguments to find a Asset
@@ -2925,10 +2925,10 @@ export namespace Prisma {
     count<T extends AssetCountArgs>(
       args?: Subset<T, AssetCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
+      T extends $Utils.Record<"select", any>
+        ? T["select"] extends true
           ? number
-          : GetScalarType<T['select'], AssetCountAggregateOutputType>
+          : GetScalarType<T["select"], AssetCountAggregateOutputType>
         : number
     >
 
@@ -2979,20 +2979,20 @@ export namespace Prisma {
     groupBy<
       T extends AssetGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
+        Extends<"skip", Keys<T>>,
+        Extends<"take", Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AssetGroupByArgs['orderBy'] }
-        : { orderBy?: AssetGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+        ? { orderBy: AssetGroupByArgs["orderBy"] }
+        : { orderBy?: AssetGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
+      ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
+      HavingFields extends GetHavingFields<T["having"]>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
+      ByEmpty extends T["by"] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
+      ? "Error: \"by\" must not be empty."
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -3001,13 +3001,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                'Field ',
+                "Field ",
                 P,
-                ` in "having" needs to be provided in "by"`,
+                " in \"having\" needs to be provided in \"by\"",
               ]
         }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+      : "take" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -3015,9 +3015,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
+      : "skip" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -3025,7 +3025,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
       : ByValid extends True
       ? {}
       : {
@@ -3080,15 +3080,15 @@ export namespace Prisma {
    * Fields of the Asset model
    */
   interface AssetFieldRefs {
-    readonly id: FieldRef<"Asset", 'String'>
-    readonly key: FieldRef<"Asset", 'String'>
-    readonly bucket: FieldRef<"Asset", 'String'>
-    readonly fileName: FieldRef<"Asset", 'String'>
-    readonly mimeType: FieldRef<"Asset", 'String'>
-    readonly sizeBytes: FieldRef<"Asset", 'Int'>
-    readonly createdAt: FieldRef<"Asset", 'DateTime'>
-    readonly updatedAt: FieldRef<"Asset", 'DateTime'>
-    readonly ownerId: FieldRef<"Asset", 'String'>
+    readonly id: FieldRef<"Asset", "String">
+    readonly key: FieldRef<"Asset", "String">
+    readonly bucket: FieldRef<"Asset", "String">
+    readonly fileName: FieldRef<"Asset", "String">
+    readonly mimeType: FieldRef<"Asset", "String">
+    readonly sizeBytes: FieldRef<"Asset", "Int">
+    readonly createdAt: FieldRef<"Asset", "DateTime">
+    readonly updatedAt: FieldRef<"Asset", "DateTime">
+    readonly ownerId: FieldRef<"Asset", "String">
   }
     
 
@@ -3673,7 +3673,7 @@ export namespace Prisma {
   }
 
   export type GetChapterAssetReferenceAggregateType<T extends ChapterAssetReferenceAggregateArgs> = {
-        [P in keyof T & keyof AggregateChapterAssetReference]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateChapterAssetReference]: P extends "_count" | "count"
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateChapterAssetReference[P]>
@@ -3709,9 +3709,9 @@ export namespace Prisma {
 
   type GetChapterAssetReferenceGroupByPayload<T extends ChapterAssetReferenceGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ChapterAssetReferenceGroupByOutputType, T['by']> &
+      PickEnumerable<ChapterAssetReferenceGroupByOutputType, T["by"]> &
         {
-          [P in ((keyof T) & (keyof ChapterAssetReferenceGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ChapterAssetReferenceGroupByOutputType))]: P extends "_count"
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], ChapterAssetReferenceGroupByOutputType[P]>
@@ -3797,12 +3797,12 @@ export namespace Prisma {
   type ChapterAssetReferenceGetPayload<S extends boolean | null | undefined | ChapterAssetReferenceDefaultArgs> = $Result.GetResult<Prisma.$ChapterAssetReferencePayload, S>
 
   type ChapterAssetReferenceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ChapterAssetReferenceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    Omit<ChapterAssetReferenceFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
       select?: ChapterAssetReferenceCountAggregateInputType | true
     }
 
   export interface ChapterAssetReferenceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ChapterAssetReference'], meta: { name: 'ChapterAssetReference' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["ChapterAssetReference"], meta: { name: "ChapterAssetReference" } }
     /**
      * Find zero or one ChapterAssetReference that matches the filter.
      * @param {ChapterAssetReferenceFindUniqueArgs} args - Arguments to find a ChapterAssetReference
@@ -4061,10 +4061,10 @@ export namespace Prisma {
     count<T extends ChapterAssetReferenceCountArgs>(
       args?: Subset<T, ChapterAssetReferenceCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
+      T extends $Utils.Record<"select", any>
+        ? T["select"] extends true
           ? number
-          : GetScalarType<T['select'], ChapterAssetReferenceCountAggregateOutputType>
+          : GetScalarType<T["select"], ChapterAssetReferenceCountAggregateOutputType>
         : number
     >
 
@@ -4115,20 +4115,20 @@ export namespace Prisma {
     groupBy<
       T extends ChapterAssetReferenceGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
+        Extends<"skip", Keys<T>>,
+        Extends<"take", Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ChapterAssetReferenceGroupByArgs['orderBy'] }
-        : { orderBy?: ChapterAssetReferenceGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+        ? { orderBy: ChapterAssetReferenceGroupByArgs["orderBy"] }
+        : { orderBy?: ChapterAssetReferenceGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
+      ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
+      HavingFields extends GetHavingFields<T["having"]>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
+      ByEmpty extends T["by"] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
+      ? "Error: \"by\" must not be empty."
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -4137,13 +4137,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                'Field ',
+                "Field ",
                 P,
-                ` in "having" needs to be provided in "by"`,
+                " in \"having\" needs to be provided in \"by\"",
               ]
         }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+      : "take" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -4151,9 +4151,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
+      : "skip" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -4161,7 +4161,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
       : ByValid extends True
       ? {}
       : {
@@ -4215,12 +4215,12 @@ export namespace Prisma {
    * Fields of the ChapterAssetReference model
    */
   interface ChapterAssetReferenceFieldRefs {
-    readonly id: FieldRef<"ChapterAssetReference", 'String'>
-    readonly assetId: FieldRef<"ChapterAssetReference", 'String'>
-    readonly chapterId: FieldRef<"ChapterAssetReference", 'String'>
-    readonly type: FieldRef<"ChapterAssetReference", 'AssetReferenceType'>
-    readonly createdAt: FieldRef<"ChapterAssetReference", 'DateTime'>
-    readonly updatedAt: FieldRef<"ChapterAssetReference", 'DateTime'>
+    readonly id: FieldRef<"ChapterAssetReference", "String">
+    readonly assetId: FieldRef<"ChapterAssetReference", "String">
+    readonly chapterId: FieldRef<"ChapterAssetReference", "String">
+    readonly type: FieldRef<"ChapterAssetReference", "AssetReferenceType">
+    readonly createdAt: FieldRef<"ChapterAssetReference", "DateTime">
+    readonly updatedAt: FieldRef<"ChapterAssetReference", "DateTime">
   }
     
 
@@ -4789,7 +4789,7 @@ export namespace Prisma {
   }
 
   export type GetChapterAggregateType<T extends ChapterAggregateArgs> = {
-        [P in keyof T & keyof AggregateChapter]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateChapter]: P extends "_count" | "count"
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateChapter[P]>
@@ -4830,9 +4830,9 @@ export namespace Prisma {
 
   type GetChapterGroupByPayload<T extends ChapterGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ChapterGroupByOutputType, T['by']> &
+      PickEnumerable<ChapterGroupByOutputType, T["by"]> &
         {
-          [P in ((keyof T) & (keyof ChapterGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ChapterGroupByOutputType))]: P extends "_count"
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], ChapterGroupByOutputType[P]>
@@ -4924,12 +4924,12 @@ export namespace Prisma {
   type ChapterGetPayload<S extends boolean | null | undefined | ChapterDefaultArgs> = $Result.GetResult<Prisma.$ChapterPayload, S>
 
   type ChapterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ChapterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    Omit<ChapterFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
       select?: ChapterCountAggregateInputType | true
     }
 
   export interface ChapterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Chapter'], meta: { name: 'Chapter' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Chapter"], meta: { name: "Chapter" } }
     /**
      * Find zero or one Chapter that matches the filter.
      * @param {ChapterFindUniqueArgs} args - Arguments to find a Chapter
@@ -5188,10 +5188,10 @@ export namespace Prisma {
     count<T extends ChapterCountArgs>(
       args?: Subset<T, ChapterCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
+      T extends $Utils.Record<"select", any>
+        ? T["select"] extends true
           ? number
-          : GetScalarType<T['select'], ChapterCountAggregateOutputType>
+          : GetScalarType<T["select"], ChapterCountAggregateOutputType>
         : number
     >
 
@@ -5242,20 +5242,20 @@ export namespace Prisma {
     groupBy<
       T extends ChapterGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
+        Extends<"skip", Keys<T>>,
+        Extends<"take", Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ChapterGroupByArgs['orderBy'] }
-        : { orderBy?: ChapterGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+        ? { orderBy: ChapterGroupByArgs["orderBy"] }
+        : { orderBy?: ChapterGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
+      ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
+      HavingFields extends GetHavingFields<T["having"]>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
+      ByEmpty extends T["by"] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
+      ? "Error: \"by\" must not be empty."
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -5264,13 +5264,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                'Field ',
+                "Field ",
                 P,
-                ` in "having" needs to be provided in "by"`,
+                " in \"having\" needs to be provided in \"by\"",
               ]
         }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+      : "take" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -5278,9 +5278,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
+      : "skip" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -5288,7 +5288,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
       : ByValid extends True
       ? {}
       : {
@@ -5343,13 +5343,13 @@ export namespace Prisma {
    * Fields of the Chapter model
    */
   interface ChapterFieldRefs {
-    readonly id: FieldRef<"Chapter", 'String'>
-    readonly content: FieldRef<"Chapter", 'Json'>
-    readonly title: FieldRef<"Chapter", 'String'>
-    readonly position: FieldRef<"Chapter", 'Int'>
-    readonly createdAt: FieldRef<"Chapter", 'DateTime'>
-    readonly updatedAt: FieldRef<"Chapter", 'DateTime'>
-    readonly ebookId: FieldRef<"Chapter", 'String'>
+    readonly id: FieldRef<"Chapter", "String">
+    readonly content: FieldRef<"Chapter", "Json">
+    readonly title: FieldRef<"Chapter", "String">
+    readonly position: FieldRef<"Chapter", "Int">
+    readonly createdAt: FieldRef<"Chapter", "DateTime">
+    readonly updatedAt: FieldRef<"Chapter", "DateTime">
+    readonly ebookId: FieldRef<"Chapter", "String">
   }
     
 
@@ -5946,7 +5946,7 @@ export namespace Prisma {
   }
 
   export type GetEbookCollaboratorAggregateType<T extends EbookCollaboratorAggregateArgs> = {
-        [P in keyof T & keyof AggregateEbookCollaborator]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateEbookCollaborator]: P extends "_count" | "count"
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateEbookCollaborator[P]>
@@ -5984,9 +5984,9 @@ export namespace Prisma {
 
   type GetEbookCollaboratorGroupByPayload<T extends EbookCollaboratorGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<EbookCollaboratorGroupByOutputType, T['by']> &
+      PickEnumerable<EbookCollaboratorGroupByOutputType, T["by"]> &
         {
-          [P in ((keyof T) & (keyof EbookCollaboratorGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof EbookCollaboratorGroupByOutputType))]: P extends "_count"
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], EbookCollaboratorGroupByOutputType[P]>
@@ -6094,12 +6094,12 @@ export namespace Prisma {
   type EbookCollaboratorGetPayload<S extends boolean | null | undefined | EbookCollaboratorDefaultArgs> = $Result.GetResult<Prisma.$EbookCollaboratorPayload, S>
 
   type EbookCollaboratorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<EbookCollaboratorFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    Omit<EbookCollaboratorFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
       select?: EbookCollaboratorCountAggregateInputType | true
     }
 
   export interface EbookCollaboratorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EbookCollaborator'], meta: { name: 'EbookCollaborator' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["EbookCollaborator"], meta: { name: "EbookCollaborator" } }
     /**
      * Find zero or one EbookCollaborator that matches the filter.
      * @param {EbookCollaboratorFindUniqueArgs} args - Arguments to find a EbookCollaborator
@@ -6358,10 +6358,10 @@ export namespace Prisma {
     count<T extends EbookCollaboratorCountArgs>(
       args?: Subset<T, EbookCollaboratorCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
+      T extends $Utils.Record<"select", any>
+        ? T["select"] extends true
           ? number
-          : GetScalarType<T['select'], EbookCollaboratorCountAggregateOutputType>
+          : GetScalarType<T["select"], EbookCollaboratorCountAggregateOutputType>
         : number
     >
 
@@ -6412,20 +6412,20 @@ export namespace Prisma {
     groupBy<
       T extends EbookCollaboratorGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
+        Extends<"skip", Keys<T>>,
+        Extends<"take", Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EbookCollaboratorGroupByArgs['orderBy'] }
-        : { orderBy?: EbookCollaboratorGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+        ? { orderBy: EbookCollaboratorGroupByArgs["orderBy"] }
+        : { orderBy?: EbookCollaboratorGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
+      ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
+      HavingFields extends GetHavingFields<T["having"]>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
+      ByEmpty extends T["by"] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
+      ? "Error: \"by\" must not be empty."
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -6434,13 +6434,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                'Field ',
+                "Field ",
                 P,
-                ` in "having" needs to be provided in "by"`,
+                " in \"having\" needs to be provided in \"by\"",
               ]
         }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+      : "take" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -6448,9 +6448,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
+      : "skip" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -6458,7 +6458,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
       : ByValid extends True
       ? {}
       : {
@@ -6514,14 +6514,14 @@ export namespace Prisma {
    * Fields of the EbookCollaborator model
    */
   interface EbookCollaboratorFieldRefs {
-    readonly id: FieldRef<"EbookCollaborator", 'String'>
-    readonly ebookId: FieldRef<"EbookCollaborator", 'String'>
-    readonly userId: FieldRef<"EbookCollaborator", 'String'>
-    readonly role: FieldRef<"EbookCollaborator", 'CollaborationRole'>
-    readonly allChaptersAccess: FieldRef<"EbookCollaborator", 'Boolean'>
-    readonly customRoleId: FieldRef<"EbookCollaborator", 'String'>
-    readonly createdAt: FieldRef<"EbookCollaborator", 'DateTime'>
-    readonly updatedAt: FieldRef<"EbookCollaborator", 'DateTime'>
+    readonly id: FieldRef<"EbookCollaborator", "String">
+    readonly ebookId: FieldRef<"EbookCollaborator", "String">
+    readonly userId: FieldRef<"EbookCollaborator", "String">
+    readonly role: FieldRef<"EbookCollaborator", "CollaborationRole">
+    readonly allChaptersAccess: FieldRef<"EbookCollaborator", "Boolean">
+    readonly customRoleId: FieldRef<"EbookCollaborator", "String">
+    readonly createdAt: FieldRef<"EbookCollaborator", "DateTime">
+    readonly updatedAt: FieldRef<"EbookCollaborator", "DateTime">
   }
     
 
@@ -7089,7 +7089,7 @@ export namespace Prisma {
   }
 
   export type GetEbookCollaboratorChapterAccessAggregateType<T extends EbookCollaboratorChapterAccessAggregateArgs> = {
-        [P in keyof T & keyof AggregateEbookCollaboratorChapterAccess]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateEbookCollaboratorChapterAccess]: P extends "_count" | "count"
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateEbookCollaboratorChapterAccess[P]>
@@ -7123,9 +7123,9 @@ export namespace Prisma {
 
   type GetEbookCollaboratorChapterAccessGroupByPayload<T extends EbookCollaboratorChapterAccessGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<EbookCollaboratorChapterAccessGroupByOutputType, T['by']> &
+      PickEnumerable<EbookCollaboratorChapterAccessGroupByOutputType, T["by"]> &
         {
-          [P in ((keyof T) & (keyof EbookCollaboratorChapterAccessGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof EbookCollaboratorChapterAccessGroupByOutputType))]: P extends "_count"
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], EbookCollaboratorChapterAccessGroupByOutputType[P]>
@@ -7201,12 +7201,12 @@ export namespace Prisma {
   type EbookCollaboratorChapterAccessGetPayload<S extends boolean | null | undefined | EbookCollaboratorChapterAccessDefaultArgs> = $Result.GetResult<Prisma.$EbookCollaboratorChapterAccessPayload, S>
 
   type EbookCollaboratorChapterAccessCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<EbookCollaboratorChapterAccessFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    Omit<EbookCollaboratorChapterAccessFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
       select?: EbookCollaboratorChapterAccessCountAggregateInputType | true
     }
 
   export interface EbookCollaboratorChapterAccessDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EbookCollaboratorChapterAccess'], meta: { name: 'EbookCollaboratorChapterAccess' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["EbookCollaboratorChapterAccess"], meta: { name: "EbookCollaboratorChapterAccess" } }
     /**
      * Find zero or one EbookCollaboratorChapterAccess that matches the filter.
      * @param {EbookCollaboratorChapterAccessFindUniqueArgs} args - Arguments to find a EbookCollaboratorChapterAccess
@@ -7465,10 +7465,10 @@ export namespace Prisma {
     count<T extends EbookCollaboratorChapterAccessCountArgs>(
       args?: Subset<T, EbookCollaboratorChapterAccessCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
+      T extends $Utils.Record<"select", any>
+        ? T["select"] extends true
           ? number
-          : GetScalarType<T['select'], EbookCollaboratorChapterAccessCountAggregateOutputType>
+          : GetScalarType<T["select"], EbookCollaboratorChapterAccessCountAggregateOutputType>
         : number
     >
 
@@ -7519,20 +7519,20 @@ export namespace Prisma {
     groupBy<
       T extends EbookCollaboratorChapterAccessGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
+        Extends<"skip", Keys<T>>,
+        Extends<"take", Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EbookCollaboratorChapterAccessGroupByArgs['orderBy'] }
-        : { orderBy?: EbookCollaboratorChapterAccessGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+        ? { orderBy: EbookCollaboratorChapterAccessGroupByArgs["orderBy"] }
+        : { orderBy?: EbookCollaboratorChapterAccessGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
+      ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
+      HavingFields extends GetHavingFields<T["having"]>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
+      ByEmpty extends T["by"] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
+      ? "Error: \"by\" must not be empty."
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -7541,13 +7541,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                'Field ',
+                "Field ",
                 P,
-                ` in "having" needs to be provided in "by"`,
+                " in \"having\" needs to be provided in \"by\"",
               ]
         }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+      : "take" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -7555,9 +7555,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
+      : "skip" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -7565,7 +7565,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
       : ByValid extends True
       ? {}
       : {
@@ -7619,10 +7619,10 @@ export namespace Prisma {
    * Fields of the EbookCollaboratorChapterAccess model
    */
   interface EbookCollaboratorChapterAccessFieldRefs {
-    readonly id: FieldRef<"EbookCollaboratorChapterAccess", 'String'>
-    readonly collaboratorId: FieldRef<"EbookCollaboratorChapterAccess", 'String'>
-    readonly chapterId: FieldRef<"EbookCollaboratorChapterAccess", 'String'>
-    readonly createdAt: FieldRef<"EbookCollaboratorChapterAccess", 'DateTime'>
+    readonly id: FieldRef<"EbookCollaboratorChapterAccess", "String">
+    readonly collaboratorId: FieldRef<"EbookCollaboratorChapterAccess", "String">
+    readonly chapterId: FieldRef<"EbookCollaboratorChapterAccess", "String">
+    readonly createdAt: FieldRef<"EbookCollaboratorChapterAccess", "DateTime">
   }
     
 
@@ -8161,7 +8161,7 @@ export namespace Prisma {
   }
 
   export type GetEbookCustomRoleAggregateType<T extends EbookCustomRoleAggregateArgs> = {
-        [P in keyof T & keyof AggregateEbookCustomRole]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateEbookCustomRole]: P extends "_count" | "count"
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateEbookCustomRole[P]>
@@ -8198,9 +8198,9 @@ export namespace Prisma {
 
   type GetEbookCustomRoleGroupByPayload<T extends EbookCustomRoleGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<EbookCustomRoleGroupByOutputType, T['by']> &
+      PickEnumerable<EbookCustomRoleGroupByOutputType, T["by"]> &
         {
-          [P in ((keyof T) & (keyof EbookCustomRoleGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof EbookCustomRoleGroupByOutputType))]: P extends "_count"
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], EbookCustomRoleGroupByOutputType[P]>
@@ -8296,12 +8296,12 @@ export namespace Prisma {
   type EbookCustomRoleGetPayload<S extends boolean | null | undefined | EbookCustomRoleDefaultArgs> = $Result.GetResult<Prisma.$EbookCustomRolePayload, S>
 
   type EbookCustomRoleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<EbookCustomRoleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    Omit<EbookCustomRoleFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
       select?: EbookCustomRoleCountAggregateInputType | true
     }
 
   export interface EbookCustomRoleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EbookCustomRole'], meta: { name: 'EbookCustomRole' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["EbookCustomRole"], meta: { name: "EbookCustomRole" } }
     /**
      * Find zero or one EbookCustomRole that matches the filter.
      * @param {EbookCustomRoleFindUniqueArgs} args - Arguments to find a EbookCustomRole
@@ -8560,10 +8560,10 @@ export namespace Prisma {
     count<T extends EbookCustomRoleCountArgs>(
       args?: Subset<T, EbookCustomRoleCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
+      T extends $Utils.Record<"select", any>
+        ? T["select"] extends true
           ? number
-          : GetScalarType<T['select'], EbookCustomRoleCountAggregateOutputType>
+          : GetScalarType<T["select"], EbookCustomRoleCountAggregateOutputType>
         : number
     >
 
@@ -8614,20 +8614,20 @@ export namespace Prisma {
     groupBy<
       T extends EbookCustomRoleGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
+        Extends<"skip", Keys<T>>,
+        Extends<"take", Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EbookCustomRoleGroupByArgs['orderBy'] }
-        : { orderBy?: EbookCustomRoleGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+        ? { orderBy: EbookCustomRoleGroupByArgs["orderBy"] }
+        : { orderBy?: EbookCustomRoleGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
+      ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
+      HavingFields extends GetHavingFields<T["having"]>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
+      ByEmpty extends T["by"] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
+      ? "Error: \"by\" must not be empty."
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -8636,13 +8636,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                'Field ',
+                "Field ",
                 P,
-                ` in "having" needs to be provided in "by"`,
+                " in \"having\" needs to be provided in \"by\"",
               ]
         }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+      : "take" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -8650,9 +8650,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
+      : "skip" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -8660,7 +8660,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
       : ByValid extends True
       ? {}
       : {
@@ -8715,13 +8715,13 @@ export namespace Prisma {
    * Fields of the EbookCustomRole model
    */
   interface EbookCustomRoleFieldRefs {
-    readonly id: FieldRef<"EbookCustomRole", 'String'>
-    readonly ebookId: FieldRef<"EbookCustomRole", 'String'>
-    readonly name: FieldRef<"EbookCustomRole", 'String'>
-    readonly permissions: FieldRef<"EbookCustomRole", 'CollaborationPermission[]'>
-    readonly createdByUserId: FieldRef<"EbookCustomRole", 'String'>
-    readonly createdAt: FieldRef<"EbookCustomRole", 'DateTime'>
-    readonly updatedAt: FieldRef<"EbookCustomRole", 'DateTime'>
+    readonly id: FieldRef<"EbookCustomRole", "String">
+    readonly ebookId: FieldRef<"EbookCustomRole", "String">
+    readonly name: FieldRef<"EbookCustomRole", "String">
+    readonly permissions: FieldRef<"EbookCustomRole", "CollaborationPermission[]">
+    readonly createdByUserId: FieldRef<"EbookCustomRole", "String">
+    readonly createdAt: FieldRef<"EbookCustomRole", "DateTime">
+    readonly updatedAt: FieldRef<"EbookCustomRole", "DateTime">
   }
     
 
@@ -9300,7 +9300,7 @@ export namespace Prisma {
   }
 
   export type GetEbookAggregateType<T extends EbookAggregateArgs> = {
-        [P in keyof T & keyof AggregateEbook]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateEbook]: P extends "_count" | "count"
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateEbook[P]>
@@ -9339,9 +9339,9 @@ export namespace Prisma {
 
   type GetEbookGroupByPayload<T extends EbookGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<EbookGroupByOutputType, T['by']> &
+      PickEnumerable<EbookGroupByOutputType, T["by"]> &
         {
-          [P in ((keyof T) & (keyof EbookGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof EbookGroupByOutputType))]: P extends "_count"
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], EbookGroupByOutputType[P]>
@@ -9463,12 +9463,12 @@ export namespace Prisma {
   type EbookGetPayload<S extends boolean | null | undefined | EbookDefaultArgs> = $Result.GetResult<Prisma.$EbookPayload, S>
 
   type EbookCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<EbookFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    Omit<EbookFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
       select?: EbookCountAggregateInputType | true
     }
 
   export interface EbookDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Ebook'], meta: { name: 'Ebook' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Ebook"], meta: { name: "Ebook" } }
     /**
      * Find zero or one Ebook that matches the filter.
      * @param {EbookFindUniqueArgs} args - Arguments to find a Ebook
@@ -9727,10 +9727,10 @@ export namespace Prisma {
     count<T extends EbookCountArgs>(
       args?: Subset<T, EbookCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
+      T extends $Utils.Record<"select", any>
+        ? T["select"] extends true
           ? number
-          : GetScalarType<T['select'], EbookCountAggregateOutputType>
+          : GetScalarType<T["select"], EbookCountAggregateOutputType>
         : number
     >
 
@@ -9781,20 +9781,20 @@ export namespace Prisma {
     groupBy<
       T extends EbookGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
+        Extends<"skip", Keys<T>>,
+        Extends<"take", Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EbookGroupByArgs['orderBy'] }
-        : { orderBy?: EbookGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+        ? { orderBy: EbookGroupByArgs["orderBy"] }
+        : { orderBy?: EbookGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
+      ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
+      HavingFields extends GetHavingFields<T["having"]>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
+      ByEmpty extends T["by"] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
+      ? "Error: \"by\" must not be empty."
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -9803,13 +9803,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                'Field ',
+                "Field ",
                 P,
-                ` in "having" needs to be provided in "by"`,
+                " in \"having\" needs to be provided in \"by\"",
               ]
         }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+      : "take" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -9817,9 +9817,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
+      : "skip" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -9827,7 +9827,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
       : ByValid extends True
       ? {}
       : {
@@ -9886,15 +9886,15 @@ export namespace Prisma {
    * Fields of the Ebook model
    */
   interface EbookFieldRefs {
-    readonly id: FieldRef<"Ebook", 'String'>
-    readonly title: FieldRef<"Ebook", 'String'>
-    readonly subtitle: FieldRef<"Ebook", 'String'>
-    readonly shortDescription: FieldRef<"Ebook", 'String'>
-    readonly ownerId: FieldRef<"Ebook", 'String'>
-    readonly currentSnapshotId: FieldRef<"Ebook", 'String'>
-    readonly coverAssetId: FieldRef<"Ebook", 'String'>
-    readonly createdAt: FieldRef<"Ebook", 'DateTime'>
-    readonly updatedAt: FieldRef<"Ebook", 'DateTime'>
+    readonly id: FieldRef<"Ebook", "String">
+    readonly title: FieldRef<"Ebook", "String">
+    readonly subtitle: FieldRef<"Ebook", "String">
+    readonly shortDescription: FieldRef<"Ebook", "String">
+    readonly ownerId: FieldRef<"Ebook", "String">
+    readonly currentSnapshotId: FieldRef<"Ebook", "String">
+    readonly coverAssetId: FieldRef<"Ebook", "String">
+    readonly createdAt: FieldRef<"Ebook", "DateTime">
+    readonly updatedAt: FieldRef<"Ebook", "DateTime">
   }
     
 
@@ -10589,7 +10589,7 @@ export namespace Prisma {
   }
 
   export type GetSnapshotAggregateType<T extends SnapshotAggregateArgs> = {
-        [P in keyof T & keyof AggregateSnapshot]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateSnapshot]: P extends "_count" | "count"
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateSnapshot[P]>
@@ -10628,9 +10628,9 @@ export namespace Prisma {
 
   type GetSnapshotGroupByPayload<T extends SnapshotGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<SnapshotGroupByOutputType, T['by']> &
+      PickEnumerable<SnapshotGroupByOutputType, T["by"]> &
         {
-          [P in ((keyof T) & (keyof SnapshotGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof SnapshotGroupByOutputType))]: P extends "_count"
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], SnapshotGroupByOutputType[P]>
@@ -10710,12 +10710,12 @@ export namespace Prisma {
   type SnapshotGetPayload<S extends boolean | null | undefined | SnapshotDefaultArgs> = $Result.GetResult<Prisma.$SnapshotPayload, S>
 
   type SnapshotCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<SnapshotFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    Omit<SnapshotFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
       select?: SnapshotCountAggregateInputType | true
     }
 
   export interface SnapshotDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Snapshot'], meta: { name: 'Snapshot' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Snapshot"], meta: { name: "Snapshot" } }
     /**
      * Find zero or one Snapshot that matches the filter.
      * @param {SnapshotFindUniqueArgs} args - Arguments to find a Snapshot
@@ -10974,10 +10974,10 @@ export namespace Prisma {
     count<T extends SnapshotCountArgs>(
       args?: Subset<T, SnapshotCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
+      T extends $Utils.Record<"select", any>
+        ? T["select"] extends true
           ? number
-          : GetScalarType<T['select'], SnapshotCountAggregateOutputType>
+          : GetScalarType<T["select"], SnapshotCountAggregateOutputType>
         : number
     >
 
@@ -11028,20 +11028,20 @@ export namespace Prisma {
     groupBy<
       T extends SnapshotGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
+        Extends<"skip", Keys<T>>,
+        Extends<"take", Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SnapshotGroupByArgs['orderBy'] }
-        : { orderBy?: SnapshotGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+        ? { orderBy: SnapshotGroupByArgs["orderBy"] }
+        : { orderBy?: SnapshotGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
+      ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
+      HavingFields extends GetHavingFields<T["having"]>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
+      ByEmpty extends T["by"] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
+      ? "Error: \"by\" must not be empty."
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -11050,13 +11050,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                'Field ',
+                "Field ",
                 P,
-                ` in "having" needs to be provided in "by"`,
+                " in \"having\" needs to be provided in \"by\"",
               ]
         }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+      : "take" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -11064,9 +11064,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
+      : "skip" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -11074,7 +11074,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
       : ByValid extends True
       ? {}
       : {
@@ -11129,11 +11129,11 @@ export namespace Prisma {
    * Fields of the Snapshot model
    */
   interface SnapshotFieldRefs {
-    readonly id: FieldRef<"Snapshot", 'String'>
-    readonly ebookId: FieldRef<"Snapshot", 'String'>
-    readonly version: FieldRef<"Snapshot", 'Int'>
-    readonly createdAt: FieldRef<"Snapshot", 'DateTime'>
-    readonly status: FieldRef<"Snapshot", 'SnapshotStatus'>
+    readonly id: FieldRef<"Snapshot", "String">
+    readonly ebookId: FieldRef<"Snapshot", "String">
+    readonly version: FieldRef<"Snapshot", "Int">
+    readonly createdAt: FieldRef<"Snapshot", "DateTime">
+    readonly status: FieldRef<"Snapshot", "SnapshotStatus">
   }
     
 
@@ -11744,7 +11744,7 @@ export namespace Prisma {
   }
 
   export type GetSnapshotFileAggregateType<T extends SnapshotFileAggregateArgs> = {
-        [P in keyof T & keyof AggregateSnapshotFile]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateSnapshotFile]: P extends "_count" | "count"
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateSnapshotFile[P]>
@@ -11785,9 +11785,9 @@ export namespace Prisma {
 
   type GetSnapshotFileGroupByPayload<T extends SnapshotFileGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<SnapshotFileGroupByOutputType, T['by']> &
+      PickEnumerable<SnapshotFileGroupByOutputType, T["by"]> &
         {
-          [P in ((keyof T) & (keyof SnapshotFileGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof SnapshotFileGroupByOutputType))]: P extends "_count"
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], SnapshotFileGroupByOutputType[P]>
@@ -11871,12 +11871,12 @@ export namespace Prisma {
   type SnapshotFileGetPayload<S extends boolean | null | undefined | SnapshotFileDefaultArgs> = $Result.GetResult<Prisma.$SnapshotFilePayload, S>
 
   type SnapshotFileCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<SnapshotFileFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    Omit<SnapshotFileFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
       select?: SnapshotFileCountAggregateInputType | true
     }
 
   export interface SnapshotFileDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SnapshotFile'], meta: { name: 'SnapshotFile' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["SnapshotFile"], meta: { name: "SnapshotFile" } }
     /**
      * Find zero or one SnapshotFile that matches the filter.
      * @param {SnapshotFileFindUniqueArgs} args - Arguments to find a SnapshotFile
@@ -12135,10 +12135,10 @@ export namespace Prisma {
     count<T extends SnapshotFileCountArgs>(
       args?: Subset<T, SnapshotFileCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
+      T extends $Utils.Record<"select", any>
+        ? T["select"] extends true
           ? number
-          : GetScalarType<T['select'], SnapshotFileCountAggregateOutputType>
+          : GetScalarType<T["select"], SnapshotFileCountAggregateOutputType>
         : number
     >
 
@@ -12189,20 +12189,20 @@ export namespace Prisma {
     groupBy<
       T extends SnapshotFileGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
+        Extends<"skip", Keys<T>>,
+        Extends<"take", Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SnapshotFileGroupByArgs['orderBy'] }
-        : { orderBy?: SnapshotFileGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+        ? { orderBy: SnapshotFileGroupByArgs["orderBy"] }
+        : { orderBy?: SnapshotFileGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
+      ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
+      HavingFields extends GetHavingFields<T["having"]>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
+      ByEmpty extends T["by"] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
+      ? "Error: \"by\" must not be empty."
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -12211,13 +12211,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                'Field ',
+                "Field ",
                 P,
-                ` in "having" needs to be provided in "by"`,
+                " in \"having\" needs to be provided in \"by\"",
               ]
         }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+      : "take" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -12225,9 +12225,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
+      : "skip" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -12235,7 +12235,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
       : ByValid extends True
       ? {}
       : {
@@ -12288,13 +12288,13 @@ export namespace Prisma {
    * Fields of the SnapshotFile model
    */
   interface SnapshotFileFieldRefs {
-    readonly id: FieldRef<"SnapshotFile", 'String'>
-    readonly snapshotId: FieldRef<"SnapshotFile", 'String'>
-    readonly key: FieldRef<"SnapshotFile", 'String'>
-    readonly bucket: FieldRef<"SnapshotFile", 'String'>
-    readonly sizeBytes: FieldRef<"SnapshotFile", 'Int'>
-    readonly mimeType: FieldRef<"SnapshotFile", 'String'>
-    readonly createdAt: FieldRef<"SnapshotFile", 'DateTime'>
+    readonly id: FieldRef<"SnapshotFile", "String">
+    readonly snapshotId: FieldRef<"SnapshotFile", "String">
+    readonly key: FieldRef<"SnapshotFile", "String">
+    readonly bucket: FieldRef<"SnapshotFile", "String">
+    readonly sizeBytes: FieldRef<"SnapshotFile", "Int">
+    readonly mimeType: FieldRef<"SnapshotFile", "String">
+    readonly createdAt: FieldRef<"SnapshotFile", "DateTime">
   }
     
 
@@ -12891,7 +12891,7 @@ export namespace Prisma {
   }
 
   export type GetUploadHandshakeAggregateType<T extends UploadHandshakeAggregateArgs> = {
-        [P in keyof T & keyof AggregateUploadHandshake]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateUploadHandshake]: P extends "_count" | "count"
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateUploadHandshake[P]>
@@ -12936,9 +12936,9 @@ export namespace Prisma {
 
   type GetUploadHandshakeGroupByPayload<T extends UploadHandshakeGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<UploadHandshakeGroupByOutputType, T['by']> &
+      PickEnumerable<UploadHandshakeGroupByOutputType, T["by"]> &
         {
-          [P in ((keyof T) & (keyof UploadHandshakeGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof UploadHandshakeGroupByOutputType))]: P extends "_count"
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], UploadHandshakeGroupByOutputType[P]>
@@ -13042,12 +13042,12 @@ export namespace Prisma {
   type UploadHandshakeGetPayload<S extends boolean | null | undefined | UploadHandshakeDefaultArgs> = $Result.GetResult<Prisma.$UploadHandshakePayload, S>
 
   type UploadHandshakeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<UploadHandshakeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    Omit<UploadHandshakeFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
       select?: UploadHandshakeCountAggregateInputType | true
     }
 
   export interface UploadHandshakeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UploadHandshake'], meta: { name: 'UploadHandshake' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["UploadHandshake"], meta: { name: "UploadHandshake" } }
     /**
      * Find zero or one UploadHandshake that matches the filter.
      * @param {UploadHandshakeFindUniqueArgs} args - Arguments to find a UploadHandshake
@@ -13306,10 +13306,10 @@ export namespace Prisma {
     count<T extends UploadHandshakeCountArgs>(
       args?: Subset<T, UploadHandshakeCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
+      T extends $Utils.Record<"select", any>
+        ? T["select"] extends true
           ? number
-          : GetScalarType<T['select'], UploadHandshakeCountAggregateOutputType>
+          : GetScalarType<T["select"], UploadHandshakeCountAggregateOutputType>
         : number
     >
 
@@ -13360,20 +13360,20 @@ export namespace Prisma {
     groupBy<
       T extends UploadHandshakeGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
+        Extends<"skip", Keys<T>>,
+        Extends<"take", Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UploadHandshakeGroupByArgs['orderBy'] }
-        : { orderBy?: UploadHandshakeGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+        ? { orderBy: UploadHandshakeGroupByArgs["orderBy"] }
+        : { orderBy?: UploadHandshakeGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
+      ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
+      HavingFields extends GetHavingFields<T["having"]>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
+      ByEmpty extends T["by"] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
+      ? "Error: \"by\" must not be empty."
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -13382,13 +13382,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                'Field ',
+                "Field ",
                 P,
-                ` in "having" needs to be provided in "by"`,
+                " in \"having\" needs to be provided in \"by\"",
               ]
         }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+      : "take" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -13396,9 +13396,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
+      : "skip" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -13406,7 +13406,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
       : ByValid extends True
       ? {}
       : {
@@ -13459,17 +13459,17 @@ export namespace Prisma {
    * Fields of the UploadHandshake model
    */
   interface UploadHandshakeFieldRefs {
-    readonly id: FieldRef<"UploadHandshake", 'String'>
-    readonly ownerId: FieldRef<"UploadHandshake", 'String'>
-    readonly context: FieldRef<"UploadHandshake", 'AssetReferenceType'>
-    readonly key: FieldRef<"UploadHandshake", 'String'>
-    readonly fileName: FieldRef<"UploadHandshake", 'String'>
-    readonly expectedMimeType: FieldRef<"UploadHandshake", 'String'>
-    readonly expectedSizeBytes: FieldRef<"UploadHandshake", 'Int'>
-    readonly status: FieldRef<"UploadHandshake", 'UploadHandshakeStatus'>
-    readonly expiresAt: FieldRef<"UploadHandshake", 'DateTime'>
-    readonly createdAt: FieldRef<"UploadHandshake", 'DateTime'>
-    readonly updatedAt: FieldRef<"UploadHandshake", 'DateTime'>
+    readonly id: FieldRef<"UploadHandshake", "String">
+    readonly ownerId: FieldRef<"UploadHandshake", "String">
+    readonly context: FieldRef<"UploadHandshake", "AssetReferenceType">
+    readonly key: FieldRef<"UploadHandshake", "String">
+    readonly fileName: FieldRef<"UploadHandshake", "String">
+    readonly expectedMimeType: FieldRef<"UploadHandshake", "String">
+    readonly expectedSizeBytes: FieldRef<"UploadHandshake", "Int">
+    readonly status: FieldRef<"UploadHandshake", "UploadHandshakeStatus">
+    readonly expiresAt: FieldRef<"UploadHandshake", "DateTime">
+    readonly createdAt: FieldRef<"UploadHandshake", "DateTime">
+    readonly updatedAt: FieldRef<"UploadHandshake", "DateTime">
   }
     
 
@@ -14024,7 +14024,7 @@ export namespace Prisma {
   }
 
   export type GetUserAggregateType<T extends UserAggregateArgs> = {
-        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateUser]: P extends "_count" | "count"
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateUser[P]>
@@ -14063,9 +14063,9 @@ export namespace Prisma {
 
   type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<UserGroupByOutputType, T['by']> &
+      PickEnumerable<UserGroupByOutputType, T["by"]> &
         {
-          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends "_count"
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], UserGroupByOutputType[P]>
@@ -14170,12 +14170,12 @@ export namespace Prisma {
   type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
 
   type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    Omit<UserFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
       select?: UserCountAggregateInputType | true
     }
 
   export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["User"], meta: { name: "User" } }
     /**
      * Find zero or one User that matches the filter.
      * @param {UserFindUniqueArgs} args - Arguments to find a User
@@ -14434,10 +14434,10 @@ export namespace Prisma {
     count<T extends UserCountArgs>(
       args?: Subset<T, UserCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
+      T extends $Utils.Record<"select", any>
+        ? T["select"] extends true
           ? number
-          : GetScalarType<T['select'], UserCountAggregateOutputType>
+          : GetScalarType<T["select"], UserCountAggregateOutputType>
         : number
     >
 
@@ -14488,20 +14488,20 @@ export namespace Prisma {
     groupBy<
       T extends UserGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
+        Extends<"skip", Keys<T>>,
+        Extends<"take", Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UserGroupByArgs['orderBy'] }
-        : { orderBy?: UserGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+        ? { orderBy: UserGroupByArgs["orderBy"] }
+        : { orderBy?: UserGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
+      ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
+      HavingFields extends GetHavingFields<T["having"]>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
+      ByEmpty extends T["by"] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
+      ? "Error: \"by\" must not be empty."
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -14510,13 +14510,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                'Field ',
+                "Field ",
                 P,
-                ` in "having" needs to be provided in "by"`,
+                " in \"having\" needs to be provided in \"by\"",
               ]
         }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+      : "take" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -14524,9 +14524,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
+      : "skip" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -14534,7 +14534,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
       : ByValid extends True
       ? {}
       : {
@@ -14592,15 +14592,15 @@ export namespace Prisma {
    * Fields of the User model
    */
   interface UserFieldRefs {
-    readonly id: FieldRef<"User", 'String'>
-    readonly email: FieldRef<"User", 'String'>
-    readonly emailVerified: FieldRef<"User", 'DateTime'>
-    readonly name: FieldRef<"User", 'String'>
-    readonly stripeCustomerId: FieldRef<"User", 'String'>
-    readonly subscriptionStatus: FieldRef<"User", 'SubscriptionStatus'>
-    readonly plan: FieldRef<"User", 'PlanType'>
-    readonly createdAt: FieldRef<"User", 'DateTime'>
-    readonly updatedAt: FieldRef<"User", 'DateTime'>
+    readonly id: FieldRef<"User", "String">
+    readonly email: FieldRef<"User", "String">
+    readonly emailVerified: FieldRef<"User", "DateTime">
+    readonly name: FieldRef<"User", "String">
+    readonly stripeCustomerId: FieldRef<"User", "String">
+    readonly subscriptionStatus: FieldRef<"User", "SubscriptionStatus">
+    readonly plan: FieldRef<"User", "PlanType">
+    readonly createdAt: FieldRef<"User", "DateTime">
+    readonly updatedAt: FieldRef<"User", "DateTime">
   }
     
 
@@ -15267,7 +15267,7 @@ export namespace Prisma {
   }
 
   export type GetAccountAggregateType<T extends AccountAggregateArgs> = {
-        [P in keyof T & keyof AggregateAccount]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateAccount]: P extends "_count" | "count"
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateAccount[P]>
@@ -15302,9 +15302,9 @@ export namespace Prisma {
 
   type GetAccountGroupByPayload<T extends AccountGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<AccountGroupByOutputType, T['by']> &
+      PickEnumerable<AccountGroupByOutputType, T["by"]> &
         {
-          [P in ((keyof T) & (keyof AccountGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof AccountGroupByOutputType))]: P extends "_count"
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], AccountGroupByOutputType[P]>
@@ -15378,12 +15378,12 @@ export namespace Prisma {
   type AccountGetPayload<S extends boolean | null | undefined | AccountDefaultArgs> = $Result.GetResult<Prisma.$AccountPayload, S>
 
   type AccountCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<AccountFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    Omit<AccountFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
       select?: AccountCountAggregateInputType | true
     }
 
   export interface AccountDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Account'], meta: { name: 'Account' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Account"], meta: { name: "Account" } }
     /**
      * Find zero or one Account that matches the filter.
      * @param {AccountFindUniqueArgs} args - Arguments to find a Account
@@ -15642,10 +15642,10 @@ export namespace Prisma {
     count<T extends AccountCountArgs>(
       args?: Subset<T, AccountCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
+      T extends $Utils.Record<"select", any>
+        ? T["select"] extends true
           ? number
-          : GetScalarType<T['select'], AccountCountAggregateOutputType>
+          : GetScalarType<T["select"], AccountCountAggregateOutputType>
         : number
     >
 
@@ -15696,20 +15696,20 @@ export namespace Prisma {
     groupBy<
       T extends AccountGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
+        Extends<"skip", Keys<T>>,
+        Extends<"take", Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AccountGroupByArgs['orderBy'] }
-        : { orderBy?: AccountGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+        ? { orderBy: AccountGroupByArgs["orderBy"] }
+        : { orderBy?: AccountGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
+      ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
+      HavingFields extends GetHavingFields<T["having"]>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
+      ByEmpty extends T["by"] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
+      ? "Error: \"by\" must not be empty."
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -15718,13 +15718,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                'Field ',
+                "Field ",
                 P,
-                ` in "having" needs to be provided in "by"`,
+                " in \"having\" needs to be provided in \"by\"",
               ]
         }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+      : "take" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -15732,9 +15732,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
+      : "skip" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -15742,7 +15742,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
       : ByValid extends True
       ? {}
       : {
@@ -15795,11 +15795,11 @@ export namespace Prisma {
    * Fields of the Account model
    */
   interface AccountFieldRefs {
-    readonly id: FieldRef<"Account", 'String'>
-    readonly userId: FieldRef<"Account", 'String'>
-    readonly type: FieldRef<"Account", 'String'>
-    readonly provider: FieldRef<"Account", 'String'>
-    readonly providerAccountId: FieldRef<"Account", 'String'>
+    readonly id: FieldRef<"Account", "String">
+    readonly userId: FieldRef<"Account", "String">
+    readonly type: FieldRef<"Account", "String">
+    readonly provider: FieldRef<"Account", "String">
+    readonly providerAccountId: FieldRef<"Account", "String">
   }
     
 
@@ -16318,7 +16318,7 @@ export namespace Prisma {
   }
 
   export type GetVerificationTokenAggregateType<T extends VerificationTokenAggregateArgs> = {
-        [P in keyof T & keyof AggregateVerificationToken]: P extends '_count' | 'count'
+        [P in keyof T & keyof AggregateVerificationToken]: P extends "_count" | "count"
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateVerificationToken[P]>
@@ -16351,9 +16351,9 @@ export namespace Prisma {
 
   type GetVerificationTokenGroupByPayload<T extends VerificationTokenGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<VerificationTokenGroupByOutputType, T['by']> &
+      PickEnumerable<VerificationTokenGroupByOutputType, T["by"]> &
         {
-          [P in ((keyof T) & (keyof VerificationTokenGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof VerificationTokenGroupByOutputType))]: P extends "_count"
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], VerificationTokenGroupByOutputType[P]>
@@ -16403,12 +16403,12 @@ export namespace Prisma {
   type VerificationTokenGetPayload<S extends boolean | null | undefined | VerificationTokenDefaultArgs> = $Result.GetResult<Prisma.$VerificationTokenPayload, S>
 
   type VerificationTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<VerificationTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    Omit<VerificationTokenFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
       select?: VerificationTokenCountAggregateInputType | true
     }
 
   export interface VerificationTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['VerificationToken'], meta: { name: 'VerificationToken' } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["VerificationToken"], meta: { name: "VerificationToken" } }
     /**
      * Find zero or one VerificationToken that matches the filter.
      * @param {VerificationTokenFindUniqueArgs} args - Arguments to find a VerificationToken
@@ -16667,10 +16667,10 @@ export namespace Prisma {
     count<T extends VerificationTokenCountArgs>(
       args?: Subset<T, VerificationTokenCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
+      T extends $Utils.Record<"select", any>
+        ? T["select"] extends true
           ? number
-          : GetScalarType<T['select'], VerificationTokenCountAggregateOutputType>
+          : GetScalarType<T["select"], VerificationTokenCountAggregateOutputType>
         : number
     >
 
@@ -16721,20 +16721,20 @@ export namespace Prisma {
     groupBy<
       T extends VerificationTokenGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
+        Extends<"skip", Keys<T>>,
+        Extends<"take", Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: VerificationTokenGroupByArgs['orderBy'] }
-        : { orderBy?: VerificationTokenGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
+        ? { orderBy: VerificationTokenGroupByArgs["orderBy"] }
+        : { orderBy?: VerificationTokenGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
+      ByFields extends MaybeTupleToUnion<T["by"]>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
+      HavingFields extends GetHavingFields<T["having"]>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
+      ByEmpty extends T["by"] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
+      ? "Error: \"by\" must not be empty."
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -16743,13 +16743,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                'Field ',
+                "Field ",
                 P,
-                ` in "having" needs to be provided in "by"`,
+                " in \"having\" needs to be provided in \"by\"",
               ]
         }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+      : "take" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -16757,9 +16757,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
+        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
+      : "skip" extends Keys<T>
+      ? "orderBy" extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -16767,7 +16767,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
       : ByValid extends True
       ? {}
       : {
@@ -16819,9 +16819,9 @@ export namespace Prisma {
    * Fields of the VerificationToken model
    */
   interface VerificationTokenFieldRefs {
-    readonly identifier: FieldRef<"VerificationToken", 'String'>
-    readonly token: FieldRef<"VerificationToken", 'String'>
-    readonly expires: FieldRef<"VerificationToken", 'DateTime'>
+    readonly identifier: FieldRef<"VerificationToken", "String">
+    readonly token: FieldRef<"VerificationToken", "String">
+    readonly expires: FieldRef<"VerificationToken", "DateTime">
   }
     
 
@@ -17198,202 +17198,202 @@ export namespace Prisma {
    */
 
   export const TransactionIsolationLevel: {
-    ReadUncommitted: 'ReadUncommitted',
-    ReadCommitted: 'ReadCommitted',
-    RepeatableRead: 'RepeatableRead',
-    Serializable: 'Serializable'
-  };
+    ReadUncommitted: "ReadUncommitted",
+    ReadCommitted: "ReadCommitted",
+    RepeatableRead: "RepeatableRead",
+    Serializable: "Serializable"
+  }
 
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
   export const AssetScalarFieldEnum: {
-    id: 'id',
-    key: 'key',
-    bucket: 'bucket',
-    fileName: 'fileName',
-    mimeType: 'mimeType',
-    sizeBytes: 'sizeBytes',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    ownerId: 'ownerId'
-  };
+    id: "id",
+    key: "key",
+    bucket: "bucket",
+    fileName: "fileName",
+    mimeType: "mimeType",
+    sizeBytes: "sizeBytes",
+    createdAt: "createdAt",
+    updatedAt: "updatedAt",
+    ownerId: "ownerId"
+  }
 
   export type AssetScalarFieldEnum = (typeof AssetScalarFieldEnum)[keyof typeof AssetScalarFieldEnum]
 
 
   export const ChapterAssetReferenceScalarFieldEnum: {
-    id: 'id',
-    assetId: 'assetId',
-    chapterId: 'chapterId',
-    type: 'type',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
+    id: "id",
+    assetId: "assetId",
+    chapterId: "chapterId",
+    type: "type",
+    createdAt: "createdAt",
+    updatedAt: "updatedAt"
+  }
 
   export type ChapterAssetReferenceScalarFieldEnum = (typeof ChapterAssetReferenceScalarFieldEnum)[keyof typeof ChapterAssetReferenceScalarFieldEnum]
 
 
   export const ChapterScalarFieldEnum: {
-    id: 'id',
-    content: 'content',
-    title: 'title',
-    position: 'position',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    ebookId: 'ebookId'
-  };
+    id: "id",
+    content: "content",
+    title: "title",
+    position: "position",
+    createdAt: "createdAt",
+    updatedAt: "updatedAt",
+    ebookId: "ebookId"
+  }
 
   export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
 
 
   export const EbookCollaboratorScalarFieldEnum: {
-    id: 'id',
-    ebookId: 'ebookId',
-    userId: 'userId',
-    role: 'role',
-    allChaptersAccess: 'allChaptersAccess',
-    customRoleId: 'customRoleId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
+    id: "id",
+    ebookId: "ebookId",
+    userId: "userId",
+    role: "role",
+    allChaptersAccess: "allChaptersAccess",
+    customRoleId: "customRoleId",
+    createdAt: "createdAt",
+    updatedAt: "updatedAt"
+  }
 
   export type EbookCollaboratorScalarFieldEnum = (typeof EbookCollaboratorScalarFieldEnum)[keyof typeof EbookCollaboratorScalarFieldEnum]
 
 
   export const EbookCollaboratorChapterAccessScalarFieldEnum: {
-    id: 'id',
-    collaboratorId: 'collaboratorId',
-    chapterId: 'chapterId',
-    createdAt: 'createdAt'
-  };
+    id: "id",
+    collaboratorId: "collaboratorId",
+    chapterId: "chapterId",
+    createdAt: "createdAt"
+  }
 
   export type EbookCollaboratorChapterAccessScalarFieldEnum = (typeof EbookCollaboratorChapterAccessScalarFieldEnum)[keyof typeof EbookCollaboratorChapterAccessScalarFieldEnum]
 
 
   export const EbookCustomRoleScalarFieldEnum: {
-    id: 'id',
-    ebookId: 'ebookId',
-    name: 'name',
-    permissions: 'permissions',
-    createdByUserId: 'createdByUserId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
+    id: "id",
+    ebookId: "ebookId",
+    name: "name",
+    permissions: "permissions",
+    createdByUserId: "createdByUserId",
+    createdAt: "createdAt",
+    updatedAt: "updatedAt"
+  }
 
   export type EbookCustomRoleScalarFieldEnum = (typeof EbookCustomRoleScalarFieldEnum)[keyof typeof EbookCustomRoleScalarFieldEnum]
 
 
   export const EbookScalarFieldEnum: {
-    id: 'id',
-    title: 'title',
-    subtitle: 'subtitle',
-    shortDescription: 'shortDescription',
-    ownerId: 'ownerId',
-    currentSnapshotId: 'currentSnapshotId',
-    coverAssetId: 'coverAssetId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
+    id: "id",
+    title: "title",
+    subtitle: "subtitle",
+    shortDescription: "shortDescription",
+    ownerId: "ownerId",
+    currentSnapshotId: "currentSnapshotId",
+    coverAssetId: "coverAssetId",
+    createdAt: "createdAt",
+    updatedAt: "updatedAt"
+  }
 
   export type EbookScalarFieldEnum = (typeof EbookScalarFieldEnum)[keyof typeof EbookScalarFieldEnum]
 
 
   export const SnapshotScalarFieldEnum: {
-    id: 'id',
-    ebookId: 'ebookId',
-    version: 'version',
-    createdAt: 'createdAt',
-    status: 'status'
-  };
+    id: "id",
+    ebookId: "ebookId",
+    version: "version",
+    createdAt: "createdAt",
+    status: "status"
+  }
 
   export type SnapshotScalarFieldEnum = (typeof SnapshotScalarFieldEnum)[keyof typeof SnapshotScalarFieldEnum]
 
 
   export const SnapshotFileScalarFieldEnum: {
-    id: 'id',
-    snapshotId: 'snapshotId',
-    key: 'key',
-    bucket: 'bucket',
-    sizeBytes: 'sizeBytes',
-    mimeType: 'mimeType',
-    createdAt: 'createdAt'
-  };
+    id: "id",
+    snapshotId: "snapshotId",
+    key: "key",
+    bucket: "bucket",
+    sizeBytes: "sizeBytes",
+    mimeType: "mimeType",
+    createdAt: "createdAt"
+  }
 
   export type SnapshotFileScalarFieldEnum = (typeof SnapshotFileScalarFieldEnum)[keyof typeof SnapshotFileScalarFieldEnum]
 
 
   export const UploadHandshakeScalarFieldEnum: {
-    id: 'id',
-    ownerId: 'ownerId',
-    context: 'context',
-    key: 'key',
-    fileName: 'fileName',
-    expectedMimeType: 'expectedMimeType',
-    expectedSizeBytes: 'expectedSizeBytes',
-    status: 'status',
-    expiresAt: 'expiresAt',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
+    id: "id",
+    ownerId: "ownerId",
+    context: "context",
+    key: "key",
+    fileName: "fileName",
+    expectedMimeType: "expectedMimeType",
+    expectedSizeBytes: "expectedSizeBytes",
+    status: "status",
+    expiresAt: "expiresAt",
+    createdAt: "createdAt",
+    updatedAt: "updatedAt"
+  }
 
   export type UploadHandshakeScalarFieldEnum = (typeof UploadHandshakeScalarFieldEnum)[keyof typeof UploadHandshakeScalarFieldEnum]
 
 
   export const UserScalarFieldEnum: {
-    id: 'id',
-    email: 'email',
-    emailVerified: 'emailVerified',
-    name: 'name',
-    stripeCustomerId: 'stripeCustomerId',
-    subscriptionStatus: 'subscriptionStatus',
-    plan: 'plan',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
+    id: "id",
+    email: "email",
+    emailVerified: "emailVerified",
+    name: "name",
+    stripeCustomerId: "stripeCustomerId",
+    subscriptionStatus: "subscriptionStatus",
+    plan: "plan",
+    createdAt: "createdAt",
+    updatedAt: "updatedAt"
+  }
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
   export const AccountScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    type: 'type',
-    provider: 'provider',
-    providerAccountId: 'providerAccountId'
-  };
+    id: "id",
+    userId: "userId",
+    type: "type",
+    provider: "provider",
+    providerAccountId: "providerAccountId"
+  }
 
   export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
 
 
   export const VerificationTokenScalarFieldEnum: {
-    identifier: 'identifier',
-    token: 'token',
-    expires: 'expires'
-  };
+    identifier: "identifier",
+    token: "token",
+    expires: "expires"
+  }
 
   export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
 
 
   export const SortOrder: {
-    asc: 'asc',
-    desc: 'desc'
-  };
+    asc: "asc",
+    desc: "desc"
+  }
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
   export const JsonNullValueInput: {
     JsonNull: typeof JsonNull
-  };
+  }
 
   export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
-    default: 'default',
-    insensitive: 'insensitive'
-  };
+    default: "default",
+    insensitive: "insensitive"
+  }
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
@@ -17402,15 +17402,15 @@ export namespace Prisma {
     DbNull: typeof DbNull,
     JsonNull: typeof JsonNull,
     AnyNull: typeof AnyNull
-  };
+  }
 
   export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
+    first: "first",
+    last: "last"
+  }
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
@@ -17423,175 +17423,175 @@ export namespace Prisma {
   /**
    * Reference to a field of type 'String'
    */
-  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "String">
     
 
 
   /**
    * Reference to a field of type 'String[]'
    */
-  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "String[]">
     
 
 
   /**
    * Reference to a field of type 'Int'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Int">
     
 
 
   /**
    * Reference to a field of type 'Int[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Int[]">
     
 
 
   /**
    * Reference to a field of type 'DateTime'
    */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "DateTime">
     
 
 
   /**
    * Reference to a field of type 'DateTime[]'
    */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "DateTime[]">
     
 
 
   /**
    * Reference to a field of type 'AssetReferenceType'
    */
-  export type EnumAssetReferenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AssetReferenceType'>
+  export type EnumAssetReferenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "AssetReferenceType">
     
 
 
   /**
    * Reference to a field of type 'AssetReferenceType[]'
    */
-  export type ListEnumAssetReferenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AssetReferenceType[]'>
+  export type ListEnumAssetReferenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "AssetReferenceType[]">
     
 
 
   /**
    * Reference to a field of type 'Json'
    */
-  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Json">
     
 
 
   /**
    * Reference to a field of type 'QueryMode'
    */
-  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "QueryMode">
     
 
 
   /**
    * Reference to a field of type 'CollaborationRole'
    */
-  export type EnumCollaborationRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CollaborationRole'>
+  export type EnumCollaborationRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "CollaborationRole">
     
 
 
   /**
    * Reference to a field of type 'CollaborationRole[]'
    */
-  export type ListEnumCollaborationRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CollaborationRole[]'>
+  export type ListEnumCollaborationRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "CollaborationRole[]">
     
 
 
   /**
    * Reference to a field of type 'Boolean'
    */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Boolean">
     
 
 
   /**
    * Reference to a field of type 'CollaborationPermission[]'
    */
-  export type ListEnumCollaborationPermissionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CollaborationPermission[]'>
+  export type ListEnumCollaborationPermissionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "CollaborationPermission[]">
     
 
 
   /**
    * Reference to a field of type 'CollaborationPermission'
    */
-  export type EnumCollaborationPermissionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CollaborationPermission'>
+  export type EnumCollaborationPermissionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "CollaborationPermission">
     
 
 
   /**
    * Reference to a field of type 'SnapshotStatus'
    */
-  export type EnumSnapshotStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SnapshotStatus'>
+  export type EnumSnapshotStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "SnapshotStatus">
     
 
 
   /**
    * Reference to a field of type 'SnapshotStatus[]'
    */
-  export type ListEnumSnapshotStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SnapshotStatus[]'>
+  export type ListEnumSnapshotStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "SnapshotStatus[]">
     
 
 
   /**
    * Reference to a field of type 'UploadHandshakeStatus'
    */
-  export type EnumUploadHandshakeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UploadHandshakeStatus'>
+  export type EnumUploadHandshakeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "UploadHandshakeStatus">
     
 
 
   /**
    * Reference to a field of type 'UploadHandshakeStatus[]'
    */
-  export type ListEnumUploadHandshakeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UploadHandshakeStatus[]'>
+  export type ListEnumUploadHandshakeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "UploadHandshakeStatus[]">
     
 
 
   /**
    * Reference to a field of type 'SubscriptionStatus'
    */
-  export type EnumSubscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionStatus'>
+  export type EnumSubscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "SubscriptionStatus">
     
 
 
   /**
    * Reference to a field of type 'SubscriptionStatus[]'
    */
-  export type ListEnumSubscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionStatus[]'>
+  export type ListEnumSubscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "SubscriptionStatus[]">
     
 
 
   /**
    * Reference to a field of type 'PlanType'
    */
-  export type EnumPlanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlanType'>
+  export type EnumPlanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "PlanType">
     
 
 
   /**
    * Reference to a field of type 'PlanType[]'
    */
-  export type ListEnumPlanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlanType[]'>
+  export type ListEnumPlanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "PlanType[]">
     
 
 
   /**
    * Reference to a field of type 'Float'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Float">
     
 
 
   /**
    * Reference to a field of type 'Float[]'
    */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Float[]">
     
   /**
    * Deep Input Types
@@ -19691,10 +19691,10 @@ export namespace Prisma {
   }
   export type JsonFilter<$PrismaModel = never> =
     | PatchUndefined<
-        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, "path">>,
         Required<JsonFilterBase<$PrismaModel>>
       >
-    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, "path">>
 
   export type JsonFilterBase<$PrismaModel = never> = {
     equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
@@ -19770,10 +19770,10 @@ export namespace Prisma {
   }
   export type JsonWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
-        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, "path">>,
         Required<JsonWithAggregatesFilterBase<$PrismaModel>>
       >
-    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, "path">>
 
   export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
     equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
@@ -21587,10 +21587,10 @@ export namespace Prisma {
   }
   export type NestedJsonFilter<$PrismaModel = never> =
     | PatchUndefined<
-        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, "path">>,
         Required<NestedJsonFilterBase<$PrismaModel>>
       >
-    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, "path">>
 
   export type NestedJsonFilterBase<$PrismaModel = never> = {
     equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter

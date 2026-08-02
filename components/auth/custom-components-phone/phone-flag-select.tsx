@@ -2,6 +2,7 @@
 
 import flags from "react-phone-number-input/flags"
 import type { FlagProps } from "react-phone-number-input"
+import Image from "next/image"
 
 import { cn } from "@/lib/utils"
 
@@ -40,7 +41,7 @@ export function PhoneFlag({
       .replace("{xx}", country.toLowerCase())
 
     return (
-      <img
+      <Image
         src={src}
         alt={countryName}
         className={cn(
@@ -50,6 +51,8 @@ export function PhoneFlag({
           "rounded-sm",
           className,
         )}
+        width={24}
+        height={16}
       />
     )
   }
