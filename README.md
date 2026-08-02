@@ -54,10 +54,36 @@ Run the development server:
 npm run dev
 ```
 
+Run the worker server:
+
+```bash
+cd worker && npm run dev
+```
+
+Run docker services:
+
+```bash
+docker compose up -d
+```
+
 Run tests:
+
+> Unit tests
 
 ```bash
 npm test
+```
+
+> Integration tests
+
+```bash
+npm run test:integration
+```
+
+> Worker test
+
+```bash
+cd worker && npm run test
 ```
 
 ## Status
