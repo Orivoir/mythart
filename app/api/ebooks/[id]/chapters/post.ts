@@ -9,7 +9,7 @@ import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
 import { canCreateChapterForEbook } from "@/lib/authorization"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { ApiException, parseApiJsonObject, withApiHandler } from "@/lib/errors"
-import { mapModelTimestamps } from "@/lib/map-date-fields-to-timestamps"
+import { getRequestLocale } from "@/lib/request-locale"
 import { prisma } from "@/shared/lib/prisma"
 import { ChapterSchema } from "@/lib/schemas/chapter.schema"
 
@@ -42,6 +42,10 @@ export const POST = withApiHandler(async (
     const parsed = ChapterSchema.parse({
         title: typeof requestBody.title === "string" ? requestBody.title.trim() : requestBody.title,
     })
+    const locale = getRequestLocale({
+        headers: request.headers,
+        requestLocale: requestBody.locale,
+    })
 
     const newChapter = await prisma.$transaction(async (tx) => {
         const count = await tx.chapter.count({
@@ -53,12 +57,47 @@ export const POST = withApiHandler(async (
         return tx.chapter.create({
             data: {
                 title: parsed.title,
-                content: requestBody.content as CreateChapterRequestAPI["content"] || {},
                 ebookId: id,
                 position: count,
+                locales: {
+                    create: {
+                        locale,
+                        title: parsed.title,
+                        content: requestBody.content as CreateChapterRequestAPI["content"] || {},
+                    },
+                },
+            },
+            select: {
+                id: true,
+                ebookId: true,
+                position: true,
+                createdAt: true,
+                updatedAt: true,
+                locales: {
+                    where: {
+                        locale,
+                    },
+                    select: {
+                        locale: true,
+                        title: true,
+                        content: true,
+                    },
+                    take: 1,
+                },
             },
         })
     })
 
-    return NextResponse.json<CreateChapterResponseAPI>(mapModelTimestamps(newChapter), { status: 201 })
+    const chapterLocale = newChapter.locales[0]
+
+    return NextResponse.json<CreateChapterResponseAPI>({
+        id: newChapter.id,
+        ebookId: newChapter.ebookId,
+        title: chapterLocale?.title || parsed.title,
+        locale: chapterLocale?.locale || locale,
+        content: chapterLocale?.content || {},
+        position: newChapter.position,
+        createdAt: newChapter.createdAt.getTime(),
+        updatedAt: newChapter.updatedAt.getTime(),
+    }, { status: 201 })
 })

@@ -8,6 +8,7 @@ import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { ApiException, withApiHandler } from "@/lib/errors"
 import { mapModelTimestamps } from "@/lib/map-date-fields-to-timestamps"
 import { parsePaginationParams, withPagination } from "@/lib/pagination"
+import { getRequestLocale } from "@/lib/request-locale"
 import { prisma } from "@/shared/lib/prisma"
 
 export const GET = withApiHandler(async (
@@ -43,6 +44,11 @@ export const GET = withApiHandler(async (
         }
     }
 
+    const locale = getRequestLocale({
+        headers: request.headers,
+        requestLocale: request.nextUrl.searchParams.get("locale"),
+    })
+
     const { page, pageSize } = parsePaginationParams(request.nextUrl.searchParams)
 
     const chapters = await prisma.chapter.findMany({
@@ -66,9 +72,17 @@ export const GET = withApiHandler(async (
             ebookId: true,
             title: true,
             position: true,
-            content: false,
             createdAt: true,
             updatedAt: true,
+            locales: {
+                where: {
+                    locale,
+                },
+                select: {
+                    title: true,
+                },
+                take: 1,
+            },
         },
     })
 
@@ -85,7 +99,16 @@ export const GET = withApiHandler(async (
         },
     })
 
-    const itemsParsed = chapters.map(mapModelTimestamps)
+    const itemsParsed = chapters.map((chapter) => {
+        const localizedTitle = chapter.locales[0]?.title || chapter.title
+        const { locales, ...baseChapter } = chapter
+
+        return {
+            ...mapModelTimestamps(baseChapter),
+            title: localizedTitle,
+            locale,
+        }
+    })
 
     return NextResponse.json<PaginatedChaptersAPI>(
         withPagination(itemsParsed, page, pageSize, totalItems),

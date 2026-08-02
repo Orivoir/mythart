@@ -12,6 +12,14 @@ export async function loadSnapshotData(ebookId: string) {
     include: {
       chapters: {
         orderBy: {position: "asc"},
+        include: {
+          locales: {
+            where: {
+              locale: "en",
+            },
+            take: 1,
+          },
+        },
       },
       currentSnapshot: true,
       coverAsset: true
@@ -48,9 +56,7 @@ export async function generate({ebookId}: SnapshotJobData): Promise<SnapshotJobR
 
   const nextVersion = (ebook.currentSnapshot?.version ?? 0) + 1
 
-  // Currently content of chapters is stored in the database, (chapter.content)
-  // But later if chapter.content is greather than X MB
-  // it will be stored in S3 and chapter.content will be null
+  // Chapter content now lives in ChapterLocale rows.
 
   const snapshotJson = {
     // the format version should be NEVER upgraded
@@ -147,10 +153,12 @@ export async function generate({ebookId}: SnapshotJobData): Promise<SnapshotJobR
 }
 
 function getChapterData(chapter: RequirementGenerateSnapshot["chapters"][number]) {
+  const localized = chapter.locales[0]
+
   return {
     id: chapter.id,
-    title: chapter.title,
-    content: chapter.content,
+    title: localized?.title || chapter.title,
+    content: localized?.content || {},
     position: chapter.position,
     createdAt: chapter.createdAt
   }

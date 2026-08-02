@@ -11,6 +11,7 @@ export interface PaginatedChaptersAPI {
 export interface ChapterResponseAPI {
     id: string;
     ebookId: string;
+    locale: string;
     title: string;
     position: number;
     createdAt:number;
@@ -23,12 +24,14 @@ export interface ChapterContentResponseAPI extends ChapterResponseAPI {
 
 export interface CreateChapterRequestAPI {
     title: string;
+    locale?: string;
     content?: JsonValue;
 }
 
 export interface CreateChapterResponseAPI {
     id: string;
     ebookId: string;
+    locale: string;
     title: string;
     content: JsonValue;
     position: number;

@@ -7,6 +7,7 @@ import { canManageChapterByPermission } from "@/lib/authorization"
 import { CollaborationPermission } from "@/app/generated/prisma/client"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { ApiException, parseApiJsonObject, withApiHandler } from "@/lib/errors"
+import { getRequestLocale } from "@/lib/request-locale"
 import { prisma } from "@/shared/lib/prisma"
 import { UpdateChapterSchema } from "@/lib/schemas/chapter.schema"
 
@@ -37,21 +38,78 @@ export const PUT = withApiHandler(async (
         title: typeof requestBody.title === "string" ? requestBody.title.trim() : requestBody.title,
         content: requestBody.content,
     })
+    const locale = getRequestLocale({
+        headers: request.headers,
+        requestLocale: requestBody.locale,
+    })
+    const hasContentInRequest = Object.prototype.hasOwnProperty.call(requestBody, "content")
 
-    // @TODO: `content` property will should be not overwrite, should use a merge or/and diff strategy for lightweight content update, to avoid overwrite all content and lose previous content.
-    const chapterUpdated = await prisma.chapter.update({
-        where: {
-            id,
-        },
-        data: {
-            title: parsed.title ?? chapter.title,
-            content: requestBody.content as UpdateChapterRequestAPI["content"] || chapter.content || {}, // @TODO: this is for dev only, should be removed before production.
-        },
+    const chapterUpdated = await prisma.$transaction(async (tx) => {
+        const updatedChapter = await tx.chapter.update({
+            where: {
+                id,
+            },
+            data: parsed.title
+                ? {
+                    title: parsed.title,
+                }
+                : {},
+            select: {
+                id: true,
+                ebookId: true,
+                position: true,
+                createdAt: true,
+                updatedAt: true,
+                title: true,
+            },
+        })
+
+        const updatedLocale = await tx.chapterLocale.upsert({
+            where: {
+                chapterId_locale: {
+                    chapterId: id,
+                    locale,
+                },
+            },
+            update: {
+                ...(parsed.title
+                    ? {
+                        title: parsed.title,
+                    }
+                    : {}),
+                ...(hasContentInRequest
+                    ? {
+                        content: requestBody.content as UpdateChapterRequestAPI["content"] || {},
+                    }
+                    : {}),
+            },
+            create: {
+                chapterId: id,
+                locale,
+                title: parsed.title ?? updatedChapter.title,
+                content: requestBody.content as UpdateChapterRequestAPI["content"] || {},
+            },
+            select: {
+                locale: true,
+                title: true,
+                content: true,
+            },
+        })
+
+        return {
+            chapter: updatedChapter,
+            chapterLocale: updatedLocale,
+        }
     })
 
     return NextResponse.json<UpdateChapterResponseAPI>({
-        ...chapterUpdated,
-        createdAt: chapterUpdated.createdAt.getTime(),
-        updatedAt: chapterUpdated.updatedAt.getTime(),
+        id: chapterUpdated.chapter.id,
+        ebookId: chapterUpdated.chapter.ebookId,
+        position: chapterUpdated.chapter.position,
+        title: chapterUpdated.chapterLocale.title,
+        locale: chapterUpdated.chapterLocale.locale,
+        content: chapterUpdated.chapterLocale.content,
+        createdAt: chapterUpdated.chapter.createdAt.getTime(),
+        updatedAt: chapterUpdated.chapter.updatedAt.getTime(),
     }, { status: 200 })
 })

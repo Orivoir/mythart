@@ -137,8 +137,14 @@ test("POST /api/ebooks/:id/chapters returns PAYMENT_REQUIRED when chapter plan l
             data: {
                 ebookId,
                 title: `Chapter ${index}`,
-                content: {},
                 position: index,
+                locales: {
+                    create: {
+                        locale: "en",
+                        title: `Chapter ${index}`,
+                        content: {},
+                    },
+                },
             },
         })
     }

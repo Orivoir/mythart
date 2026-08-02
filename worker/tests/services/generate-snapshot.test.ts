@@ -133,21 +133,36 @@ async function createEbookFixture(): Promise<EbookFixture> {
     ],
   }
 
+  const chapterOneTitle = faker.lorem.sentence({ min: 2, max: 5 })
+  const chapterTwoTitle = faker.lorem.sentence({ min: 2, max: 5 })
+
   const chapterOne = await prisma.chapter.create({
     data: {
       ebookId: ebook.id,
-      title: faker.lorem.sentence({ min: 2, max: 5 }),
+      title: chapterOneTitle,
       position: 0,
-      content: chapterOneContent,
+      locales: {
+        create: {
+          locale: "en",
+          title: chapterOneTitle,
+          content: chapterOneContent,
+        },
+      },
     },
   })
 
   const chapterTwo = await prisma.chapter.create({
     data: {
       ebookId: ebook.id,
-      title: faker.lorem.sentence({ min: 2, max: 5 }),
+      title: chapterTwoTitle,
       position: 1,
-      content: chapterTwoContent,
+      locales: {
+        create: {
+          locale: "en",
+          title: chapterTwoTitle,
+          content: chapterTwoContent,
+        },
+      },
     },
   })
 
@@ -163,14 +178,14 @@ async function createEbookFixture(): Promise<EbookFixture> {
       {
         id: chapterOne.id,
         title: chapterOne.title,
-        content: chapterOne.content,
+        content: chapterOneContent,
         position: chapterOne.position,
         createdAt: chapterOne.createdAt,
       },
       {
         id: chapterTwo.id,
         title: chapterTwo.title,
-        content: chapterTwo.content,
+        content: chapterTwoContent,
         position: chapterTwo.position,
         createdAt: chapterTwo.createdAt,
       },

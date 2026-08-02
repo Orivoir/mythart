@@ -44,7 +44,6 @@ model ChapterAssetReference {
 
 model Chapter {
   id        String   @id @default(cuid())
-  content   Json
   title     String
   position  Int
   createdAt DateTime @default(now())
@@ -56,8 +55,29 @@ model Chapter {
   assetReferences    ChapterAssetReference[]
   collaboratorAccess EbookCollaboratorChapterAccess[]
 
+  locales ChapterLocale[]
+
   @@unique([ebookId, position])
   @@index([ebookId])
+}
+
+model ChapterLocale {
+  id String @id @default(cuid())
+
+  locale String // fr, en, de, es...
+
+  title   String
+  content Json
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  chapterId String
+  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  @@unique([chapterId, locale])
+  @@index([locale])
+  @@index([chapterId])
 }
 
 model EbookCollaborator {

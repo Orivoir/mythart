@@ -3,7 +3,7 @@
  * Client
 **/
 
-import * as runtime from "./runtime/client.js"
+import * as runtime from './runtime/client.js';
 import $Types = runtime.Types // general types
 import $Public = runtime.Types.Public
 import $Utils = runtime.Types.Utils
@@ -28,6 +28,11 @@ export type ChapterAssetReference = $Result.DefaultSelection<Prisma.$ChapterAsse
  * 
  */
 export type Chapter = $Result.DefaultSelection<Prisma.$ChapterPayload>
+/**
+ * Model ChapterLocale
+ * 
+ */
+export type ChapterLocale = $Result.DefaultSelection<Prisma.$ChapterLocalePayload>
 /**
  * Model EbookCollaborator
  * 
@@ -84,84 +89,84 @@ export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTok
  */
 export namespace $Enums {
   export const SubscriptionStatus: {
-  none: "none",
-  trialing: "trialing",
-  active: "active",
-  past_due: "past_due",
-  canceled: "canceled",
-  unpaid: "unpaid"
-}
+  none: 'none',
+  trialing: 'trialing',
+  active: 'active',
+  past_due: 'past_due',
+  canceled: 'canceled',
+  unpaid: 'unpaid'
+};
 
 export type SubscriptionStatus = (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus]
 
 
 export const PlanType: {
-  free: "free",
-  premium: "premium",
-  pro: "pro"
-}
+  free: 'free',
+  premium: 'premium',
+  pro: 'pro'
+};
 
 export type PlanType = (typeof PlanType)[keyof typeof PlanType]
 
 
 export const AssetReferenceType: {
-  COVER: "COVER",
-  CONTENT_IMAGE: "CONTENT_IMAGE",
-  SNAPSHOT: "SNAPSHOT",
-  EXPORT: "EXPORT"
-}
+  COVER: 'COVER',
+  CONTENT_IMAGE: 'CONTENT_IMAGE',
+  SNAPSHOT: 'SNAPSHOT',
+  EXPORT: 'EXPORT'
+};
 
 export type AssetReferenceType = (typeof AssetReferenceType)[keyof typeof AssetReferenceType]
 
 
 export const CollaborationRole: {
-  OWNER: "OWNER",
-  AUTHOR: "AUTHOR",
-  TRANSLATOR: "TRANSLATOR",
-  PROOFREADER: "PROOFREADER",
-  EDITOR: "EDITOR"
-}
+  OWNER: 'OWNER',
+  AUTHOR: 'AUTHOR',
+  TRANSLATOR: 'TRANSLATOR',
+  PROOFREADER: 'PROOFREADER',
+  EDITOR: 'EDITOR'
+};
 
 export type CollaborationRole = (typeof CollaborationRole)[keyof typeof CollaborationRole]
 
 
 export const CollaborationPermission: {
-  EBOOK_READ: "EBOOK_READ",
-  EBOOK_UPDATE_METADATA: "EBOOK_UPDATE_METADATA",
-  EBOOK_DELETE: "EBOOK_DELETE",
-  CHAPTER_READ: "CHAPTER_READ",
-  CHAPTER_CREATE: "CHAPTER_CREATE",
-  CHAPTER_UPDATE: "CHAPTER_UPDATE",
-  CHAPTER_DELETE: "CHAPTER_DELETE",
-  SNAPSHOT_READ: "SNAPSHOT_READ",
-  SNAPSHOT_CREATE: "SNAPSHOT_CREATE",
-  SNAPSHOT_RESTORE: "SNAPSHOT_RESTORE",
-  ASSET_UPLOAD: "ASSET_UPLOAD",
-  ASSET_DELETE: "ASSET_DELETE",
-  COVER_UPDATE: "COVER_UPDATE",
-  COLLABORATOR_INVITE: "COLLABORATOR_INVITE",
-  COLLABORATOR_REMOVE: "COLLABORATOR_REMOVE",
-  ROLE_ASSIGN: "ROLE_ASSIGN"
-}
+  EBOOK_READ: 'EBOOK_READ',
+  EBOOK_UPDATE_METADATA: 'EBOOK_UPDATE_METADATA',
+  EBOOK_DELETE: 'EBOOK_DELETE',
+  CHAPTER_READ: 'CHAPTER_READ',
+  CHAPTER_CREATE: 'CHAPTER_CREATE',
+  CHAPTER_UPDATE: 'CHAPTER_UPDATE',
+  CHAPTER_DELETE: 'CHAPTER_DELETE',
+  SNAPSHOT_READ: 'SNAPSHOT_READ',
+  SNAPSHOT_CREATE: 'SNAPSHOT_CREATE',
+  SNAPSHOT_RESTORE: 'SNAPSHOT_RESTORE',
+  ASSET_UPLOAD: 'ASSET_UPLOAD',
+  ASSET_DELETE: 'ASSET_DELETE',
+  COVER_UPDATE: 'COVER_UPDATE',
+  COLLABORATOR_INVITE: 'COLLABORATOR_INVITE',
+  COLLABORATOR_REMOVE: 'COLLABORATOR_REMOVE',
+  ROLE_ASSIGN: 'ROLE_ASSIGN'
+};
 
 export type CollaborationPermission = (typeof CollaborationPermission)[keyof typeof CollaborationPermission]
 
 
 export const SnapshotStatus: {
-  PENDING: "PENDING",
-  READY: "READY",
-  FAILED: "FAILED"
-}
+  PENDING: 'PENDING',
+  READY: 'READY',
+  FAILED: 'FAILED'
+};
 
 export type SnapshotStatus = (typeof SnapshotStatus)[keyof typeof SnapshotStatus]
 
 
 export const UploadHandshakeStatus: {
-  PENDING: "PENDING",
-  COMPLETED: "COMPLETED",
-  FAILED: "FAILED",
-  EXPIRED: "EXPIRED"
-}
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED',
+  EXPIRED: 'EXPIRED'
+};
 
 export type UploadHandshakeStatus = (typeof UploadHandshakeStatus)[keyof typeof UploadHandshakeStatus]
 
@@ -213,10 +218,10 @@ export const UploadHandshakeStatus: typeof $Enums.UploadHandshakeStatus
  */
 export class PrismaClient<
   ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
-  const U = "log" extends keyof ClientOptions ? ClientOptions["log"] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions["log"]> : never : never,
+  const U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
   ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
 > {
-  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["other"] }
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
 
     /**
    * ##  Prisma Client ʲˢ
@@ -236,7 +241,7 @@ export class PrismaClient<
    */
 
   constructor(optionsArg ?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>);
-  $on<V extends U>(eventType: V, callback: (event: V extends "query" ? Prisma.QueryEvent : Prisma.LogEvent) => void): PrismaClient;
+  $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): PrismaClient;
 
   /**
    * Connect with the database
@@ -345,6 +350,16 @@ export class PrismaClient<
     * ```
     */
   get chapter(): Prisma.ChapterDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.chapterLocale`: Exposes CRUD operations for the **ChapterLocale** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ChapterLocales
+    * const chapterLocales = await prisma.chapterLocale.findMany()
+    * ```
+    */
+  get chapterLocale(): Prisma.ChapterLocaleDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.ebookCollaborator`: Exposes CRUD operations for the **EbookCollaborator** model.
@@ -639,9 +654,9 @@ export namespace Prisma {
     [key in keyof T]: key extends keyof U ? T[key] : never
   } &
     (T extends SelectAndInclude
-      ? "Please either choose `select` or `include`."
+      ? 'Please either choose `select` or `include`.'
       : T extends SelectAndOmit
-        ? "Please either choose `select` or `omit`."
+        ? 'Please either choose `select` or `omit`.'
         : {})
 
   /**
@@ -675,7 +690,7 @@ export namespace Prisma {
   ? False
   : T extends Uint8Array
   ? False
-  : T extends bigint
+  : T extends BigInt
   ? False
   : T extends object
   ? True
@@ -820,7 +835,7 @@ export namespace Prisma {
 
   type Cast<A, B> = A extends B ? A : B;
 
-  export const type: unique symbol
+  export const type: unique symbol;
 
 
 
@@ -836,13 +851,13 @@ export namespace Prisma {
 
   type FieldPaths<
     T,
-    U = Omit<T, "_avg" | "_sum" | "_count" | "_min" | "_max">
+    U = Omit<T, '_avg' | '_sum' | '_count' | '_min' | '_max'>
   > = IsObject<T> extends True ? U : T
 
   type GetHavingFields<T> = {
     [K in keyof T]: Or<
-      Or<Extends<"OR", K>, Extends<"AND", K>>,
-      Extends<"NOT", K>
+      Or<Extends<'OR', K>, Extends<'AND', K>>,
+      Extends<'NOT', K>
     > extends True
       ? // infer is only needed to not hit TS limit
         // based on the brilliant idea of Pierre-Antoine Mills
@@ -879,27 +894,28 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Asset: "Asset",
-    ChapterAssetReference: "ChapterAssetReference",
-    Chapter: "Chapter",
-    EbookCollaborator: "EbookCollaborator",
-    EbookCollaboratorChapterAccess: "EbookCollaboratorChapterAccess",
-    EbookCustomRole: "EbookCustomRole",
-    Ebook: "Ebook",
-    Snapshot: "Snapshot",
-    SnapshotFile: "SnapshotFile",
-    UploadHandshake: "UploadHandshake",
-    User: "User",
-    Account: "Account",
-    VerificationToken: "VerificationToken"
-  }
+    Asset: 'Asset',
+    ChapterAssetReference: 'ChapterAssetReference',
+    Chapter: 'Chapter',
+    ChapterLocale: 'ChapterLocale',
+    EbookCollaborator: 'EbookCollaborator',
+    EbookCollaboratorChapterAccess: 'EbookCollaboratorChapterAccess',
+    EbookCustomRole: 'EbookCustomRole',
+    Ebook: 'Ebook',
+    Snapshot: 'Snapshot',
+    SnapshotFile: 'SnapshotFile',
+    UploadHandshake: 'UploadHandshake',
+    User: 'User',
+    Account: 'Account',
+    VerificationToken: 'VerificationToken'
+  };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
 
 
 
   interface TypeMapCb<ClientOptions = {}> extends $Utils.Fn<{extArgs: $Extensions.InternalArgs }, $Utils.Record<string, any>> {
-    returns: Prisma.TypeMap<this["params"]["extArgs"], ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}>
+    returns: Prisma.TypeMap<this['params']['extArgs'], ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}>
   }
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> = {
@@ -907,7 +923,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "asset" | "chapterAssetReference" | "chapter" | "ebookCollaborator" | "ebookCollaboratorChapterAccess" | "ebookCustomRole" | "ebook" | "snapshot" | "snapshotFile" | "uploadHandshake" | "user" | "account" | "verificationToken"
+      modelProps: "asset" | "chapterAssetReference" | "chapter" | "chapterLocale" | "ebookCollaborator" | "ebookCollaboratorChapterAccess" | "ebookCustomRole" | "ebook" | "snapshot" | "snapshotFile" | "uploadHandshake" | "user" | "account" | "verificationToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1130,6 +1146,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ChapterCountArgs<ExtArgs>
             result: $Utils.Optional<ChapterCountAggregateOutputType> | number
+          }
+        }
+      }
+      ChapterLocale: {
+        payload: Prisma.$ChapterLocalePayload<ExtArgs>
+        fields: Prisma.ChapterLocaleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ChapterLocaleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterLocalePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ChapterLocaleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterLocalePayload>
+          }
+          findFirst: {
+            args: Prisma.ChapterLocaleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterLocalePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ChapterLocaleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterLocalePayload>
+          }
+          findMany: {
+            args: Prisma.ChapterLocaleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterLocalePayload>[]
+          }
+          create: {
+            args: Prisma.ChapterLocaleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterLocalePayload>
+          }
+          createMany: {
+            args: Prisma.ChapterLocaleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ChapterLocaleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterLocalePayload>[]
+          }
+          delete: {
+            args: Prisma.ChapterLocaleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterLocalePayload>
+          }
+          update: {
+            args: Prisma.ChapterLocaleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterLocalePayload>
+          }
+          deleteMany: {
+            args: Prisma.ChapterLocaleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ChapterLocaleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ChapterLocaleUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterLocalePayload>[]
+          }
+          upsert: {
+            args: Prisma.ChapterLocaleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterLocalePayload>
+          }
+          aggregate: {
+            args: Prisma.ChapterLocaleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateChapterLocale>
+          }
+          groupBy: {
+            args: Prisma.ChapterLocaleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ChapterLocaleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ChapterLocaleCountArgs<ExtArgs>
+            result: $Utils.Optional<ChapterLocaleCountAggregateOutputType> | number
           }
         }
       }
@@ -1899,7 +1989,7 @@ export namespace Prisma {
   }
   export const defineExtension: $Extensions.ExtendsHook<"define", Prisma.TypeMapCb, $Extensions.DefaultArgs>
   export type DefaultPrismaClient = PrismaClient
-  export type ErrorFormat = "pretty" | "colorless" | "minimal"
+  export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
   export interface PrismaClientOptions {
     /**
      * @default "colorless"
@@ -1984,6 +2074,7 @@ export namespace Prisma {
     asset?: AssetOmit
     chapterAssetReference?: ChapterAssetReferenceOmit
     chapter?: ChapterOmit
+    chapterLocale?: ChapterLocaleOmit
     ebookCollaborator?: EbookCollaboratorOmit
     ebookCollaboratorChapterAccess?: EbookCollaboratorChapterAccessOmit
     ebookCustomRole?: EbookCustomRoleOmit
@@ -1997,16 +2088,16 @@ export namespace Prisma {
   }
 
   /* Types for Logging */
-  export type LogLevel = "info" | "query" | "warn" | "error"
+  export type LogLevel = 'info' | 'query' | 'warn' | 'error'
   export type LogDefinition = {
     level: LogLevel
-    emit: "stdout" | "event"
+    emit: 'stdout' | 'event'
   }
 
   export type CheckIsLogLevel<T> = T extends LogLevel ? T : never;
 
   export type GetLogType<T> = CheckIsLogLevel<
-    T extends LogDefinition ? T["level"] : T
+    T extends LogDefinition ? T['level'] : T
   >;
 
   export type GetEvents<T extends any[]> = T extends Array<LogLevel | LogDefinition>
@@ -2030,27 +2121,27 @@ export namespace Prisma {
 
 
   export type PrismaAction =
-    | "findUnique"
-    | "findUniqueOrThrow"
-    | "findMany"
-    | "findFirst"
-    | "findFirstOrThrow"
-    | "create"
-    | "createMany"
-    | "createManyAndReturn"
-    | "update"
-    | "updateMany"
-    | "updateManyAndReturn"
-    | "upsert"
-    | "delete"
-    | "deleteMany"
-    | "executeRaw"
-    | "queryRaw"
-    | "aggregate"
-    | "count"
-    | "runCommandRaw"
-    | "findRaw"
-    | "groupBy"
+    | 'findUnique'
+    | 'findUniqueOrThrow'
+    | 'findMany'
+    | 'findFirst'
+    | 'findFirstOrThrow'
+    | 'create'
+    | 'createMany'
+    | 'createManyAndReturn'
+    | 'update'
+    | 'updateMany'
+    | 'updateManyAndReturn'
+    | 'upsert'
+    | 'delete'
+    | 'deleteMany'
+    | 'executeRaw'
+    | 'queryRaw'
+    | 'aggregate'
+    | 'count'
+    | 'runCommandRaw'
+    | 'findRaw'
+    | 'groupBy'
 
   // tested in getLogLevel.test.ts
   export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
@@ -2116,11 +2207,13 @@ export namespace Prisma {
   export type ChapterCountOutputType = {
     assetReferences: number
     collaboratorAccess: number
+    locales: number
   }
 
   export type ChapterCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assetReferences?: boolean | ChapterCountOutputTypeCountAssetReferencesArgs
     collaboratorAccess?: boolean | ChapterCountOutputTypeCountCollaboratorAccessArgs
+    locales?: boolean | ChapterCountOutputTypeCountLocalesArgs
   }
 
   // Custom InputTypes
@@ -2146,6 +2239,13 @@ export namespace Prisma {
    */
   export type ChapterCountOutputTypeCountCollaboratorAccessArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EbookCollaboratorChapterAccessWhereInput
+  }
+
+  /**
+   * ChapterCountOutputType without action
+   */
+  export type ChapterCountOutputTypeCountLocalesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChapterLocaleWhereInput
   }
 
 
@@ -2514,7 +2614,7 @@ export namespace Prisma {
   }
 
   export type GetAssetAggregateType<T extends AssetAggregateArgs> = {
-        [P in keyof T & keyof AggregateAsset]: P extends "_count" | "count"
+        [P in keyof T & keyof AggregateAsset]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateAsset[P]>
@@ -2557,9 +2657,9 @@ export namespace Prisma {
 
   type GetAssetGroupByPayload<T extends AssetGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<AssetGroupByOutputType, T["by"]> &
+      PickEnumerable<AssetGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof AssetGroupByOutputType))]: P extends "_count"
+          [P in ((keyof T) & (keyof AssetGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], AssetGroupByOutputType[P]>
@@ -2661,12 +2761,12 @@ export namespace Prisma {
   type AssetGetPayload<S extends boolean | null | undefined | AssetDefaultArgs> = $Result.GetResult<Prisma.$AssetPayload, S>
 
   type AssetCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<AssetFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    Omit<AssetFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: AssetCountAggregateInputType | true
     }
 
   export interface AssetDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Asset"], meta: { name: "Asset" } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Asset'], meta: { name: 'Asset' } }
     /**
      * Find zero or one Asset that matches the filter.
      * @param {AssetFindUniqueArgs} args - Arguments to find a Asset
@@ -2925,10 +3025,10 @@ export namespace Prisma {
     count<T extends AssetCountArgs>(
       args?: Subset<T, AssetCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<"select", any>
-        ? T["select"] extends true
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
           ? number
-          : GetScalarType<T["select"], AssetCountAggregateOutputType>
+          : GetScalarType<T['select'], AssetCountAggregateOutputType>
         : number
     >
 
@@ -2979,20 +3079,20 @@ export namespace Prisma {
     groupBy<
       T extends AssetGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AssetGroupByArgs["orderBy"] }
-        : { orderBy?: AssetGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
-      ByFields extends MaybeTupleToUnion<T["by"]>,
+        ? { orderBy: AssetGroupByArgs['orderBy'] }
+        : { orderBy?: AssetGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
+      HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
+      ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? "Error: \"by\" must not be empty."
+      ? `Error: "by" must not be empty.`
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -3001,13 +3101,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                "Field ",
+                'Field ',
                 P,
-                " in \"having\" needs to be provided in \"by\"",
+                ` in "having" needs to be provided in "by"`,
               ]
         }[HavingFields]
-      : "take" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -3015,9 +3115,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
-      : "skip" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -3025,7 +3125,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
       : ByValid extends True
       ? {}
       : {
@@ -3080,15 +3180,15 @@ export namespace Prisma {
    * Fields of the Asset model
    */
   interface AssetFieldRefs {
-    readonly id: FieldRef<"Asset", "String">
-    readonly key: FieldRef<"Asset", "String">
-    readonly bucket: FieldRef<"Asset", "String">
-    readonly fileName: FieldRef<"Asset", "String">
-    readonly mimeType: FieldRef<"Asset", "String">
-    readonly sizeBytes: FieldRef<"Asset", "Int">
-    readonly createdAt: FieldRef<"Asset", "DateTime">
-    readonly updatedAt: FieldRef<"Asset", "DateTime">
-    readonly ownerId: FieldRef<"Asset", "String">
+    readonly id: FieldRef<"Asset", 'String'>
+    readonly key: FieldRef<"Asset", 'String'>
+    readonly bucket: FieldRef<"Asset", 'String'>
+    readonly fileName: FieldRef<"Asset", 'String'>
+    readonly mimeType: FieldRef<"Asset", 'String'>
+    readonly sizeBytes: FieldRef<"Asset", 'Int'>
+    readonly createdAt: FieldRef<"Asset", 'DateTime'>
+    readonly updatedAt: FieldRef<"Asset", 'DateTime'>
+    readonly ownerId: FieldRef<"Asset", 'String'>
   }
     
 
@@ -3673,7 +3773,7 @@ export namespace Prisma {
   }
 
   export type GetChapterAssetReferenceAggregateType<T extends ChapterAssetReferenceAggregateArgs> = {
-        [P in keyof T & keyof AggregateChapterAssetReference]: P extends "_count" | "count"
+        [P in keyof T & keyof AggregateChapterAssetReference]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateChapterAssetReference[P]>
@@ -3709,9 +3809,9 @@ export namespace Prisma {
 
   type GetChapterAssetReferenceGroupByPayload<T extends ChapterAssetReferenceGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ChapterAssetReferenceGroupByOutputType, T["by"]> &
+      PickEnumerable<ChapterAssetReferenceGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof ChapterAssetReferenceGroupByOutputType))]: P extends "_count"
+          [P in ((keyof T) & (keyof ChapterAssetReferenceGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], ChapterAssetReferenceGroupByOutputType[P]>
@@ -3797,12 +3897,12 @@ export namespace Prisma {
   type ChapterAssetReferenceGetPayload<S extends boolean | null | undefined | ChapterAssetReferenceDefaultArgs> = $Result.GetResult<Prisma.$ChapterAssetReferencePayload, S>
 
   type ChapterAssetReferenceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ChapterAssetReferenceFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    Omit<ChapterAssetReferenceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: ChapterAssetReferenceCountAggregateInputType | true
     }
 
   export interface ChapterAssetReferenceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["ChapterAssetReference"], meta: { name: "ChapterAssetReference" } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ChapterAssetReference'], meta: { name: 'ChapterAssetReference' } }
     /**
      * Find zero or one ChapterAssetReference that matches the filter.
      * @param {ChapterAssetReferenceFindUniqueArgs} args - Arguments to find a ChapterAssetReference
@@ -4061,10 +4161,10 @@ export namespace Prisma {
     count<T extends ChapterAssetReferenceCountArgs>(
       args?: Subset<T, ChapterAssetReferenceCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<"select", any>
-        ? T["select"] extends true
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
           ? number
-          : GetScalarType<T["select"], ChapterAssetReferenceCountAggregateOutputType>
+          : GetScalarType<T['select'], ChapterAssetReferenceCountAggregateOutputType>
         : number
     >
 
@@ -4115,20 +4215,20 @@ export namespace Prisma {
     groupBy<
       T extends ChapterAssetReferenceGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ChapterAssetReferenceGroupByArgs["orderBy"] }
-        : { orderBy?: ChapterAssetReferenceGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
-      ByFields extends MaybeTupleToUnion<T["by"]>,
+        ? { orderBy: ChapterAssetReferenceGroupByArgs['orderBy'] }
+        : { orderBy?: ChapterAssetReferenceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
+      HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
+      ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? "Error: \"by\" must not be empty."
+      ? `Error: "by" must not be empty.`
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -4137,13 +4237,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                "Field ",
+                'Field ',
                 P,
-                " in \"having\" needs to be provided in \"by\"",
+                ` in "having" needs to be provided in "by"`,
               ]
         }[HavingFields]
-      : "take" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -4151,9 +4251,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
-      : "skip" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -4161,7 +4261,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
       : ByValid extends True
       ? {}
       : {
@@ -4215,12 +4315,12 @@ export namespace Prisma {
    * Fields of the ChapterAssetReference model
    */
   interface ChapterAssetReferenceFieldRefs {
-    readonly id: FieldRef<"ChapterAssetReference", "String">
-    readonly assetId: FieldRef<"ChapterAssetReference", "String">
-    readonly chapterId: FieldRef<"ChapterAssetReference", "String">
-    readonly type: FieldRef<"ChapterAssetReference", "AssetReferenceType">
-    readonly createdAt: FieldRef<"ChapterAssetReference", "DateTime">
-    readonly updatedAt: FieldRef<"ChapterAssetReference", "DateTime">
+    readonly id: FieldRef<"ChapterAssetReference", 'String'>
+    readonly assetId: FieldRef<"ChapterAssetReference", 'String'>
+    readonly chapterId: FieldRef<"ChapterAssetReference", 'String'>
+    readonly type: FieldRef<"ChapterAssetReference", 'AssetReferenceType'>
+    readonly createdAt: FieldRef<"ChapterAssetReference", 'DateTime'>
+    readonly updatedAt: FieldRef<"ChapterAssetReference", 'DateTime'>
   }
     
 
@@ -4680,7 +4780,6 @@ export namespace Prisma {
 
   export type ChapterCountAggregateOutputType = {
     id: number
-    content: number
     title: number
     position: number
     createdAt: number
@@ -4718,7 +4817,6 @@ export namespace Prisma {
 
   export type ChapterCountAggregateInputType = {
     id?: true
-    content?: true
     title?: true
     position?: true
     createdAt?: true
@@ -4789,7 +4887,7 @@ export namespace Prisma {
   }
 
   export type GetChapterAggregateType<T extends ChapterAggregateArgs> = {
-        [P in keyof T & keyof AggregateChapter]: P extends "_count" | "count"
+        [P in keyof T & keyof AggregateChapter]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateChapter[P]>
@@ -4815,7 +4913,6 @@ export namespace Prisma {
 
   export type ChapterGroupByOutputType = {
     id: string
-    content: JsonValue
     title: string
     position: number
     createdAt: Date
@@ -4830,9 +4927,9 @@ export namespace Prisma {
 
   type GetChapterGroupByPayload<T extends ChapterGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ChapterGroupByOutputType, T["by"]> &
+      PickEnumerable<ChapterGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof ChapterGroupByOutputType))]: P extends "_count"
+          [P in ((keyof T) & (keyof ChapterGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], ChapterGroupByOutputType[P]>
@@ -4844,7 +4941,6 @@ export namespace Prisma {
 
   export type ChapterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    content?: boolean
     title?: boolean
     position?: boolean
     createdAt?: boolean
@@ -4853,12 +4949,12 @@ export namespace Prisma {
     ebook?: boolean | EbookDefaultArgs<ExtArgs>
     assetReferences?: boolean | Chapter$assetReferencesArgs<ExtArgs>
     collaboratorAccess?: boolean | Chapter$collaboratorAccessArgs<ExtArgs>
+    locales?: boolean | Chapter$localesArgs<ExtArgs>
     _count?: boolean | ChapterCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["chapter"]>
 
   export type ChapterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    content?: boolean
     title?: boolean
     position?: boolean
     createdAt?: boolean
@@ -4869,7 +4965,6 @@ export namespace Prisma {
 
   export type ChapterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    content?: boolean
     title?: boolean
     position?: boolean
     createdAt?: boolean
@@ -4880,7 +4975,6 @@ export namespace Prisma {
 
   export type ChapterSelectScalar = {
     id?: boolean
-    content?: boolean
     title?: boolean
     position?: boolean
     createdAt?: boolean
@@ -4888,11 +4982,12 @@ export namespace Prisma {
     ebookId?: boolean
   }
 
-  export type ChapterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "title" | "position" | "createdAt" | "updatedAt" | "ebookId", ExtArgs["result"]["chapter"]>
+  export type ChapterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "position" | "createdAt" | "updatedAt" | "ebookId", ExtArgs["result"]["chapter"]>
   export type ChapterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ebook?: boolean | EbookDefaultArgs<ExtArgs>
     assetReferences?: boolean | Chapter$assetReferencesArgs<ExtArgs>
     collaboratorAccess?: boolean | Chapter$collaboratorAccessArgs<ExtArgs>
+    locales?: boolean | Chapter$localesArgs<ExtArgs>
     _count?: boolean | ChapterCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ChapterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4908,10 +5003,10 @@ export namespace Prisma {
       ebook: Prisma.$EbookPayload<ExtArgs>
       assetReferences: Prisma.$ChapterAssetReferencePayload<ExtArgs>[]
       collaboratorAccess: Prisma.$EbookCollaboratorChapterAccessPayload<ExtArgs>[]
+      locales: Prisma.$ChapterLocalePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      content: Prisma.JsonValue
       title: string
       position: number
       createdAt: Date
@@ -4924,12 +5019,12 @@ export namespace Prisma {
   type ChapterGetPayload<S extends boolean | null | undefined | ChapterDefaultArgs> = $Result.GetResult<Prisma.$ChapterPayload, S>
 
   type ChapterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ChapterFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    Omit<ChapterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: ChapterCountAggregateInputType | true
     }
 
   export interface ChapterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Chapter"], meta: { name: "Chapter" } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Chapter'], meta: { name: 'Chapter' } }
     /**
      * Find zero or one Chapter that matches the filter.
      * @param {ChapterFindUniqueArgs} args - Arguments to find a Chapter
@@ -5188,10 +5283,10 @@ export namespace Prisma {
     count<T extends ChapterCountArgs>(
       args?: Subset<T, ChapterCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<"select", any>
-        ? T["select"] extends true
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
           ? number
-          : GetScalarType<T["select"], ChapterCountAggregateOutputType>
+          : GetScalarType<T['select'], ChapterCountAggregateOutputType>
         : number
     >
 
@@ -5242,20 +5337,20 @@ export namespace Prisma {
     groupBy<
       T extends ChapterGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ChapterGroupByArgs["orderBy"] }
-        : { orderBy?: ChapterGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
-      ByFields extends MaybeTupleToUnion<T["by"]>,
+        ? { orderBy: ChapterGroupByArgs['orderBy'] }
+        : { orderBy?: ChapterGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
+      HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
+      ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? "Error: \"by\" must not be empty."
+      ? `Error: "by" must not be empty.`
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -5264,13 +5359,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                "Field ",
+                'Field ',
                 P,
-                " in \"having\" needs to be provided in \"by\"",
+                ` in "having" needs to be provided in "by"`,
               ]
         }[HavingFields]
-      : "take" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -5278,9 +5373,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
-      : "skip" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -5288,7 +5383,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
       : ByValid extends True
       ? {}
       : {
@@ -5314,6 +5409,7 @@ export namespace Prisma {
     ebook<T extends EbookDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EbookDefaultArgs<ExtArgs>>): Prisma__EbookClient<$Result.GetResult<Prisma.$EbookPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     assetReferences<T extends Chapter$assetReferencesArgs<ExtArgs> = {}>(args?: Subset<T, Chapter$assetReferencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChapterAssetReferencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     collaboratorAccess<T extends Chapter$collaboratorAccessArgs<ExtArgs> = {}>(args?: Subset<T, Chapter$collaboratorAccessArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EbookCollaboratorChapterAccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    locales<T extends Chapter$localesArgs<ExtArgs> = {}>(args?: Subset<T, Chapter$localesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChapterLocalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5343,13 +5439,12 @@ export namespace Prisma {
    * Fields of the Chapter model
    */
   interface ChapterFieldRefs {
-    readonly id: FieldRef<"Chapter", "String">
-    readonly content: FieldRef<"Chapter", "Json">
-    readonly title: FieldRef<"Chapter", "String">
-    readonly position: FieldRef<"Chapter", "Int">
-    readonly createdAt: FieldRef<"Chapter", "DateTime">
-    readonly updatedAt: FieldRef<"Chapter", "DateTime">
-    readonly ebookId: FieldRef<"Chapter", "String">
+    readonly id: FieldRef<"Chapter", 'String'>
+    readonly title: FieldRef<"Chapter", 'String'>
+    readonly position: FieldRef<"Chapter", 'Int'>
+    readonly createdAt: FieldRef<"Chapter", 'DateTime'>
+    readonly updatedAt: FieldRef<"Chapter", 'DateTime'>
+    readonly ebookId: FieldRef<"Chapter", 'String'>
   }
     
 
@@ -5799,6 +5894,30 @@ export namespace Prisma {
   }
 
   /**
+   * Chapter.locales
+   */
+  export type Chapter$localesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChapterLocale
+     */
+    select?: ChapterLocaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChapterLocale
+     */
+    omit?: ChapterLocaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterLocaleInclude<ExtArgs> | null
+    where?: ChapterLocaleWhereInput
+    orderBy?: ChapterLocaleOrderByWithRelationInput | ChapterLocaleOrderByWithRelationInput[]
+    cursor?: ChapterLocaleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChapterLocaleScalarFieldEnum | ChapterLocaleScalarFieldEnum[]
+  }
+
+  /**
    * Chapter without action
    */
   export type ChapterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5814,6 +5933,1091 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ChapterInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ChapterLocale
+   */
+
+  export type AggregateChapterLocale = {
+    _count: ChapterLocaleCountAggregateOutputType | null
+    _min: ChapterLocaleMinAggregateOutputType | null
+    _max: ChapterLocaleMaxAggregateOutputType | null
+  }
+
+  export type ChapterLocaleMinAggregateOutputType = {
+    id: string | null
+    locale: string | null
+    title: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    chapterId: string | null
+  }
+
+  export type ChapterLocaleMaxAggregateOutputType = {
+    id: string | null
+    locale: string | null
+    title: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    chapterId: string | null
+  }
+
+  export type ChapterLocaleCountAggregateOutputType = {
+    id: number
+    locale: number
+    title: number
+    content: number
+    createdAt: number
+    updatedAt: number
+    chapterId: number
+    _all: number
+  }
+
+
+  export type ChapterLocaleMinAggregateInputType = {
+    id?: true
+    locale?: true
+    title?: true
+    createdAt?: true
+    updatedAt?: true
+    chapterId?: true
+  }
+
+  export type ChapterLocaleMaxAggregateInputType = {
+    id?: true
+    locale?: true
+    title?: true
+    createdAt?: true
+    updatedAt?: true
+    chapterId?: true
+  }
+
+  export type ChapterLocaleCountAggregateInputType = {
+    id?: true
+    locale?: true
+    title?: true
+    content?: true
+    createdAt?: true
+    updatedAt?: true
+    chapterId?: true
+    _all?: true
+  }
+
+  export type ChapterLocaleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ChapterLocale to aggregate.
+     */
+    where?: ChapterLocaleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChapterLocales to fetch.
+     */
+    orderBy?: ChapterLocaleOrderByWithRelationInput | ChapterLocaleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ChapterLocaleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChapterLocales from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChapterLocales.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ChapterLocales
+    **/
+    _count?: true | ChapterLocaleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ChapterLocaleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ChapterLocaleMaxAggregateInputType
+  }
+
+  export type GetChapterLocaleAggregateType<T extends ChapterLocaleAggregateArgs> = {
+        [P in keyof T & keyof AggregateChapterLocale]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateChapterLocale[P]>
+      : GetScalarType<T[P], AggregateChapterLocale[P]>
+  }
+
+
+
+
+  export type ChapterLocaleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChapterLocaleWhereInput
+    orderBy?: ChapterLocaleOrderByWithAggregationInput | ChapterLocaleOrderByWithAggregationInput[]
+    by: ChapterLocaleScalarFieldEnum[] | ChapterLocaleScalarFieldEnum
+    having?: ChapterLocaleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ChapterLocaleCountAggregateInputType | true
+    _min?: ChapterLocaleMinAggregateInputType
+    _max?: ChapterLocaleMaxAggregateInputType
+  }
+
+  export type ChapterLocaleGroupByOutputType = {
+    id: string
+    locale: string
+    title: string
+    content: JsonValue
+    createdAt: Date
+    updatedAt: Date
+    chapterId: string
+    _count: ChapterLocaleCountAggregateOutputType | null
+    _min: ChapterLocaleMinAggregateOutputType | null
+    _max: ChapterLocaleMaxAggregateOutputType | null
+  }
+
+  type GetChapterLocaleGroupByPayload<T extends ChapterLocaleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ChapterLocaleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ChapterLocaleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ChapterLocaleGroupByOutputType[P]>
+            : GetScalarType<T[P], ChapterLocaleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ChapterLocaleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    locale?: boolean
+    title?: boolean
+    content?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    chapterId?: boolean
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["chapterLocale"]>
+
+  export type ChapterLocaleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    locale?: boolean
+    title?: boolean
+    content?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    chapterId?: boolean
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["chapterLocale"]>
+
+  export type ChapterLocaleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    locale?: boolean
+    title?: boolean
+    content?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    chapterId?: boolean
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["chapterLocale"]>
+
+  export type ChapterLocaleSelectScalar = {
+    id?: boolean
+    locale?: boolean
+    title?: boolean
+    content?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    chapterId?: boolean
+  }
+
+  export type ChapterLocaleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "locale" | "title" | "content" | "createdAt" | "updatedAt" | "chapterId", ExtArgs["result"]["chapterLocale"]>
+  export type ChapterLocaleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }
+  export type ChapterLocaleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }
+  export type ChapterLocaleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }
+
+  export type $ChapterLocalePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ChapterLocale"
+    objects: {
+      chapter: Prisma.$ChapterPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      locale: string
+      title: string
+      content: Prisma.JsonValue
+      createdAt: Date
+      updatedAt: Date
+      chapterId: string
+    }, ExtArgs["result"]["chapterLocale"]>
+    composites: {}
+  }
+
+  type ChapterLocaleGetPayload<S extends boolean | null | undefined | ChapterLocaleDefaultArgs> = $Result.GetResult<Prisma.$ChapterLocalePayload, S>
+
+  type ChapterLocaleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ChapterLocaleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ChapterLocaleCountAggregateInputType | true
+    }
+
+  export interface ChapterLocaleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ChapterLocale'], meta: { name: 'ChapterLocale' } }
+    /**
+     * Find zero or one ChapterLocale that matches the filter.
+     * @param {ChapterLocaleFindUniqueArgs} args - Arguments to find a ChapterLocale
+     * @example
+     * // Get one ChapterLocale
+     * const chapterLocale = await prisma.chapterLocale.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ChapterLocaleFindUniqueArgs>(args: SelectSubset<T, ChapterLocaleFindUniqueArgs<ExtArgs>>): Prisma__ChapterLocaleClient<$Result.GetResult<Prisma.$ChapterLocalePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ChapterLocale that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ChapterLocaleFindUniqueOrThrowArgs} args - Arguments to find a ChapterLocale
+     * @example
+     * // Get one ChapterLocale
+     * const chapterLocale = await prisma.chapterLocale.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ChapterLocaleFindUniqueOrThrowArgs>(args: SelectSubset<T, ChapterLocaleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ChapterLocaleClient<$Result.GetResult<Prisma.$ChapterLocalePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ChapterLocale that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterLocaleFindFirstArgs} args - Arguments to find a ChapterLocale
+     * @example
+     * // Get one ChapterLocale
+     * const chapterLocale = await prisma.chapterLocale.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ChapterLocaleFindFirstArgs>(args?: SelectSubset<T, ChapterLocaleFindFirstArgs<ExtArgs>>): Prisma__ChapterLocaleClient<$Result.GetResult<Prisma.$ChapterLocalePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ChapterLocale that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterLocaleFindFirstOrThrowArgs} args - Arguments to find a ChapterLocale
+     * @example
+     * // Get one ChapterLocale
+     * const chapterLocale = await prisma.chapterLocale.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ChapterLocaleFindFirstOrThrowArgs>(args?: SelectSubset<T, ChapterLocaleFindFirstOrThrowArgs<ExtArgs>>): Prisma__ChapterLocaleClient<$Result.GetResult<Prisma.$ChapterLocalePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ChapterLocales that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterLocaleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ChapterLocales
+     * const chapterLocales = await prisma.chapterLocale.findMany()
+     * 
+     * // Get first 10 ChapterLocales
+     * const chapterLocales = await prisma.chapterLocale.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const chapterLocaleWithIdOnly = await prisma.chapterLocale.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ChapterLocaleFindManyArgs>(args?: SelectSubset<T, ChapterLocaleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChapterLocalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ChapterLocale.
+     * @param {ChapterLocaleCreateArgs} args - Arguments to create a ChapterLocale.
+     * @example
+     * // Create one ChapterLocale
+     * const ChapterLocale = await prisma.chapterLocale.create({
+     *   data: {
+     *     // ... data to create a ChapterLocale
+     *   }
+     * })
+     * 
+     */
+    create<T extends ChapterLocaleCreateArgs>(args: SelectSubset<T, ChapterLocaleCreateArgs<ExtArgs>>): Prisma__ChapterLocaleClient<$Result.GetResult<Prisma.$ChapterLocalePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ChapterLocales.
+     * @param {ChapterLocaleCreateManyArgs} args - Arguments to create many ChapterLocales.
+     * @example
+     * // Create many ChapterLocales
+     * const chapterLocale = await prisma.chapterLocale.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ChapterLocaleCreateManyArgs>(args?: SelectSubset<T, ChapterLocaleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ChapterLocales and returns the data saved in the database.
+     * @param {ChapterLocaleCreateManyAndReturnArgs} args - Arguments to create many ChapterLocales.
+     * @example
+     * // Create many ChapterLocales
+     * const chapterLocale = await prisma.chapterLocale.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ChapterLocales and only return the `id`
+     * const chapterLocaleWithIdOnly = await prisma.chapterLocale.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ChapterLocaleCreateManyAndReturnArgs>(args?: SelectSubset<T, ChapterLocaleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChapterLocalePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ChapterLocale.
+     * @param {ChapterLocaleDeleteArgs} args - Arguments to delete one ChapterLocale.
+     * @example
+     * // Delete one ChapterLocale
+     * const ChapterLocale = await prisma.chapterLocale.delete({
+     *   where: {
+     *     // ... filter to delete one ChapterLocale
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ChapterLocaleDeleteArgs>(args: SelectSubset<T, ChapterLocaleDeleteArgs<ExtArgs>>): Prisma__ChapterLocaleClient<$Result.GetResult<Prisma.$ChapterLocalePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ChapterLocale.
+     * @param {ChapterLocaleUpdateArgs} args - Arguments to update one ChapterLocale.
+     * @example
+     * // Update one ChapterLocale
+     * const chapterLocale = await prisma.chapterLocale.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ChapterLocaleUpdateArgs>(args: SelectSubset<T, ChapterLocaleUpdateArgs<ExtArgs>>): Prisma__ChapterLocaleClient<$Result.GetResult<Prisma.$ChapterLocalePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ChapterLocales.
+     * @param {ChapterLocaleDeleteManyArgs} args - Arguments to filter ChapterLocales to delete.
+     * @example
+     * // Delete a few ChapterLocales
+     * const { count } = await prisma.chapterLocale.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ChapterLocaleDeleteManyArgs>(args?: SelectSubset<T, ChapterLocaleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ChapterLocales.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterLocaleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ChapterLocales
+     * const chapterLocale = await prisma.chapterLocale.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ChapterLocaleUpdateManyArgs>(args: SelectSubset<T, ChapterLocaleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ChapterLocales and returns the data updated in the database.
+     * @param {ChapterLocaleUpdateManyAndReturnArgs} args - Arguments to update many ChapterLocales.
+     * @example
+     * // Update many ChapterLocales
+     * const chapterLocale = await prisma.chapterLocale.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ChapterLocales and only return the `id`
+     * const chapterLocaleWithIdOnly = await prisma.chapterLocale.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ChapterLocaleUpdateManyAndReturnArgs>(args: SelectSubset<T, ChapterLocaleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChapterLocalePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ChapterLocale.
+     * @param {ChapterLocaleUpsertArgs} args - Arguments to update or create a ChapterLocale.
+     * @example
+     * // Update or create a ChapterLocale
+     * const chapterLocale = await prisma.chapterLocale.upsert({
+     *   create: {
+     *     // ... data to create a ChapterLocale
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ChapterLocale we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ChapterLocaleUpsertArgs>(args: SelectSubset<T, ChapterLocaleUpsertArgs<ExtArgs>>): Prisma__ChapterLocaleClient<$Result.GetResult<Prisma.$ChapterLocalePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ChapterLocales.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterLocaleCountArgs} args - Arguments to filter ChapterLocales to count.
+     * @example
+     * // Count the number of ChapterLocales
+     * const count = await prisma.chapterLocale.count({
+     *   where: {
+     *     // ... the filter for the ChapterLocales we want to count
+     *   }
+     * })
+    **/
+    count<T extends ChapterLocaleCountArgs>(
+      args?: Subset<T, ChapterLocaleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ChapterLocaleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ChapterLocale.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterLocaleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ChapterLocaleAggregateArgs>(args: Subset<T, ChapterLocaleAggregateArgs>): Prisma.PrismaPromise<GetChapterLocaleAggregateType<T>>
+
+    /**
+     * Group by ChapterLocale.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterLocaleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ChapterLocaleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ChapterLocaleGroupByArgs['orderBy'] }
+        : { orderBy?: ChapterLocaleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ChapterLocaleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetChapterLocaleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ChapterLocale model
+   */
+  readonly fields: ChapterLocaleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ChapterLocale.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ChapterLocaleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    chapter<T extends ChapterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChapterDefaultArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ChapterLocale model
+   */
+  interface ChapterLocaleFieldRefs {
+    readonly id: FieldRef<"ChapterLocale", 'String'>
+    readonly locale: FieldRef<"ChapterLocale", 'String'>
+    readonly title: FieldRef<"ChapterLocale", 'String'>
+    readonly content: FieldRef<"ChapterLocale", 'Json'>
+    readonly createdAt: FieldRef<"ChapterLocale", 'DateTime'>
+    readonly updatedAt: FieldRef<"ChapterLocale", 'DateTime'>
+    readonly chapterId: FieldRef<"ChapterLocale", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ChapterLocale findUnique
+   */
+  export type ChapterLocaleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChapterLocale
+     */
+    select?: ChapterLocaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChapterLocale
+     */
+    omit?: ChapterLocaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterLocaleInclude<ExtArgs> | null
+    /**
+     * Filter, which ChapterLocale to fetch.
+     */
+    where: ChapterLocaleWhereUniqueInput
+  }
+
+  /**
+   * ChapterLocale findUniqueOrThrow
+   */
+  export type ChapterLocaleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChapterLocale
+     */
+    select?: ChapterLocaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChapterLocale
+     */
+    omit?: ChapterLocaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterLocaleInclude<ExtArgs> | null
+    /**
+     * Filter, which ChapterLocale to fetch.
+     */
+    where: ChapterLocaleWhereUniqueInput
+  }
+
+  /**
+   * ChapterLocale findFirst
+   */
+  export type ChapterLocaleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChapterLocale
+     */
+    select?: ChapterLocaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChapterLocale
+     */
+    omit?: ChapterLocaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterLocaleInclude<ExtArgs> | null
+    /**
+     * Filter, which ChapterLocale to fetch.
+     */
+    where?: ChapterLocaleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChapterLocales to fetch.
+     */
+    orderBy?: ChapterLocaleOrderByWithRelationInput | ChapterLocaleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ChapterLocales.
+     */
+    cursor?: ChapterLocaleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChapterLocales from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChapterLocales.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ChapterLocales.
+     */
+    distinct?: ChapterLocaleScalarFieldEnum | ChapterLocaleScalarFieldEnum[]
+  }
+
+  /**
+   * ChapterLocale findFirstOrThrow
+   */
+  export type ChapterLocaleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChapterLocale
+     */
+    select?: ChapterLocaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChapterLocale
+     */
+    omit?: ChapterLocaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterLocaleInclude<ExtArgs> | null
+    /**
+     * Filter, which ChapterLocale to fetch.
+     */
+    where?: ChapterLocaleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChapterLocales to fetch.
+     */
+    orderBy?: ChapterLocaleOrderByWithRelationInput | ChapterLocaleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ChapterLocales.
+     */
+    cursor?: ChapterLocaleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChapterLocales from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChapterLocales.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ChapterLocales.
+     */
+    distinct?: ChapterLocaleScalarFieldEnum | ChapterLocaleScalarFieldEnum[]
+  }
+
+  /**
+   * ChapterLocale findMany
+   */
+  export type ChapterLocaleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChapterLocale
+     */
+    select?: ChapterLocaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChapterLocale
+     */
+    omit?: ChapterLocaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterLocaleInclude<ExtArgs> | null
+    /**
+     * Filter, which ChapterLocales to fetch.
+     */
+    where?: ChapterLocaleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChapterLocales to fetch.
+     */
+    orderBy?: ChapterLocaleOrderByWithRelationInput | ChapterLocaleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ChapterLocales.
+     */
+    cursor?: ChapterLocaleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChapterLocales from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChapterLocales.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ChapterLocales.
+     */
+    distinct?: ChapterLocaleScalarFieldEnum | ChapterLocaleScalarFieldEnum[]
+  }
+
+  /**
+   * ChapterLocale create
+   */
+  export type ChapterLocaleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChapterLocale
+     */
+    select?: ChapterLocaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChapterLocale
+     */
+    omit?: ChapterLocaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterLocaleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ChapterLocale.
+     */
+    data: XOR<ChapterLocaleCreateInput, ChapterLocaleUncheckedCreateInput>
+  }
+
+  /**
+   * ChapterLocale createMany
+   */
+  export type ChapterLocaleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ChapterLocales.
+     */
+    data: ChapterLocaleCreateManyInput | ChapterLocaleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ChapterLocale createManyAndReturn
+   */
+  export type ChapterLocaleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChapterLocale
+     */
+    select?: ChapterLocaleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChapterLocale
+     */
+    omit?: ChapterLocaleOmit<ExtArgs> | null
+    /**
+     * The data used to create many ChapterLocales.
+     */
+    data: ChapterLocaleCreateManyInput | ChapterLocaleCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterLocaleIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ChapterLocale update
+   */
+  export type ChapterLocaleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChapterLocale
+     */
+    select?: ChapterLocaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChapterLocale
+     */
+    omit?: ChapterLocaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterLocaleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ChapterLocale.
+     */
+    data: XOR<ChapterLocaleUpdateInput, ChapterLocaleUncheckedUpdateInput>
+    /**
+     * Choose, which ChapterLocale to update.
+     */
+    where: ChapterLocaleWhereUniqueInput
+  }
+
+  /**
+   * ChapterLocale updateMany
+   */
+  export type ChapterLocaleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ChapterLocales.
+     */
+    data: XOR<ChapterLocaleUpdateManyMutationInput, ChapterLocaleUncheckedUpdateManyInput>
+    /**
+     * Filter which ChapterLocales to update
+     */
+    where?: ChapterLocaleWhereInput
+    /**
+     * Limit how many ChapterLocales to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ChapterLocale updateManyAndReturn
+   */
+  export type ChapterLocaleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChapterLocale
+     */
+    select?: ChapterLocaleSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChapterLocale
+     */
+    omit?: ChapterLocaleOmit<ExtArgs> | null
+    /**
+     * The data used to update ChapterLocales.
+     */
+    data: XOR<ChapterLocaleUpdateManyMutationInput, ChapterLocaleUncheckedUpdateManyInput>
+    /**
+     * Filter which ChapterLocales to update
+     */
+    where?: ChapterLocaleWhereInput
+    /**
+     * Limit how many ChapterLocales to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterLocaleIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ChapterLocale upsert
+   */
+  export type ChapterLocaleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChapterLocale
+     */
+    select?: ChapterLocaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChapterLocale
+     */
+    omit?: ChapterLocaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterLocaleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ChapterLocale to update in case it exists.
+     */
+    where: ChapterLocaleWhereUniqueInput
+    /**
+     * In case the ChapterLocale found by the `where` argument doesn't exist, create a new ChapterLocale with this data.
+     */
+    create: XOR<ChapterLocaleCreateInput, ChapterLocaleUncheckedCreateInput>
+    /**
+     * In case the ChapterLocale was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ChapterLocaleUpdateInput, ChapterLocaleUncheckedUpdateInput>
+  }
+
+  /**
+   * ChapterLocale delete
+   */
+  export type ChapterLocaleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChapterLocale
+     */
+    select?: ChapterLocaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChapterLocale
+     */
+    omit?: ChapterLocaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterLocaleInclude<ExtArgs> | null
+    /**
+     * Filter which ChapterLocale to delete.
+     */
+    where: ChapterLocaleWhereUniqueInput
+  }
+
+  /**
+   * ChapterLocale deleteMany
+   */
+  export type ChapterLocaleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ChapterLocales to delete
+     */
+    where?: ChapterLocaleWhereInput
+    /**
+     * Limit how many ChapterLocales to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ChapterLocale without action
+   */
+  export type ChapterLocaleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChapterLocale
+     */
+    select?: ChapterLocaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChapterLocale
+     */
+    omit?: ChapterLocaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterLocaleInclude<ExtArgs> | null
   }
 
 
@@ -5946,7 +7150,7 @@ export namespace Prisma {
   }
 
   export type GetEbookCollaboratorAggregateType<T extends EbookCollaboratorAggregateArgs> = {
-        [P in keyof T & keyof AggregateEbookCollaborator]: P extends "_count" | "count"
+        [P in keyof T & keyof AggregateEbookCollaborator]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateEbookCollaborator[P]>
@@ -5984,9 +7188,9 @@ export namespace Prisma {
 
   type GetEbookCollaboratorGroupByPayload<T extends EbookCollaboratorGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<EbookCollaboratorGroupByOutputType, T["by"]> &
+      PickEnumerable<EbookCollaboratorGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof EbookCollaboratorGroupByOutputType))]: P extends "_count"
+          [P in ((keyof T) & (keyof EbookCollaboratorGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], EbookCollaboratorGroupByOutputType[P]>
@@ -6094,12 +7298,12 @@ export namespace Prisma {
   type EbookCollaboratorGetPayload<S extends boolean | null | undefined | EbookCollaboratorDefaultArgs> = $Result.GetResult<Prisma.$EbookCollaboratorPayload, S>
 
   type EbookCollaboratorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<EbookCollaboratorFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    Omit<EbookCollaboratorFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: EbookCollaboratorCountAggregateInputType | true
     }
 
   export interface EbookCollaboratorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["EbookCollaborator"], meta: { name: "EbookCollaborator" } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EbookCollaborator'], meta: { name: 'EbookCollaborator' } }
     /**
      * Find zero or one EbookCollaborator that matches the filter.
      * @param {EbookCollaboratorFindUniqueArgs} args - Arguments to find a EbookCollaborator
@@ -6358,10 +7562,10 @@ export namespace Prisma {
     count<T extends EbookCollaboratorCountArgs>(
       args?: Subset<T, EbookCollaboratorCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<"select", any>
-        ? T["select"] extends true
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
           ? number
-          : GetScalarType<T["select"], EbookCollaboratorCountAggregateOutputType>
+          : GetScalarType<T['select'], EbookCollaboratorCountAggregateOutputType>
         : number
     >
 
@@ -6412,20 +7616,20 @@ export namespace Prisma {
     groupBy<
       T extends EbookCollaboratorGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EbookCollaboratorGroupByArgs["orderBy"] }
-        : { orderBy?: EbookCollaboratorGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
-      ByFields extends MaybeTupleToUnion<T["by"]>,
+        ? { orderBy: EbookCollaboratorGroupByArgs['orderBy'] }
+        : { orderBy?: EbookCollaboratorGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
+      HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
+      ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? "Error: \"by\" must not be empty."
+      ? `Error: "by" must not be empty.`
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -6434,13 +7638,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                "Field ",
+                'Field ',
                 P,
-                " in \"having\" needs to be provided in \"by\"",
+                ` in "having" needs to be provided in "by"`,
               ]
         }[HavingFields]
-      : "take" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -6448,9 +7652,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
-      : "skip" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -6458,7 +7662,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
       : ByValid extends True
       ? {}
       : {
@@ -6514,14 +7718,14 @@ export namespace Prisma {
    * Fields of the EbookCollaborator model
    */
   interface EbookCollaboratorFieldRefs {
-    readonly id: FieldRef<"EbookCollaborator", "String">
-    readonly ebookId: FieldRef<"EbookCollaborator", "String">
-    readonly userId: FieldRef<"EbookCollaborator", "String">
-    readonly role: FieldRef<"EbookCollaborator", "CollaborationRole">
-    readonly allChaptersAccess: FieldRef<"EbookCollaborator", "Boolean">
-    readonly customRoleId: FieldRef<"EbookCollaborator", "String">
-    readonly createdAt: FieldRef<"EbookCollaborator", "DateTime">
-    readonly updatedAt: FieldRef<"EbookCollaborator", "DateTime">
+    readonly id: FieldRef<"EbookCollaborator", 'String'>
+    readonly ebookId: FieldRef<"EbookCollaborator", 'String'>
+    readonly userId: FieldRef<"EbookCollaborator", 'String'>
+    readonly role: FieldRef<"EbookCollaborator", 'CollaborationRole'>
+    readonly allChaptersAccess: FieldRef<"EbookCollaborator", 'Boolean'>
+    readonly customRoleId: FieldRef<"EbookCollaborator", 'String'>
+    readonly createdAt: FieldRef<"EbookCollaborator", 'DateTime'>
+    readonly updatedAt: FieldRef<"EbookCollaborator", 'DateTime'>
   }
     
 
@@ -7089,7 +8293,7 @@ export namespace Prisma {
   }
 
   export type GetEbookCollaboratorChapterAccessAggregateType<T extends EbookCollaboratorChapterAccessAggregateArgs> = {
-        [P in keyof T & keyof AggregateEbookCollaboratorChapterAccess]: P extends "_count" | "count"
+        [P in keyof T & keyof AggregateEbookCollaboratorChapterAccess]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateEbookCollaboratorChapterAccess[P]>
@@ -7123,9 +8327,9 @@ export namespace Prisma {
 
   type GetEbookCollaboratorChapterAccessGroupByPayload<T extends EbookCollaboratorChapterAccessGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<EbookCollaboratorChapterAccessGroupByOutputType, T["by"]> &
+      PickEnumerable<EbookCollaboratorChapterAccessGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof EbookCollaboratorChapterAccessGroupByOutputType))]: P extends "_count"
+          [P in ((keyof T) & (keyof EbookCollaboratorChapterAccessGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], EbookCollaboratorChapterAccessGroupByOutputType[P]>
@@ -7201,12 +8405,12 @@ export namespace Prisma {
   type EbookCollaboratorChapterAccessGetPayload<S extends boolean | null | undefined | EbookCollaboratorChapterAccessDefaultArgs> = $Result.GetResult<Prisma.$EbookCollaboratorChapterAccessPayload, S>
 
   type EbookCollaboratorChapterAccessCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<EbookCollaboratorChapterAccessFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    Omit<EbookCollaboratorChapterAccessFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: EbookCollaboratorChapterAccessCountAggregateInputType | true
     }
 
   export interface EbookCollaboratorChapterAccessDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["EbookCollaboratorChapterAccess"], meta: { name: "EbookCollaboratorChapterAccess" } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EbookCollaboratorChapterAccess'], meta: { name: 'EbookCollaboratorChapterAccess' } }
     /**
      * Find zero or one EbookCollaboratorChapterAccess that matches the filter.
      * @param {EbookCollaboratorChapterAccessFindUniqueArgs} args - Arguments to find a EbookCollaboratorChapterAccess
@@ -7465,10 +8669,10 @@ export namespace Prisma {
     count<T extends EbookCollaboratorChapterAccessCountArgs>(
       args?: Subset<T, EbookCollaboratorChapterAccessCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<"select", any>
-        ? T["select"] extends true
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
           ? number
-          : GetScalarType<T["select"], EbookCollaboratorChapterAccessCountAggregateOutputType>
+          : GetScalarType<T['select'], EbookCollaboratorChapterAccessCountAggregateOutputType>
         : number
     >
 
@@ -7519,20 +8723,20 @@ export namespace Prisma {
     groupBy<
       T extends EbookCollaboratorChapterAccessGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EbookCollaboratorChapterAccessGroupByArgs["orderBy"] }
-        : { orderBy?: EbookCollaboratorChapterAccessGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
-      ByFields extends MaybeTupleToUnion<T["by"]>,
+        ? { orderBy: EbookCollaboratorChapterAccessGroupByArgs['orderBy'] }
+        : { orderBy?: EbookCollaboratorChapterAccessGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
+      HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
+      ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? "Error: \"by\" must not be empty."
+      ? `Error: "by" must not be empty.`
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -7541,13 +8745,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                "Field ",
+                'Field ',
                 P,
-                " in \"having\" needs to be provided in \"by\"",
+                ` in "having" needs to be provided in "by"`,
               ]
         }[HavingFields]
-      : "take" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -7555,9 +8759,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
-      : "skip" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -7565,7 +8769,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
       : ByValid extends True
       ? {}
       : {
@@ -7619,10 +8823,10 @@ export namespace Prisma {
    * Fields of the EbookCollaboratorChapterAccess model
    */
   interface EbookCollaboratorChapterAccessFieldRefs {
-    readonly id: FieldRef<"EbookCollaboratorChapterAccess", "String">
-    readonly collaboratorId: FieldRef<"EbookCollaboratorChapterAccess", "String">
-    readonly chapterId: FieldRef<"EbookCollaboratorChapterAccess", "String">
-    readonly createdAt: FieldRef<"EbookCollaboratorChapterAccess", "DateTime">
+    readonly id: FieldRef<"EbookCollaboratorChapterAccess", 'String'>
+    readonly collaboratorId: FieldRef<"EbookCollaboratorChapterAccess", 'String'>
+    readonly chapterId: FieldRef<"EbookCollaboratorChapterAccess", 'String'>
+    readonly createdAt: FieldRef<"EbookCollaboratorChapterAccess", 'DateTime'>
   }
     
 
@@ -8161,7 +9365,7 @@ export namespace Prisma {
   }
 
   export type GetEbookCustomRoleAggregateType<T extends EbookCustomRoleAggregateArgs> = {
-        [P in keyof T & keyof AggregateEbookCustomRole]: P extends "_count" | "count"
+        [P in keyof T & keyof AggregateEbookCustomRole]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateEbookCustomRole[P]>
@@ -8198,9 +9402,9 @@ export namespace Prisma {
 
   type GetEbookCustomRoleGroupByPayload<T extends EbookCustomRoleGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<EbookCustomRoleGroupByOutputType, T["by"]> &
+      PickEnumerable<EbookCustomRoleGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof EbookCustomRoleGroupByOutputType))]: P extends "_count"
+          [P in ((keyof T) & (keyof EbookCustomRoleGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], EbookCustomRoleGroupByOutputType[P]>
@@ -8296,12 +9500,12 @@ export namespace Prisma {
   type EbookCustomRoleGetPayload<S extends boolean | null | undefined | EbookCustomRoleDefaultArgs> = $Result.GetResult<Prisma.$EbookCustomRolePayload, S>
 
   type EbookCustomRoleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<EbookCustomRoleFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    Omit<EbookCustomRoleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: EbookCustomRoleCountAggregateInputType | true
     }
 
   export interface EbookCustomRoleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["EbookCustomRole"], meta: { name: "EbookCustomRole" } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EbookCustomRole'], meta: { name: 'EbookCustomRole' } }
     /**
      * Find zero or one EbookCustomRole that matches the filter.
      * @param {EbookCustomRoleFindUniqueArgs} args - Arguments to find a EbookCustomRole
@@ -8560,10 +9764,10 @@ export namespace Prisma {
     count<T extends EbookCustomRoleCountArgs>(
       args?: Subset<T, EbookCustomRoleCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<"select", any>
-        ? T["select"] extends true
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
           ? number
-          : GetScalarType<T["select"], EbookCustomRoleCountAggregateOutputType>
+          : GetScalarType<T['select'], EbookCustomRoleCountAggregateOutputType>
         : number
     >
 
@@ -8614,20 +9818,20 @@ export namespace Prisma {
     groupBy<
       T extends EbookCustomRoleGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EbookCustomRoleGroupByArgs["orderBy"] }
-        : { orderBy?: EbookCustomRoleGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
-      ByFields extends MaybeTupleToUnion<T["by"]>,
+        ? { orderBy: EbookCustomRoleGroupByArgs['orderBy'] }
+        : { orderBy?: EbookCustomRoleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
+      HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
+      ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? "Error: \"by\" must not be empty."
+      ? `Error: "by" must not be empty.`
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -8636,13 +9840,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                "Field ",
+                'Field ',
                 P,
-                " in \"having\" needs to be provided in \"by\"",
+                ` in "having" needs to be provided in "by"`,
               ]
         }[HavingFields]
-      : "take" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -8650,9 +9854,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
-      : "skip" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -8660,7 +9864,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
       : ByValid extends True
       ? {}
       : {
@@ -8715,13 +9919,13 @@ export namespace Prisma {
    * Fields of the EbookCustomRole model
    */
   interface EbookCustomRoleFieldRefs {
-    readonly id: FieldRef<"EbookCustomRole", "String">
-    readonly ebookId: FieldRef<"EbookCustomRole", "String">
-    readonly name: FieldRef<"EbookCustomRole", "String">
-    readonly permissions: FieldRef<"EbookCustomRole", "CollaborationPermission[]">
-    readonly createdByUserId: FieldRef<"EbookCustomRole", "String">
-    readonly createdAt: FieldRef<"EbookCustomRole", "DateTime">
-    readonly updatedAt: FieldRef<"EbookCustomRole", "DateTime">
+    readonly id: FieldRef<"EbookCustomRole", 'String'>
+    readonly ebookId: FieldRef<"EbookCustomRole", 'String'>
+    readonly name: FieldRef<"EbookCustomRole", 'String'>
+    readonly permissions: FieldRef<"EbookCustomRole", 'CollaborationPermission[]'>
+    readonly createdByUserId: FieldRef<"EbookCustomRole", 'String'>
+    readonly createdAt: FieldRef<"EbookCustomRole", 'DateTime'>
+    readonly updatedAt: FieldRef<"EbookCustomRole", 'DateTime'>
   }
     
 
@@ -9300,7 +10504,7 @@ export namespace Prisma {
   }
 
   export type GetEbookAggregateType<T extends EbookAggregateArgs> = {
-        [P in keyof T & keyof AggregateEbook]: P extends "_count" | "count"
+        [P in keyof T & keyof AggregateEbook]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateEbook[P]>
@@ -9339,9 +10543,9 @@ export namespace Prisma {
 
   type GetEbookGroupByPayload<T extends EbookGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<EbookGroupByOutputType, T["by"]> &
+      PickEnumerable<EbookGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof EbookGroupByOutputType))]: P extends "_count"
+          [P in ((keyof T) & (keyof EbookGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], EbookGroupByOutputType[P]>
@@ -9463,12 +10667,12 @@ export namespace Prisma {
   type EbookGetPayload<S extends boolean | null | undefined | EbookDefaultArgs> = $Result.GetResult<Prisma.$EbookPayload, S>
 
   type EbookCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<EbookFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    Omit<EbookFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: EbookCountAggregateInputType | true
     }
 
   export interface EbookDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Ebook"], meta: { name: "Ebook" } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Ebook'], meta: { name: 'Ebook' } }
     /**
      * Find zero or one Ebook that matches the filter.
      * @param {EbookFindUniqueArgs} args - Arguments to find a Ebook
@@ -9727,10 +10931,10 @@ export namespace Prisma {
     count<T extends EbookCountArgs>(
       args?: Subset<T, EbookCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<"select", any>
-        ? T["select"] extends true
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
           ? number
-          : GetScalarType<T["select"], EbookCountAggregateOutputType>
+          : GetScalarType<T['select'], EbookCountAggregateOutputType>
         : number
     >
 
@@ -9781,20 +10985,20 @@ export namespace Prisma {
     groupBy<
       T extends EbookGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EbookGroupByArgs["orderBy"] }
-        : { orderBy?: EbookGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
-      ByFields extends MaybeTupleToUnion<T["by"]>,
+        ? { orderBy: EbookGroupByArgs['orderBy'] }
+        : { orderBy?: EbookGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
+      HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
+      ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? "Error: \"by\" must not be empty."
+      ? `Error: "by" must not be empty.`
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -9803,13 +11007,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                "Field ",
+                'Field ',
                 P,
-                " in \"having\" needs to be provided in \"by\"",
+                ` in "having" needs to be provided in "by"`,
               ]
         }[HavingFields]
-      : "take" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -9817,9 +11021,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
-      : "skip" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -9827,7 +11031,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
       : ByValid extends True
       ? {}
       : {
@@ -9886,15 +11090,15 @@ export namespace Prisma {
    * Fields of the Ebook model
    */
   interface EbookFieldRefs {
-    readonly id: FieldRef<"Ebook", "String">
-    readonly title: FieldRef<"Ebook", "String">
-    readonly subtitle: FieldRef<"Ebook", "String">
-    readonly shortDescription: FieldRef<"Ebook", "String">
-    readonly ownerId: FieldRef<"Ebook", "String">
-    readonly currentSnapshotId: FieldRef<"Ebook", "String">
-    readonly coverAssetId: FieldRef<"Ebook", "String">
-    readonly createdAt: FieldRef<"Ebook", "DateTime">
-    readonly updatedAt: FieldRef<"Ebook", "DateTime">
+    readonly id: FieldRef<"Ebook", 'String'>
+    readonly title: FieldRef<"Ebook", 'String'>
+    readonly subtitle: FieldRef<"Ebook", 'String'>
+    readonly shortDescription: FieldRef<"Ebook", 'String'>
+    readonly ownerId: FieldRef<"Ebook", 'String'>
+    readonly currentSnapshotId: FieldRef<"Ebook", 'String'>
+    readonly coverAssetId: FieldRef<"Ebook", 'String'>
+    readonly createdAt: FieldRef<"Ebook", 'DateTime'>
+    readonly updatedAt: FieldRef<"Ebook", 'DateTime'>
   }
     
 
@@ -10589,7 +11793,7 @@ export namespace Prisma {
   }
 
   export type GetSnapshotAggregateType<T extends SnapshotAggregateArgs> = {
-        [P in keyof T & keyof AggregateSnapshot]: P extends "_count" | "count"
+        [P in keyof T & keyof AggregateSnapshot]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateSnapshot[P]>
@@ -10628,9 +11832,9 @@ export namespace Prisma {
 
   type GetSnapshotGroupByPayload<T extends SnapshotGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<SnapshotGroupByOutputType, T["by"]> &
+      PickEnumerable<SnapshotGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof SnapshotGroupByOutputType))]: P extends "_count"
+          [P in ((keyof T) & (keyof SnapshotGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], SnapshotGroupByOutputType[P]>
@@ -10710,12 +11914,12 @@ export namespace Prisma {
   type SnapshotGetPayload<S extends boolean | null | undefined | SnapshotDefaultArgs> = $Result.GetResult<Prisma.$SnapshotPayload, S>
 
   type SnapshotCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<SnapshotFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    Omit<SnapshotFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: SnapshotCountAggregateInputType | true
     }
 
   export interface SnapshotDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Snapshot"], meta: { name: "Snapshot" } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Snapshot'], meta: { name: 'Snapshot' } }
     /**
      * Find zero or one Snapshot that matches the filter.
      * @param {SnapshotFindUniqueArgs} args - Arguments to find a Snapshot
@@ -10974,10 +12178,10 @@ export namespace Prisma {
     count<T extends SnapshotCountArgs>(
       args?: Subset<T, SnapshotCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<"select", any>
-        ? T["select"] extends true
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
           ? number
-          : GetScalarType<T["select"], SnapshotCountAggregateOutputType>
+          : GetScalarType<T['select'], SnapshotCountAggregateOutputType>
         : number
     >
 
@@ -11028,20 +12232,20 @@ export namespace Prisma {
     groupBy<
       T extends SnapshotGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SnapshotGroupByArgs["orderBy"] }
-        : { orderBy?: SnapshotGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
-      ByFields extends MaybeTupleToUnion<T["by"]>,
+        ? { orderBy: SnapshotGroupByArgs['orderBy'] }
+        : { orderBy?: SnapshotGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
+      HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
+      ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? "Error: \"by\" must not be empty."
+      ? `Error: "by" must not be empty.`
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -11050,13 +12254,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                "Field ",
+                'Field ',
                 P,
-                " in \"having\" needs to be provided in \"by\"",
+                ` in "having" needs to be provided in "by"`,
               ]
         }[HavingFields]
-      : "take" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -11064,9 +12268,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
-      : "skip" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -11074,7 +12278,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
       : ByValid extends True
       ? {}
       : {
@@ -11129,11 +12333,11 @@ export namespace Prisma {
    * Fields of the Snapshot model
    */
   interface SnapshotFieldRefs {
-    readonly id: FieldRef<"Snapshot", "String">
-    readonly ebookId: FieldRef<"Snapshot", "String">
-    readonly version: FieldRef<"Snapshot", "Int">
-    readonly createdAt: FieldRef<"Snapshot", "DateTime">
-    readonly status: FieldRef<"Snapshot", "SnapshotStatus">
+    readonly id: FieldRef<"Snapshot", 'String'>
+    readonly ebookId: FieldRef<"Snapshot", 'String'>
+    readonly version: FieldRef<"Snapshot", 'Int'>
+    readonly createdAt: FieldRef<"Snapshot", 'DateTime'>
+    readonly status: FieldRef<"Snapshot", 'SnapshotStatus'>
   }
     
 
@@ -11744,7 +12948,7 @@ export namespace Prisma {
   }
 
   export type GetSnapshotFileAggregateType<T extends SnapshotFileAggregateArgs> = {
-        [P in keyof T & keyof AggregateSnapshotFile]: P extends "_count" | "count"
+        [P in keyof T & keyof AggregateSnapshotFile]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateSnapshotFile[P]>
@@ -11785,9 +12989,9 @@ export namespace Prisma {
 
   type GetSnapshotFileGroupByPayload<T extends SnapshotFileGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<SnapshotFileGroupByOutputType, T["by"]> &
+      PickEnumerable<SnapshotFileGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof SnapshotFileGroupByOutputType))]: P extends "_count"
+          [P in ((keyof T) & (keyof SnapshotFileGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], SnapshotFileGroupByOutputType[P]>
@@ -11871,12 +13075,12 @@ export namespace Prisma {
   type SnapshotFileGetPayload<S extends boolean | null | undefined | SnapshotFileDefaultArgs> = $Result.GetResult<Prisma.$SnapshotFilePayload, S>
 
   type SnapshotFileCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<SnapshotFileFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    Omit<SnapshotFileFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: SnapshotFileCountAggregateInputType | true
     }
 
   export interface SnapshotFileDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["SnapshotFile"], meta: { name: "SnapshotFile" } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SnapshotFile'], meta: { name: 'SnapshotFile' } }
     /**
      * Find zero or one SnapshotFile that matches the filter.
      * @param {SnapshotFileFindUniqueArgs} args - Arguments to find a SnapshotFile
@@ -12135,10 +13339,10 @@ export namespace Prisma {
     count<T extends SnapshotFileCountArgs>(
       args?: Subset<T, SnapshotFileCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<"select", any>
-        ? T["select"] extends true
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
           ? number
-          : GetScalarType<T["select"], SnapshotFileCountAggregateOutputType>
+          : GetScalarType<T['select'], SnapshotFileCountAggregateOutputType>
         : number
     >
 
@@ -12189,20 +13393,20 @@ export namespace Prisma {
     groupBy<
       T extends SnapshotFileGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SnapshotFileGroupByArgs["orderBy"] }
-        : { orderBy?: SnapshotFileGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
-      ByFields extends MaybeTupleToUnion<T["by"]>,
+        ? { orderBy: SnapshotFileGroupByArgs['orderBy'] }
+        : { orderBy?: SnapshotFileGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
+      HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
+      ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? "Error: \"by\" must not be empty."
+      ? `Error: "by" must not be empty.`
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -12211,13 +13415,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                "Field ",
+                'Field ',
                 P,
-                " in \"having\" needs to be provided in \"by\"",
+                ` in "having" needs to be provided in "by"`,
               ]
         }[HavingFields]
-      : "take" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -12225,9 +13429,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
-      : "skip" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -12235,7 +13439,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
       : ByValid extends True
       ? {}
       : {
@@ -12288,13 +13492,13 @@ export namespace Prisma {
    * Fields of the SnapshotFile model
    */
   interface SnapshotFileFieldRefs {
-    readonly id: FieldRef<"SnapshotFile", "String">
-    readonly snapshotId: FieldRef<"SnapshotFile", "String">
-    readonly key: FieldRef<"SnapshotFile", "String">
-    readonly bucket: FieldRef<"SnapshotFile", "String">
-    readonly sizeBytes: FieldRef<"SnapshotFile", "Int">
-    readonly mimeType: FieldRef<"SnapshotFile", "String">
-    readonly createdAt: FieldRef<"SnapshotFile", "DateTime">
+    readonly id: FieldRef<"SnapshotFile", 'String'>
+    readonly snapshotId: FieldRef<"SnapshotFile", 'String'>
+    readonly key: FieldRef<"SnapshotFile", 'String'>
+    readonly bucket: FieldRef<"SnapshotFile", 'String'>
+    readonly sizeBytes: FieldRef<"SnapshotFile", 'Int'>
+    readonly mimeType: FieldRef<"SnapshotFile", 'String'>
+    readonly createdAt: FieldRef<"SnapshotFile", 'DateTime'>
   }
     
 
@@ -12891,7 +14095,7 @@ export namespace Prisma {
   }
 
   export type GetUploadHandshakeAggregateType<T extends UploadHandshakeAggregateArgs> = {
-        [P in keyof T & keyof AggregateUploadHandshake]: P extends "_count" | "count"
+        [P in keyof T & keyof AggregateUploadHandshake]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateUploadHandshake[P]>
@@ -12936,9 +14140,9 @@ export namespace Prisma {
 
   type GetUploadHandshakeGroupByPayload<T extends UploadHandshakeGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<UploadHandshakeGroupByOutputType, T["by"]> &
+      PickEnumerable<UploadHandshakeGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof UploadHandshakeGroupByOutputType))]: P extends "_count"
+          [P in ((keyof T) & (keyof UploadHandshakeGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], UploadHandshakeGroupByOutputType[P]>
@@ -13042,12 +14246,12 @@ export namespace Prisma {
   type UploadHandshakeGetPayload<S extends boolean | null | undefined | UploadHandshakeDefaultArgs> = $Result.GetResult<Prisma.$UploadHandshakePayload, S>
 
   type UploadHandshakeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<UploadHandshakeFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    Omit<UploadHandshakeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: UploadHandshakeCountAggregateInputType | true
     }
 
   export interface UploadHandshakeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["UploadHandshake"], meta: { name: "UploadHandshake" } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UploadHandshake'], meta: { name: 'UploadHandshake' } }
     /**
      * Find zero or one UploadHandshake that matches the filter.
      * @param {UploadHandshakeFindUniqueArgs} args - Arguments to find a UploadHandshake
@@ -13306,10 +14510,10 @@ export namespace Prisma {
     count<T extends UploadHandshakeCountArgs>(
       args?: Subset<T, UploadHandshakeCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<"select", any>
-        ? T["select"] extends true
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
           ? number
-          : GetScalarType<T["select"], UploadHandshakeCountAggregateOutputType>
+          : GetScalarType<T['select'], UploadHandshakeCountAggregateOutputType>
         : number
     >
 
@@ -13360,20 +14564,20 @@ export namespace Prisma {
     groupBy<
       T extends UploadHandshakeGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UploadHandshakeGroupByArgs["orderBy"] }
-        : { orderBy?: UploadHandshakeGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
-      ByFields extends MaybeTupleToUnion<T["by"]>,
+        ? { orderBy: UploadHandshakeGroupByArgs['orderBy'] }
+        : { orderBy?: UploadHandshakeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
+      HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
+      ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? "Error: \"by\" must not be empty."
+      ? `Error: "by" must not be empty.`
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -13382,13 +14586,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                "Field ",
+                'Field ',
                 P,
-                " in \"having\" needs to be provided in \"by\"",
+                ` in "having" needs to be provided in "by"`,
               ]
         }[HavingFields]
-      : "take" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -13396,9 +14600,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
-      : "skip" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -13406,7 +14610,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
       : ByValid extends True
       ? {}
       : {
@@ -13459,17 +14663,17 @@ export namespace Prisma {
    * Fields of the UploadHandshake model
    */
   interface UploadHandshakeFieldRefs {
-    readonly id: FieldRef<"UploadHandshake", "String">
-    readonly ownerId: FieldRef<"UploadHandshake", "String">
-    readonly context: FieldRef<"UploadHandshake", "AssetReferenceType">
-    readonly key: FieldRef<"UploadHandshake", "String">
-    readonly fileName: FieldRef<"UploadHandshake", "String">
-    readonly expectedMimeType: FieldRef<"UploadHandshake", "String">
-    readonly expectedSizeBytes: FieldRef<"UploadHandshake", "Int">
-    readonly status: FieldRef<"UploadHandshake", "UploadHandshakeStatus">
-    readonly expiresAt: FieldRef<"UploadHandshake", "DateTime">
-    readonly createdAt: FieldRef<"UploadHandshake", "DateTime">
-    readonly updatedAt: FieldRef<"UploadHandshake", "DateTime">
+    readonly id: FieldRef<"UploadHandshake", 'String'>
+    readonly ownerId: FieldRef<"UploadHandshake", 'String'>
+    readonly context: FieldRef<"UploadHandshake", 'AssetReferenceType'>
+    readonly key: FieldRef<"UploadHandshake", 'String'>
+    readonly fileName: FieldRef<"UploadHandshake", 'String'>
+    readonly expectedMimeType: FieldRef<"UploadHandshake", 'String'>
+    readonly expectedSizeBytes: FieldRef<"UploadHandshake", 'Int'>
+    readonly status: FieldRef<"UploadHandshake", 'UploadHandshakeStatus'>
+    readonly expiresAt: FieldRef<"UploadHandshake", 'DateTime'>
+    readonly createdAt: FieldRef<"UploadHandshake", 'DateTime'>
+    readonly updatedAt: FieldRef<"UploadHandshake", 'DateTime'>
   }
     
 
@@ -14024,7 +15228,7 @@ export namespace Prisma {
   }
 
   export type GetUserAggregateType<T extends UserAggregateArgs> = {
-        [P in keyof T & keyof AggregateUser]: P extends "_count" | "count"
+        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateUser[P]>
@@ -14063,9 +15267,9 @@ export namespace Prisma {
 
   type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<UserGroupByOutputType, T["by"]> &
+      PickEnumerable<UserGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends "_count"
+          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], UserGroupByOutputType[P]>
@@ -14170,12 +15374,12 @@ export namespace Prisma {
   type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
 
   type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<UserFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: UserCountAggregateInputType | true
     }
 
   export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["User"], meta: { name: "User" } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
     /**
      * Find zero or one User that matches the filter.
      * @param {UserFindUniqueArgs} args - Arguments to find a User
@@ -14434,10 +15638,10 @@ export namespace Prisma {
     count<T extends UserCountArgs>(
       args?: Subset<T, UserCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<"select", any>
-        ? T["select"] extends true
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
           ? number
-          : GetScalarType<T["select"], UserCountAggregateOutputType>
+          : GetScalarType<T['select'], UserCountAggregateOutputType>
         : number
     >
 
@@ -14488,20 +15692,20 @@ export namespace Prisma {
     groupBy<
       T extends UserGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UserGroupByArgs["orderBy"] }
-        : { orderBy?: UserGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
-      ByFields extends MaybeTupleToUnion<T["by"]>,
+        ? { orderBy: UserGroupByArgs['orderBy'] }
+        : { orderBy?: UserGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
+      HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
+      ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? "Error: \"by\" must not be empty."
+      ? `Error: "by" must not be empty.`
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -14510,13 +15714,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                "Field ",
+                'Field ',
                 P,
-                " in \"having\" needs to be provided in \"by\"",
+                ` in "having" needs to be provided in "by"`,
               ]
         }[HavingFields]
-      : "take" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -14524,9 +15728,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
-      : "skip" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -14534,7 +15738,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
       : ByValid extends True
       ? {}
       : {
@@ -14592,15 +15796,15 @@ export namespace Prisma {
    * Fields of the User model
    */
   interface UserFieldRefs {
-    readonly id: FieldRef<"User", "String">
-    readonly email: FieldRef<"User", "String">
-    readonly emailVerified: FieldRef<"User", "DateTime">
-    readonly name: FieldRef<"User", "String">
-    readonly stripeCustomerId: FieldRef<"User", "String">
-    readonly subscriptionStatus: FieldRef<"User", "SubscriptionStatus">
-    readonly plan: FieldRef<"User", "PlanType">
-    readonly createdAt: FieldRef<"User", "DateTime">
-    readonly updatedAt: FieldRef<"User", "DateTime">
+    readonly id: FieldRef<"User", 'String'>
+    readonly email: FieldRef<"User", 'String'>
+    readonly emailVerified: FieldRef<"User", 'DateTime'>
+    readonly name: FieldRef<"User", 'String'>
+    readonly stripeCustomerId: FieldRef<"User", 'String'>
+    readonly subscriptionStatus: FieldRef<"User", 'SubscriptionStatus'>
+    readonly plan: FieldRef<"User", 'PlanType'>
+    readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -15267,7 +16471,7 @@ export namespace Prisma {
   }
 
   export type GetAccountAggregateType<T extends AccountAggregateArgs> = {
-        [P in keyof T & keyof AggregateAccount]: P extends "_count" | "count"
+        [P in keyof T & keyof AggregateAccount]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateAccount[P]>
@@ -15302,9 +16506,9 @@ export namespace Prisma {
 
   type GetAccountGroupByPayload<T extends AccountGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<AccountGroupByOutputType, T["by"]> &
+      PickEnumerable<AccountGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof AccountGroupByOutputType))]: P extends "_count"
+          [P in ((keyof T) & (keyof AccountGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], AccountGroupByOutputType[P]>
@@ -15378,12 +16582,12 @@ export namespace Prisma {
   type AccountGetPayload<S extends boolean | null | undefined | AccountDefaultArgs> = $Result.GetResult<Prisma.$AccountPayload, S>
 
   type AccountCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<AccountFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    Omit<AccountFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: AccountCountAggregateInputType | true
     }
 
   export interface AccountDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["Account"], meta: { name: "Account" } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Account'], meta: { name: 'Account' } }
     /**
      * Find zero or one Account that matches the filter.
      * @param {AccountFindUniqueArgs} args - Arguments to find a Account
@@ -15642,10 +16846,10 @@ export namespace Prisma {
     count<T extends AccountCountArgs>(
       args?: Subset<T, AccountCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<"select", any>
-        ? T["select"] extends true
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
           ? number
-          : GetScalarType<T["select"], AccountCountAggregateOutputType>
+          : GetScalarType<T['select'], AccountCountAggregateOutputType>
         : number
     >
 
@@ -15696,20 +16900,20 @@ export namespace Prisma {
     groupBy<
       T extends AccountGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AccountGroupByArgs["orderBy"] }
-        : { orderBy?: AccountGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
-      ByFields extends MaybeTupleToUnion<T["by"]>,
+        ? { orderBy: AccountGroupByArgs['orderBy'] }
+        : { orderBy?: AccountGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
+      HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
+      ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? "Error: \"by\" must not be empty."
+      ? `Error: "by" must not be empty.`
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -15718,13 +16922,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                "Field ",
+                'Field ',
                 P,
-                " in \"having\" needs to be provided in \"by\"",
+                ` in "having" needs to be provided in "by"`,
               ]
         }[HavingFields]
-      : "take" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -15732,9 +16936,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
-      : "skip" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -15742,7 +16946,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
       : ByValid extends True
       ? {}
       : {
@@ -15795,11 +16999,11 @@ export namespace Prisma {
    * Fields of the Account model
    */
   interface AccountFieldRefs {
-    readonly id: FieldRef<"Account", "String">
-    readonly userId: FieldRef<"Account", "String">
-    readonly type: FieldRef<"Account", "String">
-    readonly provider: FieldRef<"Account", "String">
-    readonly providerAccountId: FieldRef<"Account", "String">
+    readonly id: FieldRef<"Account", 'String'>
+    readonly userId: FieldRef<"Account", 'String'>
+    readonly type: FieldRef<"Account", 'String'>
+    readonly provider: FieldRef<"Account", 'String'>
+    readonly providerAccountId: FieldRef<"Account", 'String'>
   }
     
 
@@ -16318,7 +17522,7 @@ export namespace Prisma {
   }
 
   export type GetVerificationTokenAggregateType<T extends VerificationTokenAggregateArgs> = {
-        [P in keyof T & keyof AggregateVerificationToken]: P extends "_count" | "count"
+        [P in keyof T & keyof AggregateVerificationToken]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateVerificationToken[P]>
@@ -16351,9 +17555,9 @@ export namespace Prisma {
 
   type GetVerificationTokenGroupByPayload<T extends VerificationTokenGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<VerificationTokenGroupByOutputType, T["by"]> &
+      PickEnumerable<VerificationTokenGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof VerificationTokenGroupByOutputType))]: P extends "_count"
+          [P in ((keyof T) & (keyof VerificationTokenGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
               : GetScalarType<T[P], VerificationTokenGroupByOutputType[P]>
@@ -16403,12 +17607,12 @@ export namespace Prisma {
   type VerificationTokenGetPayload<S extends boolean | null | undefined | VerificationTokenDefaultArgs> = $Result.GetResult<Prisma.$VerificationTokenPayload, S>
 
   type VerificationTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<VerificationTokenFindManyArgs, "select" | "include" | "distinct" | "omit"> & {
+    Omit<VerificationTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: VerificationTokenCountAggregateInputType | true
     }
 
   export interface VerificationTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>["model"]["VerificationToken"], meta: { name: "VerificationToken" } }
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['VerificationToken'], meta: { name: 'VerificationToken' } }
     /**
      * Find zero or one VerificationToken that matches the filter.
      * @param {VerificationTokenFindUniqueArgs} args - Arguments to find a VerificationToken
@@ -16667,10 +17871,10 @@ export namespace Prisma {
     count<T extends VerificationTokenCountArgs>(
       args?: Subset<T, VerificationTokenCountArgs>,
     ): Prisma.PrismaPromise<
-      T extends $Utils.Record<"select", any>
-        ? T["select"] extends true
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
           ? number
-          : GetScalarType<T["select"], VerificationTokenCountAggregateOutputType>
+          : GetScalarType<T['select'], VerificationTokenCountAggregateOutputType>
         : number
     >
 
@@ -16721,20 +17925,20 @@ export namespace Prisma {
     groupBy<
       T extends VerificationTokenGroupByArgs,
       HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: VerificationTokenGroupByArgs["orderBy"] }
-        : { orderBy?: VerificationTokenGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T["orderBy"]>>>,
-      ByFields extends MaybeTupleToUnion<T["by"]>,
+        ? { orderBy: VerificationTokenGroupByArgs['orderBy'] }
+        : { orderBy?: VerificationTokenGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
+      HavingFields extends GetHavingFields<T['having']>,
       HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
+      ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? "Error: \"by\" must not be empty."
+      ? `Error: "by" must not be empty.`
       : HavingValid extends False
       ? {
           [P in HavingFields]: P extends ByFields
@@ -16743,13 +17947,13 @@ export namespace Prisma {
             ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
             : [
                 Error,
-                "Field ",
+                'Field ',
                 P,
-                " in \"having\" needs to be provided in \"by\"",
+                ` in "having" needs to be provided in "by"`,
               ]
         }[HavingFields]
-      : "take" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -16757,9 +17961,9 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"take\", you also need to provide \"orderBy\""
-      : "skip" extends Keys<T>
-      ? "orderBy" extends Keys<T>
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
         ? ByValid extends True
           ? {}
           : {
@@ -16767,7 +17971,7 @@ export namespace Prisma {
                 ? never
                 : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
             }[OrderFields]
-        : "Error: If you provide \"skip\", you also need to provide \"orderBy\""
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
       : ByValid extends True
       ? {}
       : {
@@ -16819,9 +18023,9 @@ export namespace Prisma {
    * Fields of the VerificationToken model
    */
   interface VerificationTokenFieldRefs {
-    readonly identifier: FieldRef<"VerificationToken", "String">
-    readonly token: FieldRef<"VerificationToken", "String">
-    readonly expires: FieldRef<"VerificationToken", "DateTime">
+    readonly identifier: FieldRef<"VerificationToken", 'String'>
+    readonly token: FieldRef<"VerificationToken", 'String'>
+    readonly expires: FieldRef<"VerificationToken", 'DateTime'>
   }
     
 
@@ -17198,202 +18402,214 @@ export namespace Prisma {
    */
 
   export const TransactionIsolationLevel: {
-    ReadUncommitted: "ReadUncommitted",
-    ReadCommitted: "ReadCommitted",
-    RepeatableRead: "RepeatableRead",
-    Serializable: "Serializable"
-  }
+    ReadUncommitted: 'ReadUncommitted',
+    ReadCommitted: 'ReadCommitted',
+    RepeatableRead: 'RepeatableRead',
+    Serializable: 'Serializable'
+  };
 
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
   export const AssetScalarFieldEnum: {
-    id: "id",
-    key: "key",
-    bucket: "bucket",
-    fileName: "fileName",
-    mimeType: "mimeType",
-    sizeBytes: "sizeBytes",
-    createdAt: "createdAt",
-    updatedAt: "updatedAt",
-    ownerId: "ownerId"
-  }
+    id: 'id',
+    key: 'key',
+    bucket: 'bucket',
+    fileName: 'fileName',
+    mimeType: 'mimeType',
+    sizeBytes: 'sizeBytes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    ownerId: 'ownerId'
+  };
 
   export type AssetScalarFieldEnum = (typeof AssetScalarFieldEnum)[keyof typeof AssetScalarFieldEnum]
 
 
   export const ChapterAssetReferenceScalarFieldEnum: {
-    id: "id",
-    assetId: "assetId",
-    chapterId: "chapterId",
-    type: "type",
-    createdAt: "createdAt",
-    updatedAt: "updatedAt"
-  }
+    id: 'id',
+    assetId: 'assetId',
+    chapterId: 'chapterId',
+    type: 'type',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
 
   export type ChapterAssetReferenceScalarFieldEnum = (typeof ChapterAssetReferenceScalarFieldEnum)[keyof typeof ChapterAssetReferenceScalarFieldEnum]
 
 
   export const ChapterScalarFieldEnum: {
-    id: "id",
-    content: "content",
-    title: "title",
-    position: "position",
-    createdAt: "createdAt",
-    updatedAt: "updatedAt",
-    ebookId: "ebookId"
-  }
+    id: 'id',
+    title: 'title',
+    position: 'position',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    ebookId: 'ebookId'
+  };
 
   export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
 
 
+  export const ChapterLocaleScalarFieldEnum: {
+    id: 'id',
+    locale: 'locale',
+    title: 'title',
+    content: 'content',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    chapterId: 'chapterId'
+  };
+
+  export type ChapterLocaleScalarFieldEnum = (typeof ChapterLocaleScalarFieldEnum)[keyof typeof ChapterLocaleScalarFieldEnum]
+
+
   export const EbookCollaboratorScalarFieldEnum: {
-    id: "id",
-    ebookId: "ebookId",
-    userId: "userId",
-    role: "role",
-    allChaptersAccess: "allChaptersAccess",
-    customRoleId: "customRoleId",
-    createdAt: "createdAt",
-    updatedAt: "updatedAt"
-  }
+    id: 'id',
+    ebookId: 'ebookId',
+    userId: 'userId',
+    role: 'role',
+    allChaptersAccess: 'allChaptersAccess',
+    customRoleId: 'customRoleId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
 
   export type EbookCollaboratorScalarFieldEnum = (typeof EbookCollaboratorScalarFieldEnum)[keyof typeof EbookCollaboratorScalarFieldEnum]
 
 
   export const EbookCollaboratorChapterAccessScalarFieldEnum: {
-    id: "id",
-    collaboratorId: "collaboratorId",
-    chapterId: "chapterId",
-    createdAt: "createdAt"
-  }
+    id: 'id',
+    collaboratorId: 'collaboratorId',
+    chapterId: 'chapterId',
+    createdAt: 'createdAt'
+  };
 
   export type EbookCollaboratorChapterAccessScalarFieldEnum = (typeof EbookCollaboratorChapterAccessScalarFieldEnum)[keyof typeof EbookCollaboratorChapterAccessScalarFieldEnum]
 
 
   export const EbookCustomRoleScalarFieldEnum: {
-    id: "id",
-    ebookId: "ebookId",
-    name: "name",
-    permissions: "permissions",
-    createdByUserId: "createdByUserId",
-    createdAt: "createdAt",
-    updatedAt: "updatedAt"
-  }
+    id: 'id',
+    ebookId: 'ebookId',
+    name: 'name',
+    permissions: 'permissions',
+    createdByUserId: 'createdByUserId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
 
   export type EbookCustomRoleScalarFieldEnum = (typeof EbookCustomRoleScalarFieldEnum)[keyof typeof EbookCustomRoleScalarFieldEnum]
 
 
   export const EbookScalarFieldEnum: {
-    id: "id",
-    title: "title",
-    subtitle: "subtitle",
-    shortDescription: "shortDescription",
-    ownerId: "ownerId",
-    currentSnapshotId: "currentSnapshotId",
-    coverAssetId: "coverAssetId",
-    createdAt: "createdAt",
-    updatedAt: "updatedAt"
-  }
+    id: 'id',
+    title: 'title',
+    subtitle: 'subtitle',
+    shortDescription: 'shortDescription',
+    ownerId: 'ownerId',
+    currentSnapshotId: 'currentSnapshotId',
+    coverAssetId: 'coverAssetId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
 
   export type EbookScalarFieldEnum = (typeof EbookScalarFieldEnum)[keyof typeof EbookScalarFieldEnum]
 
 
   export const SnapshotScalarFieldEnum: {
-    id: "id",
-    ebookId: "ebookId",
-    version: "version",
-    createdAt: "createdAt",
-    status: "status"
-  }
+    id: 'id',
+    ebookId: 'ebookId',
+    version: 'version',
+    createdAt: 'createdAt',
+    status: 'status'
+  };
 
   export type SnapshotScalarFieldEnum = (typeof SnapshotScalarFieldEnum)[keyof typeof SnapshotScalarFieldEnum]
 
 
   export const SnapshotFileScalarFieldEnum: {
-    id: "id",
-    snapshotId: "snapshotId",
-    key: "key",
-    bucket: "bucket",
-    sizeBytes: "sizeBytes",
-    mimeType: "mimeType",
-    createdAt: "createdAt"
-  }
+    id: 'id',
+    snapshotId: 'snapshotId',
+    key: 'key',
+    bucket: 'bucket',
+    sizeBytes: 'sizeBytes',
+    mimeType: 'mimeType',
+    createdAt: 'createdAt'
+  };
 
   export type SnapshotFileScalarFieldEnum = (typeof SnapshotFileScalarFieldEnum)[keyof typeof SnapshotFileScalarFieldEnum]
 
 
   export const UploadHandshakeScalarFieldEnum: {
-    id: "id",
-    ownerId: "ownerId",
-    context: "context",
-    key: "key",
-    fileName: "fileName",
-    expectedMimeType: "expectedMimeType",
-    expectedSizeBytes: "expectedSizeBytes",
-    status: "status",
-    expiresAt: "expiresAt",
-    createdAt: "createdAt",
-    updatedAt: "updatedAt"
-  }
+    id: 'id',
+    ownerId: 'ownerId',
+    context: 'context',
+    key: 'key',
+    fileName: 'fileName',
+    expectedMimeType: 'expectedMimeType',
+    expectedSizeBytes: 'expectedSizeBytes',
+    status: 'status',
+    expiresAt: 'expiresAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
 
   export type UploadHandshakeScalarFieldEnum = (typeof UploadHandshakeScalarFieldEnum)[keyof typeof UploadHandshakeScalarFieldEnum]
 
 
   export const UserScalarFieldEnum: {
-    id: "id",
-    email: "email",
-    emailVerified: "emailVerified",
-    name: "name",
-    stripeCustomerId: "stripeCustomerId",
-    subscriptionStatus: "subscriptionStatus",
-    plan: "plan",
-    createdAt: "createdAt",
-    updatedAt: "updatedAt"
-  }
+    id: 'id',
+    email: 'email',
+    emailVerified: 'emailVerified',
+    name: 'name',
+    stripeCustomerId: 'stripeCustomerId',
+    subscriptionStatus: 'subscriptionStatus',
+    plan: 'plan',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
   export const AccountScalarFieldEnum: {
-    id: "id",
-    userId: "userId",
-    type: "type",
-    provider: "provider",
-    providerAccountId: "providerAccountId"
-  }
+    id: 'id',
+    userId: 'userId',
+    type: 'type',
+    provider: 'provider',
+    providerAccountId: 'providerAccountId'
+  };
 
   export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
 
 
   export const VerificationTokenScalarFieldEnum: {
-    identifier: "identifier",
-    token: "token",
-    expires: "expires"
-  }
+    identifier: 'identifier',
+    token: 'token',
+    expires: 'expires'
+  };
 
   export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
 
 
   export const SortOrder: {
-    asc: "asc",
-    desc: "desc"
-  }
+    asc: 'asc',
+    desc: 'desc'
+  };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
   export const JsonNullValueInput: {
     JsonNull: typeof JsonNull
-  }
+  };
 
   export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
-    default: "default",
-    insensitive: "insensitive"
-  }
+    default: 'default',
+    insensitive: 'insensitive'
+  };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
@@ -17402,15 +18618,15 @@ export namespace Prisma {
     DbNull: typeof DbNull,
     JsonNull: typeof JsonNull,
     AnyNull: typeof AnyNull
-  }
+  };
 
   export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   export const NullsOrder: {
-    first: "first",
-    last: "last"
-  }
+    first: 'first',
+    last: 'last'
+  };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
@@ -17423,175 +18639,175 @@ export namespace Prisma {
   /**
    * Reference to a field of type 'String'
    */
-  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "String">
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
     
 
 
   /**
    * Reference to a field of type 'String[]'
    */
-  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "String[]">
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
     
 
 
   /**
    * Reference to a field of type 'Int'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Int">
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
   /**
    * Reference to a field of type 'Int[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Int[]">
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
   /**
    * Reference to a field of type 'DateTime'
    */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "DateTime">
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
     
 
 
   /**
    * Reference to a field of type 'DateTime[]'
    */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "DateTime[]">
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
   /**
    * Reference to a field of type 'AssetReferenceType'
    */
-  export type EnumAssetReferenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "AssetReferenceType">
+  export type EnumAssetReferenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AssetReferenceType'>
     
 
 
   /**
    * Reference to a field of type 'AssetReferenceType[]'
    */
-  export type ListEnumAssetReferenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "AssetReferenceType[]">
+  export type ListEnumAssetReferenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AssetReferenceType[]'>
     
 
 
   /**
    * Reference to a field of type 'Json'
    */
-  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Json">
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
     
 
 
   /**
    * Reference to a field of type 'QueryMode'
    */
-  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "QueryMode">
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
   /**
    * Reference to a field of type 'CollaborationRole'
    */
-  export type EnumCollaborationRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "CollaborationRole">
+  export type EnumCollaborationRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CollaborationRole'>
     
 
 
   /**
    * Reference to a field of type 'CollaborationRole[]'
    */
-  export type ListEnumCollaborationRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "CollaborationRole[]">
+  export type ListEnumCollaborationRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CollaborationRole[]'>
     
 
 
   /**
    * Reference to a field of type 'Boolean'
    */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Boolean">
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
   /**
    * Reference to a field of type 'CollaborationPermission[]'
    */
-  export type ListEnumCollaborationPermissionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "CollaborationPermission[]">
+  export type ListEnumCollaborationPermissionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CollaborationPermission[]'>
     
 
 
   /**
    * Reference to a field of type 'CollaborationPermission'
    */
-  export type EnumCollaborationPermissionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "CollaborationPermission">
+  export type EnumCollaborationPermissionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CollaborationPermission'>
     
 
 
   /**
    * Reference to a field of type 'SnapshotStatus'
    */
-  export type EnumSnapshotStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "SnapshotStatus">
+  export type EnumSnapshotStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SnapshotStatus'>
     
 
 
   /**
    * Reference to a field of type 'SnapshotStatus[]'
    */
-  export type ListEnumSnapshotStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "SnapshotStatus[]">
+  export type ListEnumSnapshotStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SnapshotStatus[]'>
     
 
 
   /**
    * Reference to a field of type 'UploadHandshakeStatus'
    */
-  export type EnumUploadHandshakeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "UploadHandshakeStatus">
+  export type EnumUploadHandshakeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UploadHandshakeStatus'>
     
 
 
   /**
    * Reference to a field of type 'UploadHandshakeStatus[]'
    */
-  export type ListEnumUploadHandshakeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "UploadHandshakeStatus[]">
+  export type ListEnumUploadHandshakeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UploadHandshakeStatus[]'>
     
 
 
   /**
    * Reference to a field of type 'SubscriptionStatus'
    */
-  export type EnumSubscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "SubscriptionStatus">
+  export type EnumSubscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionStatus'>
     
 
 
   /**
    * Reference to a field of type 'SubscriptionStatus[]'
    */
-  export type ListEnumSubscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "SubscriptionStatus[]">
+  export type ListEnumSubscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionStatus[]'>
     
 
 
   /**
    * Reference to a field of type 'PlanType'
    */
-  export type EnumPlanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "PlanType">
+  export type EnumPlanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlanType'>
     
 
 
   /**
    * Reference to a field of type 'PlanType[]'
    */
-  export type ListEnumPlanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "PlanType[]">
+  export type ListEnumPlanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlanType[]'>
     
 
 
   /**
    * Reference to a field of type 'Float'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Float">
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
   /**
    * Reference to a field of type 'Float[]'
    */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Float[]">
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -17749,7 +18965,6 @@ export namespace Prisma {
     OR?: ChapterWhereInput[]
     NOT?: ChapterWhereInput | ChapterWhereInput[]
     id?: StringFilter<"Chapter"> | string
-    content?: JsonFilter<"Chapter">
     title?: StringFilter<"Chapter"> | string
     position?: IntFilter<"Chapter"> | number
     createdAt?: DateTimeFilter<"Chapter"> | Date | string
@@ -17758,11 +18973,11 @@ export namespace Prisma {
     ebook?: XOR<EbookScalarRelationFilter, EbookWhereInput>
     assetReferences?: ChapterAssetReferenceListRelationFilter
     collaboratorAccess?: EbookCollaboratorChapterAccessListRelationFilter
+    locales?: ChapterLocaleListRelationFilter
   }
 
   export type ChapterOrderByWithRelationInput = {
     id?: SortOrder
-    content?: SortOrder
     title?: SortOrder
     position?: SortOrder
     createdAt?: SortOrder
@@ -17771,6 +18986,7 @@ export namespace Prisma {
     ebook?: EbookOrderByWithRelationInput
     assetReferences?: ChapterAssetReferenceOrderByRelationAggregateInput
     collaboratorAccess?: EbookCollaboratorChapterAccessOrderByRelationAggregateInput
+    locales?: ChapterLocaleOrderByRelationAggregateInput
   }
 
   export type ChapterWhereUniqueInput = Prisma.AtLeast<{
@@ -17779,7 +18995,6 @@ export namespace Prisma {
     AND?: ChapterWhereInput | ChapterWhereInput[]
     OR?: ChapterWhereInput[]
     NOT?: ChapterWhereInput | ChapterWhereInput[]
-    content?: JsonFilter<"Chapter">
     title?: StringFilter<"Chapter"> | string
     position?: IntFilter<"Chapter"> | number
     createdAt?: DateTimeFilter<"Chapter"> | Date | string
@@ -17788,11 +19003,11 @@ export namespace Prisma {
     ebook?: XOR<EbookScalarRelationFilter, EbookWhereInput>
     assetReferences?: ChapterAssetReferenceListRelationFilter
     collaboratorAccess?: EbookCollaboratorChapterAccessListRelationFilter
+    locales?: ChapterLocaleListRelationFilter
   }, "id" | "ebookId_position">
 
   export type ChapterOrderByWithAggregationInput = {
     id?: SortOrder
-    content?: SortOrder
     title?: SortOrder
     position?: SortOrder
     createdAt?: SortOrder
@@ -17810,12 +19025,77 @@ export namespace Prisma {
     OR?: ChapterScalarWhereWithAggregatesInput[]
     NOT?: ChapterScalarWhereWithAggregatesInput | ChapterScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Chapter"> | string
-    content?: JsonWithAggregatesFilter<"Chapter">
     title?: StringWithAggregatesFilter<"Chapter"> | string
     position?: IntWithAggregatesFilter<"Chapter"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Chapter"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Chapter"> | Date | string
     ebookId?: StringWithAggregatesFilter<"Chapter"> | string
+  }
+
+  export type ChapterLocaleWhereInput = {
+    AND?: ChapterLocaleWhereInput | ChapterLocaleWhereInput[]
+    OR?: ChapterLocaleWhereInput[]
+    NOT?: ChapterLocaleWhereInput | ChapterLocaleWhereInput[]
+    id?: StringFilter<"ChapterLocale"> | string
+    locale?: StringFilter<"ChapterLocale"> | string
+    title?: StringFilter<"ChapterLocale"> | string
+    content?: JsonFilter<"ChapterLocale">
+    createdAt?: DateTimeFilter<"ChapterLocale"> | Date | string
+    updatedAt?: DateTimeFilter<"ChapterLocale"> | Date | string
+    chapterId?: StringFilter<"ChapterLocale"> | string
+    chapter?: XOR<ChapterScalarRelationFilter, ChapterWhereInput>
+  }
+
+  export type ChapterLocaleOrderByWithRelationInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    chapterId?: SortOrder
+    chapter?: ChapterOrderByWithRelationInput
+  }
+
+  export type ChapterLocaleWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    chapterId_locale?: ChapterLocaleChapterIdLocaleCompoundUniqueInput
+    AND?: ChapterLocaleWhereInput | ChapterLocaleWhereInput[]
+    OR?: ChapterLocaleWhereInput[]
+    NOT?: ChapterLocaleWhereInput | ChapterLocaleWhereInput[]
+    locale?: StringFilter<"ChapterLocale"> | string
+    title?: StringFilter<"ChapterLocale"> | string
+    content?: JsonFilter<"ChapterLocale">
+    createdAt?: DateTimeFilter<"ChapterLocale"> | Date | string
+    updatedAt?: DateTimeFilter<"ChapterLocale"> | Date | string
+    chapterId?: StringFilter<"ChapterLocale"> | string
+    chapter?: XOR<ChapterScalarRelationFilter, ChapterWhereInput>
+  }, "id" | "chapterId_locale">
+
+  export type ChapterLocaleOrderByWithAggregationInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    chapterId?: SortOrder
+    _count?: ChapterLocaleCountOrderByAggregateInput
+    _max?: ChapterLocaleMaxOrderByAggregateInput
+    _min?: ChapterLocaleMinOrderByAggregateInput
+  }
+
+  export type ChapterLocaleScalarWhereWithAggregatesInput = {
+    AND?: ChapterLocaleScalarWhereWithAggregatesInput | ChapterLocaleScalarWhereWithAggregatesInput[]
+    OR?: ChapterLocaleScalarWhereWithAggregatesInput[]
+    NOT?: ChapterLocaleScalarWhereWithAggregatesInput | ChapterLocaleScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ChapterLocale"> | string
+    locale?: StringWithAggregatesFilter<"ChapterLocale"> | string
+    title?: StringWithAggregatesFilter<"ChapterLocale"> | string
+    content?: JsonWithAggregatesFilter<"ChapterLocale">
+    createdAt?: DateTimeWithAggregatesFilter<"ChapterLocale"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ChapterLocale"> | Date | string
+    chapterId?: StringWithAggregatesFilter<"ChapterLocale"> | string
   }
 
   export type EbookCollaboratorWhereInput = {
@@ -18679,7 +19959,6 @@ export namespace Prisma {
 
   export type ChapterCreateInput = {
     id?: string
-    content: JsonNullValueInput | InputJsonValue
     title: string
     position: number
     createdAt?: Date | string
@@ -18687,11 +19966,11 @@ export namespace Prisma {
     ebook: EbookCreateNestedOneWithoutChaptersInput
     assetReferences?: ChapterAssetReferenceCreateNestedManyWithoutChapterInput
     collaboratorAccess?: EbookCollaboratorChapterAccessCreateNestedManyWithoutChapterInput
+    locales?: ChapterLocaleCreateNestedManyWithoutChapterInput
   }
 
   export type ChapterUncheckedCreateInput = {
     id?: string
-    content: JsonNullValueInput | InputJsonValue
     title: string
     position: number
     createdAt?: Date | string
@@ -18699,11 +19978,11 @@ export namespace Prisma {
     ebookId: string
     assetReferences?: ChapterAssetReferenceUncheckedCreateNestedManyWithoutChapterInput
     collaboratorAccess?: EbookCollaboratorChapterAccessUncheckedCreateNestedManyWithoutChapterInput
+    locales?: ChapterLocaleUncheckedCreateNestedManyWithoutChapterInput
   }
 
   export type ChapterUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     title?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18711,11 +19990,11 @@ export namespace Prisma {
     ebook?: EbookUpdateOneRequiredWithoutChaptersNestedInput
     assetReferences?: ChapterAssetReferenceUpdateManyWithoutChapterNestedInput
     collaboratorAccess?: EbookCollaboratorChapterAccessUpdateManyWithoutChapterNestedInput
+    locales?: ChapterLocaleUpdateManyWithoutChapterNestedInput
   }
 
   export type ChapterUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     title?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18723,11 +20002,11 @@ export namespace Prisma {
     ebookId?: StringFieldUpdateOperationsInput | string
     assetReferences?: ChapterAssetReferenceUncheckedUpdateManyWithoutChapterNestedInput
     collaboratorAccess?: EbookCollaboratorChapterAccessUncheckedUpdateManyWithoutChapterNestedInput
+    locales?: ChapterLocaleUncheckedUpdateManyWithoutChapterNestedInput
   }
 
   export type ChapterCreateManyInput = {
     id?: string
-    content: JsonNullValueInput | InputJsonValue
     title: string
     position: number
     createdAt?: Date | string
@@ -18737,7 +20016,6 @@ export namespace Prisma {
 
   export type ChapterUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     title?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18746,12 +20024,80 @@ export namespace Prisma {
 
   export type ChapterUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     title?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ebookId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ChapterLocaleCreateInput = {
+    id?: string
+    locale: string
+    title: string
+    content: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    chapter: ChapterCreateNestedOneWithoutLocalesInput
+  }
+
+  export type ChapterLocaleUncheckedCreateInput = {
+    id?: string
+    locale: string
+    title: string
+    content: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    chapterId: string
+  }
+
+  export type ChapterLocaleUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    locale?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chapter?: ChapterUpdateOneRequiredWithoutLocalesNestedInput
+  }
+
+  export type ChapterLocaleUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    locale?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chapterId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ChapterLocaleCreateManyInput = {
+    id?: string
+    locale: string
+    title: string
+    content: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    chapterId: string
+  }
+
+  export type ChapterLocaleUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    locale?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChapterLocaleUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    locale?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chapterId?: StringFieldUpdateOperationsInput | string
   }
 
   export type EbookCollaboratorCreateInput = {
@@ -19689,29 +21035,6 @@ export namespace Prisma {
     _min?: NestedEnumAssetReferenceTypeFilter<$PrismaModel>
     _max?: NestedEnumAssetReferenceTypeFilter<$PrismaModel>
   }
-  export type JsonFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, "path">>,
-        Required<JsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, "path">>
-
-  export type JsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
 
   export type EbookScalarRelationFilter = {
     is?: EbookWhereInput
@@ -19724,7 +21047,17 @@ export namespace Prisma {
     none?: EbookCollaboratorChapterAccessWhereInput
   }
 
+  export type ChapterLocaleListRelationFilter = {
+    every?: ChapterLocaleWhereInput
+    some?: ChapterLocaleWhereInput
+    none?: ChapterLocaleWhereInput
+  }
+
   export type EbookCollaboratorChapterAccessOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ChapterLocaleOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -19735,7 +21068,6 @@ export namespace Prisma {
 
   export type ChapterCountOrderByAggregateInput = {
     id?: SortOrder
-    content?: SortOrder
     title?: SortOrder
     position?: SortOrder
     createdAt?: SortOrder
@@ -19768,12 +21100,68 @@ export namespace Prisma {
   export type ChapterSumOrderByAggregateInput = {
     position?: SortOrder
   }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type ChapterLocaleChapterIdLocaleCompoundUniqueInput = {
+    chapterId: string
+    locale: string
+  }
+
+  export type ChapterLocaleCountOrderByAggregateInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    chapterId?: SortOrder
+  }
+
+  export type ChapterLocaleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    title?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    chapterId?: SortOrder
+  }
+
+  export type ChapterLocaleMinOrderByAggregateInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    title?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    chapterId?: SortOrder
+  }
   export type JsonWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
-        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, "path">>,
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
         Required<JsonWithAggregatesFilterBase<$PrismaModel>>
       >
-    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, "path">>
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
 
   export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
     equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
@@ -20586,6 +21974,13 @@ export namespace Prisma {
     connect?: EbookCollaboratorChapterAccessWhereUniqueInput | EbookCollaboratorChapterAccessWhereUniqueInput[]
   }
 
+  export type ChapterLocaleCreateNestedManyWithoutChapterInput = {
+    create?: XOR<ChapterLocaleCreateWithoutChapterInput, ChapterLocaleUncheckedCreateWithoutChapterInput> | ChapterLocaleCreateWithoutChapterInput[] | ChapterLocaleUncheckedCreateWithoutChapterInput[]
+    connectOrCreate?: ChapterLocaleCreateOrConnectWithoutChapterInput | ChapterLocaleCreateOrConnectWithoutChapterInput[]
+    createMany?: ChapterLocaleCreateManyChapterInputEnvelope
+    connect?: ChapterLocaleWhereUniqueInput | ChapterLocaleWhereUniqueInput[]
+  }
+
   export type ChapterAssetReferenceUncheckedCreateNestedManyWithoutChapterInput = {
     create?: XOR<ChapterAssetReferenceCreateWithoutChapterInput, ChapterAssetReferenceUncheckedCreateWithoutChapterInput> | ChapterAssetReferenceCreateWithoutChapterInput[] | ChapterAssetReferenceUncheckedCreateWithoutChapterInput[]
     connectOrCreate?: ChapterAssetReferenceCreateOrConnectWithoutChapterInput | ChapterAssetReferenceCreateOrConnectWithoutChapterInput[]
@@ -20598,6 +21993,13 @@ export namespace Prisma {
     connectOrCreate?: EbookCollaboratorChapterAccessCreateOrConnectWithoutChapterInput | EbookCollaboratorChapterAccessCreateOrConnectWithoutChapterInput[]
     createMany?: EbookCollaboratorChapterAccessCreateManyChapterInputEnvelope
     connect?: EbookCollaboratorChapterAccessWhereUniqueInput | EbookCollaboratorChapterAccessWhereUniqueInput[]
+  }
+
+  export type ChapterLocaleUncheckedCreateNestedManyWithoutChapterInput = {
+    create?: XOR<ChapterLocaleCreateWithoutChapterInput, ChapterLocaleUncheckedCreateWithoutChapterInput> | ChapterLocaleCreateWithoutChapterInput[] | ChapterLocaleUncheckedCreateWithoutChapterInput[]
+    connectOrCreate?: ChapterLocaleCreateOrConnectWithoutChapterInput | ChapterLocaleCreateOrConnectWithoutChapterInput[]
+    createMany?: ChapterLocaleCreateManyChapterInputEnvelope
+    connect?: ChapterLocaleWhereUniqueInput | ChapterLocaleWhereUniqueInput[]
   }
 
   export type EbookUpdateOneRequiredWithoutChaptersNestedInput = {
@@ -20636,6 +22038,20 @@ export namespace Prisma {
     deleteMany?: EbookCollaboratorChapterAccessScalarWhereInput | EbookCollaboratorChapterAccessScalarWhereInput[]
   }
 
+  export type ChapterLocaleUpdateManyWithoutChapterNestedInput = {
+    create?: XOR<ChapterLocaleCreateWithoutChapterInput, ChapterLocaleUncheckedCreateWithoutChapterInput> | ChapterLocaleCreateWithoutChapterInput[] | ChapterLocaleUncheckedCreateWithoutChapterInput[]
+    connectOrCreate?: ChapterLocaleCreateOrConnectWithoutChapterInput | ChapterLocaleCreateOrConnectWithoutChapterInput[]
+    upsert?: ChapterLocaleUpsertWithWhereUniqueWithoutChapterInput | ChapterLocaleUpsertWithWhereUniqueWithoutChapterInput[]
+    createMany?: ChapterLocaleCreateManyChapterInputEnvelope
+    set?: ChapterLocaleWhereUniqueInput | ChapterLocaleWhereUniqueInput[]
+    disconnect?: ChapterLocaleWhereUniqueInput | ChapterLocaleWhereUniqueInput[]
+    delete?: ChapterLocaleWhereUniqueInput | ChapterLocaleWhereUniqueInput[]
+    connect?: ChapterLocaleWhereUniqueInput | ChapterLocaleWhereUniqueInput[]
+    update?: ChapterLocaleUpdateWithWhereUniqueWithoutChapterInput | ChapterLocaleUpdateWithWhereUniqueWithoutChapterInput[]
+    updateMany?: ChapterLocaleUpdateManyWithWhereWithoutChapterInput | ChapterLocaleUpdateManyWithWhereWithoutChapterInput[]
+    deleteMany?: ChapterLocaleScalarWhereInput | ChapterLocaleScalarWhereInput[]
+  }
+
   export type ChapterAssetReferenceUncheckedUpdateManyWithoutChapterNestedInput = {
     create?: XOR<ChapterAssetReferenceCreateWithoutChapterInput, ChapterAssetReferenceUncheckedCreateWithoutChapterInput> | ChapterAssetReferenceCreateWithoutChapterInput[] | ChapterAssetReferenceUncheckedCreateWithoutChapterInput[]
     connectOrCreate?: ChapterAssetReferenceCreateOrConnectWithoutChapterInput | ChapterAssetReferenceCreateOrConnectWithoutChapterInput[]
@@ -20662,6 +22078,34 @@ export namespace Prisma {
     update?: EbookCollaboratorChapterAccessUpdateWithWhereUniqueWithoutChapterInput | EbookCollaboratorChapterAccessUpdateWithWhereUniqueWithoutChapterInput[]
     updateMany?: EbookCollaboratorChapterAccessUpdateManyWithWhereWithoutChapterInput | EbookCollaboratorChapterAccessUpdateManyWithWhereWithoutChapterInput[]
     deleteMany?: EbookCollaboratorChapterAccessScalarWhereInput | EbookCollaboratorChapterAccessScalarWhereInput[]
+  }
+
+  export type ChapterLocaleUncheckedUpdateManyWithoutChapterNestedInput = {
+    create?: XOR<ChapterLocaleCreateWithoutChapterInput, ChapterLocaleUncheckedCreateWithoutChapterInput> | ChapterLocaleCreateWithoutChapterInput[] | ChapterLocaleUncheckedCreateWithoutChapterInput[]
+    connectOrCreate?: ChapterLocaleCreateOrConnectWithoutChapterInput | ChapterLocaleCreateOrConnectWithoutChapterInput[]
+    upsert?: ChapterLocaleUpsertWithWhereUniqueWithoutChapterInput | ChapterLocaleUpsertWithWhereUniqueWithoutChapterInput[]
+    createMany?: ChapterLocaleCreateManyChapterInputEnvelope
+    set?: ChapterLocaleWhereUniqueInput | ChapterLocaleWhereUniqueInput[]
+    disconnect?: ChapterLocaleWhereUniqueInput | ChapterLocaleWhereUniqueInput[]
+    delete?: ChapterLocaleWhereUniqueInput | ChapterLocaleWhereUniqueInput[]
+    connect?: ChapterLocaleWhereUniqueInput | ChapterLocaleWhereUniqueInput[]
+    update?: ChapterLocaleUpdateWithWhereUniqueWithoutChapterInput | ChapterLocaleUpdateWithWhereUniqueWithoutChapterInput[]
+    updateMany?: ChapterLocaleUpdateManyWithWhereWithoutChapterInput | ChapterLocaleUpdateManyWithWhereWithoutChapterInput[]
+    deleteMany?: ChapterLocaleScalarWhereInput | ChapterLocaleScalarWhereInput[]
+  }
+
+  export type ChapterCreateNestedOneWithoutLocalesInput = {
+    create?: XOR<ChapterCreateWithoutLocalesInput, ChapterUncheckedCreateWithoutLocalesInput>
+    connectOrCreate?: ChapterCreateOrConnectWithoutLocalesInput
+    connect?: ChapterWhereUniqueInput
+  }
+
+  export type ChapterUpdateOneRequiredWithoutLocalesNestedInput = {
+    create?: XOR<ChapterCreateWithoutLocalesInput, ChapterUncheckedCreateWithoutLocalesInput>
+    connectOrCreate?: ChapterCreateOrConnectWithoutLocalesInput
+    upsert?: ChapterUpsertWithoutLocalesInput
+    connect?: ChapterWhereUniqueInput
+    update?: XOR<XOR<ChapterUpdateToOneWithWhereWithoutLocalesInput, ChapterUpdateWithoutLocalesInput>, ChapterUncheckedUpdateWithoutLocalesInput>
   }
 
   export type EbookCreateNestedOneWithoutCollaboratorsInput = {
@@ -21587,10 +23031,10 @@ export namespace Prisma {
   }
   export type NestedJsonFilter<$PrismaModel = never> =
     | PatchUndefined<
-        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, "path">>,
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
         Required<NestedJsonFilterBase<$PrismaModel>>
       >
-    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, "path">>
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
 
   export type NestedJsonFilterBase<$PrismaModel = never> = {
     equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
@@ -22016,24 +23460,24 @@ export namespace Prisma {
 
   export type ChapterCreateWithoutAssetReferencesInput = {
     id?: string
-    content: JsonNullValueInput | InputJsonValue
     title: string
     position: number
     createdAt?: Date | string
     updatedAt?: Date | string
     ebook: EbookCreateNestedOneWithoutChaptersInput
     collaboratorAccess?: EbookCollaboratorChapterAccessCreateNestedManyWithoutChapterInput
+    locales?: ChapterLocaleCreateNestedManyWithoutChapterInput
   }
 
   export type ChapterUncheckedCreateWithoutAssetReferencesInput = {
     id?: string
-    content: JsonNullValueInput | InputJsonValue
     title: string
     position: number
     createdAt?: Date | string
     updatedAt?: Date | string
     ebookId: string
     collaboratorAccess?: EbookCollaboratorChapterAccessUncheckedCreateNestedManyWithoutChapterInput
+    locales?: ChapterLocaleUncheckedCreateNestedManyWithoutChapterInput
   }
 
   export type ChapterCreateOrConnectWithoutAssetReferencesInput = {
@@ -22091,24 +23535,24 @@ export namespace Prisma {
 
   export type ChapterUpdateWithoutAssetReferencesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     title?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ebook?: EbookUpdateOneRequiredWithoutChaptersNestedInput
     collaboratorAccess?: EbookCollaboratorChapterAccessUpdateManyWithoutChapterNestedInput
+    locales?: ChapterLocaleUpdateManyWithoutChapterNestedInput
   }
 
   export type ChapterUncheckedUpdateWithoutAssetReferencesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     title?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ebookId?: StringFieldUpdateOperationsInput | string
     collaboratorAccess?: EbookCollaboratorChapterAccessUncheckedUpdateManyWithoutChapterNestedInput
+    locales?: ChapterLocaleUncheckedUpdateManyWithoutChapterNestedInput
   }
 
   export type EbookCreateWithoutChaptersInput = {
@@ -22194,6 +23638,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ChapterLocaleCreateWithoutChapterInput = {
+    id?: string
+    locale: string
+    title: string
+    content: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ChapterLocaleUncheckedCreateWithoutChapterInput = {
+    id?: string
+    locale: string
+    title: string
+    content: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ChapterLocaleCreateOrConnectWithoutChapterInput = {
+    where: ChapterLocaleWhereUniqueInput
+    create: XOR<ChapterLocaleCreateWithoutChapterInput, ChapterLocaleUncheckedCreateWithoutChapterInput>
+  }
+
+  export type ChapterLocaleCreateManyChapterInputEnvelope = {
+    data: ChapterLocaleCreateManyChapterInput | ChapterLocaleCreateManyChapterInput[]
+    skipDuplicates?: boolean
+  }
+
   export type EbookUpsertWithoutChaptersInput = {
     update: XOR<EbookUpdateWithoutChaptersInput, EbookUncheckedUpdateWithoutChaptersInput>
     create: XOR<EbookCreateWithoutChaptersInput, EbookUncheckedCreateWithoutChaptersInput>
@@ -22275,6 +23747,95 @@ export namespace Prisma {
     collaboratorId?: StringFilter<"EbookCollaboratorChapterAccess"> | string
     chapterId?: StringFilter<"EbookCollaboratorChapterAccess"> | string
     createdAt?: DateTimeFilter<"EbookCollaboratorChapterAccess"> | Date | string
+  }
+
+  export type ChapterLocaleUpsertWithWhereUniqueWithoutChapterInput = {
+    where: ChapterLocaleWhereUniqueInput
+    update: XOR<ChapterLocaleUpdateWithoutChapterInput, ChapterLocaleUncheckedUpdateWithoutChapterInput>
+    create: XOR<ChapterLocaleCreateWithoutChapterInput, ChapterLocaleUncheckedCreateWithoutChapterInput>
+  }
+
+  export type ChapterLocaleUpdateWithWhereUniqueWithoutChapterInput = {
+    where: ChapterLocaleWhereUniqueInput
+    data: XOR<ChapterLocaleUpdateWithoutChapterInput, ChapterLocaleUncheckedUpdateWithoutChapterInput>
+  }
+
+  export type ChapterLocaleUpdateManyWithWhereWithoutChapterInput = {
+    where: ChapterLocaleScalarWhereInput
+    data: XOR<ChapterLocaleUpdateManyMutationInput, ChapterLocaleUncheckedUpdateManyWithoutChapterInput>
+  }
+
+  export type ChapterLocaleScalarWhereInput = {
+    AND?: ChapterLocaleScalarWhereInput | ChapterLocaleScalarWhereInput[]
+    OR?: ChapterLocaleScalarWhereInput[]
+    NOT?: ChapterLocaleScalarWhereInput | ChapterLocaleScalarWhereInput[]
+    id?: StringFilter<"ChapterLocale"> | string
+    locale?: StringFilter<"ChapterLocale"> | string
+    title?: StringFilter<"ChapterLocale"> | string
+    content?: JsonFilter<"ChapterLocale">
+    createdAt?: DateTimeFilter<"ChapterLocale"> | Date | string
+    updatedAt?: DateTimeFilter<"ChapterLocale"> | Date | string
+    chapterId?: StringFilter<"ChapterLocale"> | string
+  }
+
+  export type ChapterCreateWithoutLocalesInput = {
+    id?: string
+    title: string
+    position: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ebook: EbookCreateNestedOneWithoutChaptersInput
+    assetReferences?: ChapterAssetReferenceCreateNestedManyWithoutChapterInput
+    collaboratorAccess?: EbookCollaboratorChapterAccessCreateNestedManyWithoutChapterInput
+  }
+
+  export type ChapterUncheckedCreateWithoutLocalesInput = {
+    id?: string
+    title: string
+    position: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ebookId: string
+    assetReferences?: ChapterAssetReferenceUncheckedCreateNestedManyWithoutChapterInput
+    collaboratorAccess?: EbookCollaboratorChapterAccessUncheckedCreateNestedManyWithoutChapterInput
+  }
+
+  export type ChapterCreateOrConnectWithoutLocalesInput = {
+    where: ChapterWhereUniqueInput
+    create: XOR<ChapterCreateWithoutLocalesInput, ChapterUncheckedCreateWithoutLocalesInput>
+  }
+
+  export type ChapterUpsertWithoutLocalesInput = {
+    update: XOR<ChapterUpdateWithoutLocalesInput, ChapterUncheckedUpdateWithoutLocalesInput>
+    create: XOR<ChapterCreateWithoutLocalesInput, ChapterUncheckedCreateWithoutLocalesInput>
+    where?: ChapterWhereInput
+  }
+
+  export type ChapterUpdateToOneWithWhereWithoutLocalesInput = {
+    where?: ChapterWhereInput
+    data: XOR<ChapterUpdateWithoutLocalesInput, ChapterUncheckedUpdateWithoutLocalesInput>
+  }
+
+  export type ChapterUpdateWithoutLocalesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ebook?: EbookUpdateOneRequiredWithoutChaptersNestedInput
+    assetReferences?: ChapterAssetReferenceUpdateManyWithoutChapterNestedInput
+    collaboratorAccess?: EbookCollaboratorChapterAccessUpdateManyWithoutChapterNestedInput
+  }
+
+  export type ChapterUncheckedUpdateWithoutLocalesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ebookId?: StringFieldUpdateOperationsInput | string
+    assetReferences?: ChapterAssetReferenceUncheckedUpdateManyWithoutChapterNestedInput
+    collaboratorAccess?: EbookCollaboratorChapterAccessUncheckedUpdateManyWithoutChapterNestedInput
   }
 
   export type EbookCreateWithoutCollaboratorsInput = {
@@ -22560,24 +24121,24 @@ export namespace Prisma {
 
   export type ChapterCreateWithoutCollaboratorAccessInput = {
     id?: string
-    content: JsonNullValueInput | InputJsonValue
     title: string
     position: number
     createdAt?: Date | string
     updatedAt?: Date | string
     ebook: EbookCreateNestedOneWithoutChaptersInput
     assetReferences?: ChapterAssetReferenceCreateNestedManyWithoutChapterInput
+    locales?: ChapterLocaleCreateNestedManyWithoutChapterInput
   }
 
   export type ChapterUncheckedCreateWithoutCollaboratorAccessInput = {
     id?: string
-    content: JsonNullValueInput | InputJsonValue
     title: string
     position: number
     createdAt?: Date | string
     updatedAt?: Date | string
     ebookId: string
     assetReferences?: ChapterAssetReferenceUncheckedCreateNestedManyWithoutChapterInput
+    locales?: ChapterLocaleUncheckedCreateNestedManyWithoutChapterInput
   }
 
   export type ChapterCreateOrConnectWithoutCollaboratorAccessInput = {
@@ -22631,24 +24192,24 @@ export namespace Prisma {
 
   export type ChapterUpdateWithoutCollaboratorAccessInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     title?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ebook?: EbookUpdateOneRequiredWithoutChaptersNestedInput
     assetReferences?: ChapterAssetReferenceUpdateManyWithoutChapterNestedInput
+    locales?: ChapterLocaleUpdateManyWithoutChapterNestedInput
   }
 
   export type ChapterUncheckedUpdateWithoutCollaboratorAccessInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     title?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ebookId?: StringFieldUpdateOperationsInput | string
     assetReferences?: ChapterAssetReferenceUncheckedUpdateManyWithoutChapterNestedInput
+    locales?: ChapterLocaleUncheckedUpdateManyWithoutChapterNestedInput
   }
 
   export type EbookCreateWithoutCustomRolesInput = {
@@ -22995,24 +24556,24 @@ export namespace Prisma {
 
   export type ChapterCreateWithoutEbookInput = {
     id?: string
-    content: JsonNullValueInput | InputJsonValue
     title: string
     position: number
     createdAt?: Date | string
     updatedAt?: Date | string
     assetReferences?: ChapterAssetReferenceCreateNestedManyWithoutChapterInput
     collaboratorAccess?: EbookCollaboratorChapterAccessCreateNestedManyWithoutChapterInput
+    locales?: ChapterLocaleCreateNestedManyWithoutChapterInput
   }
 
   export type ChapterUncheckedCreateWithoutEbookInput = {
     id?: string
-    content: JsonNullValueInput | InputJsonValue
     title: string
     position: number
     createdAt?: Date | string
     updatedAt?: Date | string
     assetReferences?: ChapterAssetReferenceUncheckedCreateNestedManyWithoutChapterInput
     collaboratorAccess?: EbookCollaboratorChapterAccessUncheckedCreateNestedManyWithoutChapterInput
+    locales?: ChapterLocaleUncheckedCreateNestedManyWithoutChapterInput
   }
 
   export type ChapterCreateOrConnectWithoutEbookInput = {
@@ -23246,7 +24807,6 @@ export namespace Prisma {
     OR?: ChapterScalarWhereInput[]
     NOT?: ChapterScalarWhereInput | ChapterScalarWhereInput[]
     id?: StringFilter<"Chapter"> | string
-    content?: JsonFilter<"Chapter">
     title?: StringFilter<"Chapter"> | string
     position?: IntFilter<"Chapter"> | number
     createdAt?: DateTimeFilter<"Chapter"> | Date | string
@@ -24158,6 +25718,15 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type ChapterLocaleCreateManyChapterInput = {
+    id?: string
+    locale: string
+    title: string
+    content: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ChapterAssetReferenceUpdateWithoutChapterInput = {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumAssetReferenceTypeFieldUpdateOperationsInput | $Enums.AssetReferenceType
@@ -24198,6 +25767,33 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     collaboratorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChapterLocaleUpdateWithoutChapterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    locale?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChapterLocaleUncheckedUpdateWithoutChapterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    locale?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChapterLocaleUncheckedUpdateManyWithoutChapterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    locale?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EbookCollaboratorChapterAccessCreateManyCollaboratorInput = {
@@ -24272,7 +25868,6 @@ export namespace Prisma {
 
   export type ChapterCreateManyEbookInput = {
     id?: string
-    content: JsonNullValueInput | InputJsonValue
     title: string
     position: number
     createdAt?: Date | string
@@ -24325,29 +25920,28 @@ export namespace Prisma {
 
   export type ChapterUpdateWithoutEbookInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     title?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assetReferences?: ChapterAssetReferenceUpdateManyWithoutChapterNestedInput
     collaboratorAccess?: EbookCollaboratorChapterAccessUpdateManyWithoutChapterNestedInput
+    locales?: ChapterLocaleUpdateManyWithoutChapterNestedInput
   }
 
   export type ChapterUncheckedUpdateWithoutEbookInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     title?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assetReferences?: ChapterAssetReferenceUncheckedUpdateManyWithoutChapterNestedInput
     collaboratorAccess?: EbookCollaboratorChapterAccessUncheckedUpdateManyWithoutChapterNestedInput
+    locales?: ChapterLocaleUncheckedUpdateManyWithoutChapterNestedInput
   }
 
   export type ChapterUncheckedUpdateManyWithoutEbookInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     title?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

@@ -65,8 +65,14 @@ export async function setupCollaborationFixture(): Promise<CollaborationFixture>
         data: {
             ebookId: ebook.id,
             title: "Chapter 1",
-            content: {},
             position: 0,
+            locales: {
+                create: {
+                    locale: "en",
+                    title: "Chapter 1",
+                    content: {},
+                },
+            },
         },
     })
 
@@ -74,8 +80,14 @@ export async function setupCollaborationFixture(): Promise<CollaborationFixture>
         data: {
             ebookId: ebook.id,
             title: "Chapter 2",
-            content: {},
             position: 1,
+            locales: {
+                create: {
+                    locale: "en",
+                    title: "Chapter 2",
+                    content: {},
+                },
+            },
         },
     })
 

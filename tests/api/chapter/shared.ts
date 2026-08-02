@@ -86,27 +86,45 @@ export async function setupChapterFixture(): Promise<ChapterFixture> {
     const chapter = await prisma.chapter.create({
         data: {
             title: "Original chapter",
-            content: { blocks: ["original"] },
             ebookId: ebook.id,
             position: 0,
+            locales: {
+                create: {
+                    locale: "en",
+                    title: "Original chapter",
+                    content: { blocks: ["original"] },
+                },
+            },
         },
     })
 
     const secondChapter = await prisma.chapter.create({
         data: {
             title: "Second chapter",
-            content: { blocks: ["second"] },
             ebookId: ebook.id,
             position: 1,
+            locales: {
+                create: {
+                    locale: "en",
+                    title: "Second chapter",
+                    content: { blocks: ["second"] },
+                },
+            },
         },
     })
 
     const otherChapter = await prisma.chapter.create({
         data: {
             title: "Other chapter",
-            content: {},
             ebookId: otherEbook.id,
             position: 0,
+            locales: {
+                create: {
+                    locale: "en",
+                    title: "Other chapter",
+                    content: {},
+                },
+            },
         },
     })
 

@@ -143,12 +143,21 @@ exports.Prisma.ChapterAssetReferenceScalarFieldEnum = {
 
 exports.Prisma.ChapterScalarFieldEnum = {
   id: 'id',
-  content: 'content',
   title: 'title',
   position: 'position',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   ebookId: 'ebookId'
+};
+
+exports.Prisma.ChapterLocaleScalarFieldEnum = {
+  id: 'id',
+  locale: 'locale',
+  title: 'title',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  chapterId: 'chapterId'
 };
 
 exports.Prisma.EbookCollaboratorScalarFieldEnum = {
@@ -339,6 +348,7 @@ exports.Prisma.ModelName = {
   Asset: 'Asset',
   ChapterAssetReference: 'ChapterAssetReference',
   Chapter: 'Chapter',
+  ChapterLocale: 'ChapterLocale',
   EbookCollaborator: 'EbookCollaborator',
   EbookCollaboratorChapterAccess: 'EbookCollaboratorChapterAccess',
   EbookCustomRole: 'EbookCustomRole',
