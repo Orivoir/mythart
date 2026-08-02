@@ -3,6 +3,7 @@ import { type Job, Worker } from "bullmq"
 import { SNAPSHOT_JOB_NAME, snapshotJobDataSchema } from "../jobs"
 import { SNAPSHOT_QUEUE_NAME } from "../queues"
 import type { RegisteredWorker, WorkerDependencies } from "../types"
+import {generate} from "./../services"
 
 type SnapshotJob = Job<Record<string, unknown>, void, string>
 
@@ -10,19 +11,14 @@ export function createSnapshotWorker({ connection, env, logger }: WorkerDependen
   const worker = new Worker(
     SNAPSHOT_QUEUE_NAME,
     async (job: SnapshotJob) => {
-      snapshotJobDataSchema.parse(job.data)
-
-      logger.warn(
-        {
-          jobId: job.id,
-          jobName: job.name,
-          queue: SNAPSHOT_QUEUE_NAME,
-        },
-        "Snapshot job processing is not implemented yet",
-      )
-
-      if (job.name === SNAPSHOT_JOB_NAME) {
-        throw new Error("Snapshot job processing is not implemented yet")
+      switch (job.name) {
+        case SNAPSHOT_JOB_NAME:
+          await generate(
+            snapshotJobDataSchema.parse(job.data)
+          )
+          break
+        default:
+          throw new Error(`Unknown job name: ${job.name}`)
       }
     },
     {
