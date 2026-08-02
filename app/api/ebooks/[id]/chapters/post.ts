@@ -10,7 +10,7 @@ import { canCreateChapterForEbook } from "@/lib/authorization"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { ApiException, parseApiJsonObject, withApiHandler } from "@/lib/errors"
 import { mapModelTimestamps } from "@/lib/map-date-fields-to-timestamps"
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/shared/lib/prisma"
 import { ChapterSchema } from "@/lib/schemas/chapter.schema"
 
 export const POST = withApiHandler(async (

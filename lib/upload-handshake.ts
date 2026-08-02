@@ -1,5 +1,5 @@
 import { AssetReferenceType, UploadHandshakeStatus } from "@/app/generated/prisma"
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/shared/lib/prisma"
 import { ApiException } from "@/lib/errors/api-exception"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { generatePresignedUrl, generateTempUploadKey, moveObjectToPermanentLocation, validateObjectUpload } from "@/lib/s3"

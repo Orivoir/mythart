@@ -1,9 +1,14 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-generator client {
+generator app_client {
   provider = "prisma-client-js"
   output   = "../../app/generated/prisma"
+}
+
+generator worker_client {
+  provider = "prisma-client-js"
+  output   = "../../worker/generated/prisma"
 }
 
 datasource db {

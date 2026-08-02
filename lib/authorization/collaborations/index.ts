@@ -1,7 +1,7 @@
 import { CollaborationPermission } from "@/app/generated/prisma/client"
 
 import { type PlanFeatures, type PlanType, PLANS } from "@/lib/constants/plan"
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/shared/lib/prisma"
 
 import {
   collaborationPermissionAppliesToChapter,

@@ -9,7 +9,7 @@ import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { ApiException, parseApiJsonObject, withApiHandler } from "@/lib/errors"
 import { normalizeStringValue } from "@/lib/normalize-string-value"
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/shared/lib/prisma"
 import { EbookSchema } from "@/lib/schemas/ebook.schema"
 
 import { mapEbookToResponse } from "../utils"

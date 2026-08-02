@@ -6,7 +6,7 @@ import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { ApiException, parseApiJsonObject, withApiHandler } from "@/lib/errors"
 import { normalizeStringValue } from "@/lib/normalize-string-value"
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/shared/lib/prisma"
 import { CustomRoleCreateSchema } from "@/lib/schemas/collaboration.schema"
 
 import { assertCustomRolesEnabled, ensureEbookPermission, mapCustomRoleResponse } from "../../utils"

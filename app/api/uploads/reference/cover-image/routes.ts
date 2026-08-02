@@ -3,7 +3,7 @@ import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
 import { ApiException } from "@/lib/errors/api-exception"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { apiUploadException } from "@/lib/errors/api-upload-exception"
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/shared/lib/prisma"
 
 export async function PUT(
   request: Request,

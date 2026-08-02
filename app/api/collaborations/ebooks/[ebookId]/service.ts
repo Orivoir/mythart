@@ -3,7 +3,7 @@ import { CollaborationPermission } from "@/app/generated/prisma/client"
 import { canAddCollaboratorToEbook } from "@/lib/authorization"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { ApiException } from "@/lib/errors"
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/shared/lib/prisma"
 import { CollaboratorCreateSchema, CollaboratorDeleteSchema, CollaboratorUpdateSchema } from "@/lib/schemas/collaboration.schema"
 
 import { assertCustomRolesEnabled, ensureEbookPermission, parseChapterIdsForEbook } from "../../utils"

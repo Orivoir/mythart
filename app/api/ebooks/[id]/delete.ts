@@ -4,7 +4,7 @@ import type { DeleteEbookResponseAPI, ResponseErrorAPI } from "@/app/types/api/e
 import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { ApiException, withApiHandler } from "@/lib/errors"
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/shared/lib/prisma"
 
 export const DELETE = withApiHandler(async (
     request: NextRequest,

@@ -5,7 +5,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter"
 import { getToken } from "next-auth/jwt"
 import type { NextRequest } from "next/server"
 
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/shared/lib/prisma"
 
 export const authSecret = process.env.AUTH_SECRET
 export const AUTH_USER_ID_HEADER = "x-auth-user-id"

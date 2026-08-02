@@ -4,7 +4,7 @@ import { hasEbookPermissionForUser } from "@/lib/authorization"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { type PlanType, PLANS } from "@/lib/constants/plan"
 import { ApiException } from "@/lib/errors"
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/shared/lib/prisma"
 
 import type { CollaboratorResponseAPI, CustomRoleResponseAPI } from "@/app/types/api/collaboration"
 

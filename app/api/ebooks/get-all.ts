@@ -5,7 +5,7 @@ import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { ApiException, withApiHandler } from "@/lib/errors"
 import { parsePaginationParams, withPagination } from "@/lib/pagination"
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/shared/lib/prisma"
 
 import { mapEbookToResponse } from "./utils"
 

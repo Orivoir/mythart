@@ -1,0 +1,339 @@
+model Asset {
+  id String @id @default(cuid())
+
+  key    String @unique
+  bucket String
+
+  fileName  String
+  mimeType  String
+  sizeBytes Int
+  // etag      String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id])
+
+  chapterReferences ChapterAssetReference[]
+  ebookCoverImages  Ebook[]
+
+  @@index([ownerId])
+}
+
+model ChapterAssetReference {
+  id String @id @default(cuid())
+
+  assetId String
+  asset   Asset  @relation(fields: [assetId], references: [id], onDelete: Cascade)
+
+  chapterId String
+  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  type AssetReferenceType
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([assetId])
+  @@index([chapterId])
+  @@index([type])
+  @@index([assetId, type])
+  @@index([chapterId, type])
+}
+
+model Chapter {
+  id        String   @id @default(cuid())
+  content   Json
+  title     String
+  position  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ebookId String
+  ebook   Ebook  @relation(fields: [ebookId], references: [id])
+
+  assetReferences    ChapterAssetReference[]
+  collaboratorAccess EbookCollaboratorChapterAccess[]
+
+  @@unique([ebookId, position])
+  @@index([ebookId])
+}
+
+model EbookCollaborator {
+  id String @id @default(cuid())
+
+  ebookId String
+  ebook   Ebook  @relation(fields: [ebookId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Built-in role assignment. Null when using a custom role.
+  role CollaborationRole?
+
+  // When true, this collaborator can act on all chapters in the ebook.
+  // When false, access is limited to chapterAccess entries.
+  allChaptersAccess Boolean @default(true)
+
+  customRoleId String?
+  // Invariant expected by app logic:
+  // - built-in role: role != null and customRoleId == null
+  // - custom role: role == null and customRoleId != null
+  customRole   EbookCustomRole? @relation(fields: [customRoleId, ebookId], references: [id, ebookId], onDelete: SetNull)
+
+  chapterAccess EbookCollaboratorChapterAccess[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([ebookId, userId])
+  @@index([ebookId])
+  @@index([userId])
+  @@index([customRoleId])
+}
+
+model EbookCollaboratorChapterAccess {
+  id String @id @default(cuid())
+
+  collaboratorId String
+  collaborator   EbookCollaborator @relation(fields: [collaboratorId], references: [id], onDelete: Cascade)
+
+  chapterId String
+  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([collaboratorId, chapterId])
+  @@index([collaboratorId])
+  @@index([chapterId])
+}
+
+model EbookCustomRole {
+  id String @id @default(cuid())
+
+  ebookId String
+  ebook   Ebook  @relation(fields: [ebookId], references: [id], onDelete: Cascade)
+
+  // Pro users can create custom collaboration roles per ebook.
+  name        String
+  permissions CollaborationPermission[]
+
+  createdByUserId String
+  createdBy       User   @relation("CustomRoleCreatedBy", fields: [createdByUserId], references: [id], onDelete: Cascade)
+
+  collaborators EbookCollaborator[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([id, ebookId])
+  @@unique([ebookId, name])
+  @@index([ebookId])
+  @@index([createdByUserId])
+}
+
+model Ebook {
+  id String @id @default(cuid())
+
+  title            String
+  subtitle         String?
+  shortDescription String?
+
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id])
+
+  currentSnapshotId String?   @unique
+  currentSnapshot   Snapshot? @relation("EbookCurrentSnapshot", fields: [currentSnapshotId], references: [id])
+
+  coverAssetId String?
+  coverAsset   Asset?  @relation(fields: [coverAssetId], references: [id])
+
+  snapshots     Snapshot[]          @relation("EbookSnapshots")
+  chapters      Chapter[]
+  collaborators EbookCollaborator[]
+  customRoles   EbookCustomRole[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([ownerId])
+}
+
+enum SubscriptionStatus {
+  none
+  trialing
+  active
+  past_due
+  canceled
+  unpaid
+}
+
+enum PlanType {
+  free
+  premium
+  pro
+}
+
+enum AssetReferenceType {
+  COVER
+  CONTENT_IMAGE
+  SNAPSHOT
+  EXPORT
+}
+
+enum CollaborationRole {
+  OWNER
+  AUTHOR
+  TRANSLATOR
+  PROOFREADER
+  EDITOR
+}
+
+enum CollaborationPermission {
+  EBOOK_READ
+  EBOOK_UPDATE_METADATA
+  EBOOK_DELETE
+  CHAPTER_READ
+  CHAPTER_CREATE
+  CHAPTER_UPDATE
+  CHAPTER_DELETE
+  SNAPSHOT_READ
+  SNAPSHOT_CREATE
+  SNAPSHOT_RESTORE
+  ASSET_UPLOAD
+  ASSET_DELETE
+  COVER_UPDATE
+  COLLABORATOR_INVITE
+  COLLABORATOR_REMOVE
+  ROLE_ASSIGN
+}
+
+enum SnapshotStatus {
+  PENDING
+  READY
+  FAILED
+}
+
+enum UploadHandshakeStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  EXPIRED
+}
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator app_client {
+  provider = "prisma-client-js"
+  output   = "../../app/generated/prisma"
+}
+
+generator worker_client {
+  provider = "prisma-client-js"
+  output   = "../../worker/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Snapshot {
+  id String @id @default(cuid())
+
+  ebookId String
+  ebook   Ebook  @relation("EbookSnapshots", fields: [ebookId], references: [id])
+
+  version Int
+
+  file SnapshotFile?
+
+  createdAt DateTime @default(now())
+
+  currentForEbook Ebook? @relation("EbookCurrentSnapshot")
+
+  // status using for Worker job queue
+  // to know if the snapshot is ready to be used or not
+  status SnapshotStatus @default(PENDING)
+
+  @@unique([ebookId, version])
+  @@index([ebookId])
+}
+
+model SnapshotFile {
+  id String @id @default(cuid())
+
+  snapshotId String   @unique
+  snapshot   Snapshot @relation(fields: [snapshotId], references: [id])
+
+  key    String @unique
+  bucket String
+
+  sizeBytes Int
+  mimeType  String
+
+  createdAt DateTime @default(now())
+}
+
+model UploadHandshake {
+  id                String                @id @default(cuid())
+  ownerId           String
+  owner             User                  @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  context           AssetReferenceType
+  key               String                @unique
+  fileName          String
+  expectedMimeType  String
+  expectedSizeBytes Int
+  status            UploadHandshakeStatus @default(PENDING)
+  expiresAt         DateTime
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+
+  @@index([ownerId])
+  @@index([status])
+  @@index([expiresAt])
+}
+
+model User {
+  id String @id @default(cuid())
+
+  email         String    @unique
+  emailVerified DateTime?
+  name          String?
+
+  stripeCustomerId String? @unique
+
+  subscriptionStatus SubscriptionStatus @default(none)
+  plan               PlanType           @default(free)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  accounts            Account[]
+  ebooks              Ebook[]
+  assets              Asset[]
+  uploadHandshakes    UploadHandshake[]
+  ebookCollaborations EbookCollaborator[]
+  createdCustomRoles  EbookCustomRole[]   @relation("CustomRoleCreatedBy")
+}
+
+model Account {
+  id                String @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

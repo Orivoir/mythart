@@ -7,7 +7,7 @@ import { canManageChapterByPermission } from "@/lib/authorization"
 import { CollaborationPermission } from "@/app/generated/prisma/client"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { ApiException, parseApiJsonObject, withApiHandler } from "@/lib/errors"
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/shared/lib/prisma"
 import { UpdateChapterSchema } from "@/lib/schemas/chapter.schema"
 
 export const PUT = withApiHandler(async (

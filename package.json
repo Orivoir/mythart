@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "docker-up": "docker compose up -d",
+    "prisma:generate": "prisma generate",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

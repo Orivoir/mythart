@@ -1,6 +1,6 @@
 import type {S3PresignedUrlOptions} from "@/lib/s3"
 import { PLANS } from "@/lib/constants/plan"
-import {prisma} from "@/lib/prisma"
+import {prisma} from "@/shared/lib/prisma"
 import {PlanType} from "@/app/generated/prisma/client"
 import {getPlanLimits, getPlan} from "@/lib/authorization"
 

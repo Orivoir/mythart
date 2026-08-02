@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { getAuthenticatedUserIdFromHeaders } from "@/lib/auth"
 import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { ApiException, parseApiJsonObject, withApiHandler } from "@/lib/errors"
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/shared/lib/prisma"
 import { CustomRoleDeleteSchema } from "@/lib/schemas/collaboration.schema"
 
 import { assertCustomRolesEnabled, ensureEbookPermission } from "../../utils"

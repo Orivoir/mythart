@@ -8,7 +8,7 @@ import { HTTP_ERRORS } from "@/lib/constants/http-code"
 import { ApiException, withApiHandler } from "@/lib/errors"
 import { mapModelTimestamps } from "@/lib/map-date-fields-to-timestamps"
 import { parsePaginationParams, withPagination } from "@/lib/pagination"
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/shared/lib/prisma"
 
 export const GET = withApiHandler(async (
     request: NextRequest,

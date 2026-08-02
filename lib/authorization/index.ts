@@ -1,4 +1,4 @@
-import { prisma } from "../prisma"
+import { prisma } from "../../shared/lib/prisma"
 import { type PlanLimits, type PlanType, PlanFeatures, PlanFeaturesName, PLANS } from "../constants/plan"
 
 

@@ -1,4 +1,4 @@
-import { JsonValue } from "@/prisma/app/generated/prisma/runtime/client"
+import { JsonValue } from "@/app/generated/prisma/runtime/client"
 
 export interface PaginatedChaptersAPI {
     items: ChapterResponseAPI[];

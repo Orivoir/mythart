@@ -1,4 +1,6 @@
-import { PrismaClient } from "../app/generated/prisma/index.js"
+// cant be shared with worker app because path of generated prisma client is different
+import { PrismaClient } from "../../app/generated/prisma/index.js"
+
 import { PrismaPg } from "@prisma/adapter-pg"
 
 const connectionString = process.env.DATABASE_URL

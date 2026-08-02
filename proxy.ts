@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from "next/server"
 import { CollaborationPermission } from "@/app/generated/prisma/client"
 import { hasEbookPermissionForUser } from "@/lib/authorization"
 import { AUTH_USER_ID_HEADER, getAuthenticatedUserId } from "@/lib/auth"
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/shared/lib/prisma"
 import { HTTP_ERRORS } from "./lib/constants/http-code"
 import { ApiException, apiErrorResponse } from "./lib/errors"
 
