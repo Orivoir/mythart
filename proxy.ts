@@ -250,5 +250,5 @@ export async function proxy(request: NextRequest): Promise<NextResponse> {
 }
 
 export const config = {
-    matcher: ["/api/ebooks/:path*", "/api/chapters/:path*", "/api/collaborations/:path*"],
+    matcher: ["/api/ebooks/:path*", "/api/chapters/:path*", "/api/collaborations/:path*", "/api/snapshot/:path*"],
 }

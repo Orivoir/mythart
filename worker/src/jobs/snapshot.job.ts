@@ -7,3 +7,21 @@ export const snapshotJobDataSchema = z.object({
 })
 
 export type SnapshotJobData = z.infer<typeof snapshotJobDataSchema>
+
+export interface SnapshotJobResult {
+  snapshot: {
+    id: string
+    ebookId: string
+    version: number
+    status: string
+    createdAt: number
+    file: {
+      id: string
+      key: string
+      bucket: string
+      sizeBytes: number
+      mimeType: string
+      createdAt: number
+    }
+  }
+}

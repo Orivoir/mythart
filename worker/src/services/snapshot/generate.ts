@@ -1,4 +1,5 @@
 import type {SnapshotJobData} from "../../jobs/snapshot.job"
+import type {SnapshotJobResult} from "../../jobs/snapshot.job"
 import { prisma } from "./../../config/prisma"
 import { s3 } from "./../../config/s3"
 import { PutObjectCommand } from "@aws-sdk/client-s3"
@@ -24,7 +25,8 @@ export async function loadSnapshotData(ebookId: string) {
   return requirements
 }
 
-export async function generate({ebookId}: SnapshotJobData): Promise<void> {
+export async function generate({ebookId}: SnapshotJobData): Promise<SnapshotJobResult
+> {
   /**
    * Should create un snapshot-v{version}.json at s3 Bucket
    * and upgrade database models:
@@ -81,7 +83,7 @@ export async function generate({ebookId}: SnapshotJobData): Promise<void> {
     throw new Error(`Failed to upload snapshot to S3. HTTP status code: ${$metadata.httpStatusCode}`)
   }
 
-  await prisma.$transaction(async (tx) => {
+  const snapshot = await prisma.$transaction(async (tx) => {
 
     const snapshot = await tx.snapshot.create({
       data: {
@@ -96,7 +98,10 @@ export async function generate({ebookId}: SnapshotJobData): Promise<void> {
             mimeType: "application/json" 
           }
         }
-      }
+      },
+      include: {
+        file: true,
+      },
     })
 
     await tx.ebook.update({
@@ -113,6 +118,27 @@ export async function generate({ebookId}: SnapshotJobData): Promise<void> {
     return snapshot
   })
 
+  if (!snapshot.file) {
+    throw new Error("Snapshot file was not created")
+  }
+
+  return {
+    snapshot: {
+      id: snapshot.id,
+      ebookId: snapshot.ebookId,
+      version: snapshot.version,
+      status: snapshot.status,
+      createdAt: snapshot.createdAt.getTime(),
+      file: {
+        id: snapshot.file.id,
+        key: snapshot.file.key,
+        bucket: snapshot.file.bucket,
+        sizeBytes: snapshot.file.sizeBytes,
+        mimeType: snapshot.file.mimeType,
+        createdAt: snapshot.file.createdAt.getTime(),
+      },
+    },
+  }
   // later should be handler case of:
   // 1 . uploading to S3 success
   // 2 . database transaction failed
