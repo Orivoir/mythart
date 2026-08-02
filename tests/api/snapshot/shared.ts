@@ -13,6 +13,14 @@ export type SnapshotFixture = {
     ebookId: string
 }
 
+export type SnapshotRecordFixture = {
+    snapshotId: string
+    ebookId: string
+    version: number
+    bucket: string
+    key: string
+}
+
 export async function setupSnapshotFixture(): Promise<SnapshotFixture> {
     await resetDb()
 
@@ -92,6 +100,64 @@ export function createJobRequest(jobId: string, userId?: string): NextRequest {
     })
 }
 
+export function createGetSnapshotRequest(snapshotId: string, userId?: string): NextRequest {
+    return new NextRequest(`http://localhost:3000/api/snapshot/${snapshotId}`, {
+        method: "GET",
+        headers: {
+            ...(userId ? { "x-auth-user-id": userId } : {}),
+        },
+    })
+}
+
 export function jobRouteContext(jobId: string) {
     return { params: { id: jobId } }
+}
+
+export function snapshotRouteContext(snapshotId: string) {
+    return { params: { id: snapshotId } }
+}
+
+export async function createSnapshotRecordFixture(options: {
+    ebookId: string
+    version?: number
+    setAsCurrent?: boolean
+}): Promise<SnapshotRecordFixture> {
+    const version = options.version ?? 1
+    const suffix = `${Date.now()}-${Math.round(Math.random() * 1_000_000)}`
+    const bucket = process.env.S3_BUCKET ?? "test-bucket"
+    const key = `snapshots/${options.ebookId}/${version}-${suffix}.json`
+
+    const snapshot = await prisma.snapshot.create({
+        data: {
+            ebookId: options.ebookId,
+            version,
+            file: {
+                create: {
+                    key,
+                    bucket,
+                    sizeBytes: 1024,
+                    mimeType: "application/json",
+                },
+            },
+        },
+    })
+
+    if (options.setAsCurrent !== false) {
+        await prisma.ebook.update({
+            where: {
+                id: options.ebookId,
+            },
+            data: {
+                currentSnapshotId: snapshot.id,
+            },
+        })
+    }
+
+    return {
+        snapshotId: snapshot.id,
+        ebookId: options.ebookId,
+        version,
+        bucket,
+        key,
+    }
 }

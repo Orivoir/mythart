@@ -9,7 +9,6 @@ import { enqueueSnapshotJob } from "@/lib/queues/snapshot-queue"
 import { createSnapshotJobRequestSchema } from "@/shared/schemas/snapshot-job.schema"
 import type { JobCreatedResponse } from "@/app/types/api/job"
 
-
 export const POST = withApiHandler(async (
     request: NextRequest,
 ): Promise<NextResponse<JobCreatedResponse>> => {
